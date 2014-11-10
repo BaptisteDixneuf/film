@@ -2,6 +2,7 @@
 <p><a href="{{ URL::action("ActeursController@create") }}"> Ajouter un acteur </a></p>
 
 @foreach($acteurs as $acteur)
+	{{ var_dump($acteur)}}
 	<h2>
 		<a href="{{ URL::action("ActeursController@view", $acteur->id )}}"> 
 		Acteur n° : {{ $acteur->id }}
@@ -11,3 +12,5 @@
 	<p> Prenom: {{ $acteur->prenom }}</p>
 	<p> Biographie: {{ $acteur->biographie }}</p>
 @endforeach
+
+<?php echo $acteurs->links(); ?>

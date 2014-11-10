@@ -10,4 +10,10 @@ class Realisateur extends Eloquent{
 			'biographie' =>'required|min:4'
 	];
 
+
+
+	public function films() 
+	{
+	    return $this->hasMany('Film');
+	}
 }

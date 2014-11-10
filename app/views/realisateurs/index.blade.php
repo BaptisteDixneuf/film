@@ -2,6 +2,7 @@
 <p><a href="{{ URL::action("RealisateursController@create") }}"> Ajouter un réalisateur </a></p>
 
 @foreach($realisateurs as $realisateur)
+	{{ var_dump($realisateur)}}
 	<h2>
 		<a href="{{ URL::action("RealisateursController@view", $realisateur->id )}}"> 
 		Réalisateur n° : {{ $realisateur->id }}
@@ -11,3 +12,5 @@
 	<p> Prenom: {{ $realisateur->prenom }}</p>
 	<p> Biographie: {{ $realisateur->biographie }}</p>
 @endforeach
+
+<?php echo $realisateurs->links(); ?>

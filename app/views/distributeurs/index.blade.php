@@ -8,5 +8,8 @@
 		</a>
 	</h2>
 	<p> Nom: {{ $distributeur->nom }}</p>
+
 	
 @endforeach
+
+<?php echo $distributeurs->links(); ?>
