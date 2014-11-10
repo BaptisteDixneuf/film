@@ -13,3 +13,8 @@
 
 Route::get('/', 'ActeursController@index');
 Route::get('/acteurs/{id}', 'ActeursController@view');
+Route::get('/acteurs/create/{id}', 'ActeursController@create');
+Route::get('/acteurs/edit/{id}', 'ActeursController@edit');
+Route::post('/acteurs/store/{id}', 'ActeursController@store');
+Route::post('/acteurs/update/{id}', 'ActeursController@update');
+Route::get('/acteurs/delete/{id}', 'ActeursController@delete');

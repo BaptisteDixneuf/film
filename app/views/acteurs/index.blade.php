@@ -1,4 +1,5 @@
 <h1> Tous les acteurs </h1>
+<p><a href="{{ URL::action("ActeursController@create") }}"> Ajouter un acteur </a></p>
 
 @foreach($acteurs as $acteur)
 	<h2>

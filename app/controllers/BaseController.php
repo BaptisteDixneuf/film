@@ -2,6 +2,9 @@
 
 class BaseController extends Controller {
 
+
+	public $layout='layout.layout';
+
 	/**
 	 * Setup the layout used by the controller.
 	 *
