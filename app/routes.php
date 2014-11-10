@@ -30,3 +30,12 @@ Route::post('/realisateurs/store/{id}', 'RealisateursController@store');
 Route::get('/realisateurs/edit/{id}', 'RealisateursController@edit');
 Route::post('/realisateurs/update/{id}', 'RealisateursController@update');
 Route::get('/realisateurs/delete/{id}', 'RealisateursController@delete');
+
+//Distributeurs
+Route::get('/distributeurs/index', 'DistributeursController@index');
+Route::get('/distributeurs/view/{id}', 'DistributeursController@view');
+Route::get('/distributeurs/create/{id}', 'DistributeursController@create');
+Route::post('/distributeurs/store/{id}', 'DistributeursController@store');
+Route::get('/distributeurs/edit/{id}', 'DistributeursController@edit');
+Route::post('/distributeurs/update/{id}', 'DistributeursController@update');
+Route::get('/distributeurs/delete/{id}', 'DistributeursController@delete');

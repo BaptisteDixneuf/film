@@ -6,5 +6,5 @@
 	<p> Prenom: {{ $realisateur->prenom }}</p>
 	<p> Biographie: {{ $realisateur->biographie }}</p>
 
-<p><a href="{{ URL::action("RealisateursController@edit", $realisateur->id) }}"> Editer l'acteur </a></p>
-<p><a href="{{ URL::action("RealisateursController@delete", $realisateur->id) }}"> Supprimer l'acteur </a></p>
+<p><a href="{{ URL::action("RealisateursController@edit", $realisateur->id) }}"> Editer le réalisateur </a></p>
+<p><a href="{{ URL::action("RealisateursController@delete", $realisateur->id) }}"> Supprimer le réalisateur </a></p>
