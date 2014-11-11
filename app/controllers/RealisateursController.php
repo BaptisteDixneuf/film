@@ -5,7 +5,7 @@ class RealisateursController extends BaseController{
 
 	public function index()
 	{
-		$realisateurs=Realisateur::paginate(10);		
+		$realisateurs=Realisateur::with('films')->paginate(10);		
 		$this->layout->nest('content','realisateurs.index',compact('realisateurs'));
 	}
 
@@ -26,7 +26,7 @@ class RealisateursController extends BaseController{
 
 	public function view($id)
 	{
-		$realisateur = Realisateur::where('id',$id)->firstOrFail();
+		$realisateur = Realisateur::with('films')->where('id',$id)->firstOrFail();
 		$this->layout->nest('content','realisateurs.view',compact('realisateur'));		
 	}
 

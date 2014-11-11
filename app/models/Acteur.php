@@ -10,4 +10,10 @@ class Acteur extends Eloquent{
 			'biographie' =>'required|min:4'
 	];
 
+
+	public function films()
+	{
+		return $this->belongsToMany('Film');
+	}
+
 }

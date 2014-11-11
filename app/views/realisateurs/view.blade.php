@@ -5,6 +5,13 @@
 	<p> Nom: {{ $realisateur->nom }}</p>
 	<p> Prenom: {{ $realisateur->prenom }}</p>
 	<p> Biographie: {{ $realisateur->biographie }}</p>
+	<p> Liste des films:
+			<ul>
+				@foreach($realisateur->films as $film)
+				<li>{{ $film->titre }}</li>	
+				@endforeach
+			</ul>
+	</p>
 
 <p><a href="{{ URL::action("RealisateursController@edit", $realisateur->id) }}"> Editer le réalisateur </a></p>
 <p><a href="{{ URL::action("RealisateursController@delete", $realisateur->id) }}"> Supprimer le réalisateur </a></p>

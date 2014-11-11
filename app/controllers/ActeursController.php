@@ -5,7 +5,7 @@ class ActeursController extends BaseController{
 
 	public function index()
 	{
-		$acteurs=Acteur::paginate(10);		
+		$acteurs=Acteur::with('films')->paginate(10);		
 		$this->layout->nest('content','acteurs.index',compact('acteurs'));
 	}
 
@@ -26,7 +26,7 @@ class ActeursController extends BaseController{
 
 	public function view($id)
 	{
-		$acteur = Acteur::where('id',$id)->firstOrFail();
+		$acteur = Acteur::with('films')->where('id',$id)->firstOrFail();
 		$this->layout->nest('content','acteurs.view',compact('acteur'));		
 	}
 
@@ -54,6 +54,22 @@ class ActeursController extends BaseController{
 	{
 		Acteur::destroy($id);
 		return Redirect::to('/')->with('success','Acteur Supprimé');
+	}
+
+	public function search(){
+
+		$acteurs=Acteur::select(array('id','nom','prenom'))
+				->where('nom','LIKE','%'.Input::get('q').'%')
+				->orwhere('prenom','LIKE','%'.Input::get('q').'%')
+				->get();
+		$liste_acteurs;
+		$i=0;
+		foreach ($acteurs as $acteur) {
+			$liste_acteurs[$i]['id']=$acteur->id;
+			$liste_acteurs[$i]["name"]=$acteur->nom.' '.$acteur->prenom;
+			$i++;
+		}	
+		return $liste_acteurs;
 	}
 
 }

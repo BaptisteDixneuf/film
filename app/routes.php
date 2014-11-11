@@ -21,6 +21,7 @@ Route::post('/acteurs/store/{id}', 'ActeursController@store');
 Route::get('/acteurs/edit/{id}', 'ActeursController@edit');
 Route::post('/acteurs/update/{id}', 'ActeursController@update');
 Route::get('/acteurs/delete/{id}', 'ActeursController@delete');
+Route::get('/acteurs/search', 'ActeursController@search');
 
 //Réalisateurs
 Route::get('/realisateurs/index', 'RealisateursController@index');

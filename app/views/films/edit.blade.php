@@ -6,6 +6,8 @@
 	$film->id? URL::action('FilmsController@update', $film->id): URL::action('FilmsController@store')
 	))
 }}
+
+
 	<div class="form-group">
     	{{
     		Form::label(
@@ -158,7 +160,35 @@
             </p>
         @endif
     </div>
+    
+        <?php 
+        $liste_acteurs=Array();
+        $i=0;
+        foreach ($film->acteurs as $acteur) {
+            $liste_acteurs[$i]['id']=$acteur->id;
+            $liste_acteurs[$i]["name"]=$acteur->nom.' '.$acteur->prenom;
+            $i++;
+        }
+        
+        ?>
+        
+    <div class="form-group">
+        <label for="acteurs" class="form-label">Acteurs</label>
+        <input class="form-control" name="acteurs" id="acteurs" type="text" value="">
+    </div>
+        
 
 
 	{{Form::submit()}}
 {{Form::close()}}
+
+
+{{ HTML::script('js/jquery.tokeninput.js')}}
+
+    <script type="text/javascript">
+          $(document).ready(function() {
+            $("#acteurs").tokenInput("http://local.dev/projetFilmApp/film/public/acteurs/search", {
+                prePopulate: <?php echo json_encode($liste_acteurs); ?>
+            });
+        });
+  </script>
