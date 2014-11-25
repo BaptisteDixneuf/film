@@ -49,3 +49,12 @@ Route::post('/films/store/{id}', 'FilmsController@store');
 Route::get('/films/edit/{id}', 'FilmsController@edit');
 Route::post('/films/update/{id}', 'FilmsController@update');
 Route::get('/films/delete/{id}', 'FilmsController@delete');
+
+//affiches
+Route::get('/affiches/index', 'AffichesController@index');
+Route::get('/affiches/view/{id}', 'AffichesController@view');
+Route::get('/affiches/create/{id}', 'AffichesController@create');
+Route::post('/affiches/store/{id}', 'AffichesController@store');
+Route::get('/affiches/edit/{id}', 'AffichesController@edit');
+Route::post('/affiches/update/{id}', 'AffichesController@update');
+Route::get('/affiches/delete/{id}', 'AffichesController@delete');
