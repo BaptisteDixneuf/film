@@ -4,7 +4,7 @@ class DistributeursController extends BaseController{
 
 	public function index()
 	{
-		$distributeurs=Distributeur::paginate(10);		
+		$distributeurs=Distributeur::with('films')->paginate(10);		
 		$this->layout->nest('content','distributeurs.index',compact('distributeurs'));
 	}
 
@@ -26,7 +26,7 @@ class DistributeursController extends BaseController{
 
 	public function view($id)
 	{
-		$distributeur = Distributeur::where('id',$id)->firstOrFail();
+		$distributeur = Distributeur::with('films')->where('id',$id)->firstOrFail();
 		$this->layout->nest('content','distributeurs.view',compact('distributeur'));		
 	}
 

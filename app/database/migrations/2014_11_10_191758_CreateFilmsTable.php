@@ -21,6 +21,7 @@ class CreateFilmsTable extends Migration {
 			$table->string('titre_francais'); 
 			$table->longtext('prix'); 
 			$table->integer('realisateur_id')->unsigned();
+			$table->integer('distributeur_id')->unsigned();
 			$table->timestamps();
 		});
 
@@ -32,7 +33,8 @@ class CreateFilmsTable extends Migration {
 				'annee_prod'=>'2014',
 				'titre_francais'=>'',
 				'prix'=>'prix International du film',
-				'realisateur_id'=>'1'
+				'realisateur_id'=>'1',
+				'distributeur_id'=>'1'
 
 			]);
 		}

@@ -3,6 +3,13 @@
 <h1> Distributeur </h1>
 	<h2>Distributeur n° : {{ $distributeur->id }}</h2>
 	<p> Nom: {{ $distributeur->nom }}</p>
+	<p> Liste des films:
+			<ul>
+				@foreach($distributeur->films as $film)
+				<li>{{ $film->titre }}</li>	
+				@endforeach
+			</ul>
+	</p>
 	
 
 <p><a href="{{ URL::action("DistributeursController@edit", $distributeur->id) }}"> Editer le distributeur </a></p>

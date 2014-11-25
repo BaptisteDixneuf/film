@@ -12,12 +12,22 @@ class CreateForeignKeys extends Migration {
 	 */
 	public function up()
 	{
+		//Relations Films-Réalisateurs
 		Schema::table('films', function(Blueprint $table) {
 			$table->foreign('realisateur_id')->references('id')->on('realisateurs')
 						->onDelete('restrict')
 						->onUpdate('restrict');
 		});
 
+		//Relations Films-Distributeurs
+		Schema::table('films', function(Blueprint $table) {
+			$table->foreign('distributeur_id')->references('id')->on('distributeurs')
+						->onDelete('restrict')
+						->onUpdate('restrict');
+		});
+
+
+		//Relations Films-Acteurs
 		Schema::table('acteur_film', function(Blueprint $table) {
 			$table->foreign('acteur_id')->references('id')->on('acteurs')
 						->onDelete('restrict')
@@ -32,10 +42,17 @@ class CreateForeignKeys extends Migration {
 
 	public function down()
 	{
+		//Relations Films-Réalisateurs
 		Schema::table('films', function(Blueprint $table) {
 			$table->dropForeign('films_realisateur_id_foreign');
 		});
 
+		//Relations Films-Distributeurs
+		Schema::table('films', function(Blueprint $table) {
+			$table->dropForeign('films_distributeur_id_foreign');
+		});
+
+		//Relations Films-Acteurs
 		Schema::table('acteur_film', function(Blueprint $table) {
 			$table->dropForeign('acteur_film_acteur_id_foreign');
 		});

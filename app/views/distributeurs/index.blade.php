@@ -8,7 +8,13 @@
 		</a>
 	</h2>
 	<p> Nom: {{ $distributeur->nom }}</p>
-
+	<p> Liste des films:
+			<ul>
+				@foreach($distributeur->films as $film)
+				<li>{{ $film->titre }}</li>	
+				@endforeach
+			</ul>
+	</p>
 	
 @endforeach
 

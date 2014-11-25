@@ -8,4 +8,9 @@ class Distributeur extends Eloquent{
 			'nom' =>'required|min:4'			
 	];
 
+	public function films() 
+	{
+	    return $this->hasMany('Film');
+	}
+
 }

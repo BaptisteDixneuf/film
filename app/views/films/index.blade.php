@@ -15,9 +15,14 @@
 	<p> Titre Français: {{ $film->titre_francais }}</p>
 	<p> Prix: {{ $film->prix }}</p>
 	<div>
-			<h3>Réalisateurs</h3>
+			<h3>Réalisateur</h3>
 		<p> Nom du Réalisateur:{{ $film->realisateur->nom }}</p>
 		<p> Prénom Réalisateur:{{ $film->realisateur->prenom  }}</p>
+	</div>
+	<div>
+			<h3>Distributeur</h3>
+		<p> Nom du Distributeur:{{ $film->distributeur->nom }}</p>
+	
 	</div>
 	<div>
 			<h3>Acteurs</h3>

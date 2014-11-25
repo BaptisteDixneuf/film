@@ -154,9 +154,30 @@
                 Realisateur::lists('nom', 'id')
             )
         }}
-        @if($errors->has('prix'))
+        @if($errors->has('realisateur_id'))
             <p class="help-block">
-                {{$errors->first('prix')}}
+                {{$errors->first('realisateur_id')}}
+            </p>
+        @endif
+    </div>
+
+    <div class="form-group">
+        {{
+            Form::label(
+                'distributeur_id',
+                "Distributeur",
+                ['class' => 'form-label']
+            )
+        }}
+        {{
+            Form::select(
+                'distributeur_id',
+                Distributeur::lists('nom', 'id')
+            )
+        }}
+        @if($errors->has('distributeur_id'))
+            <p class="help-block">
+                {{$errors->first('distributeur_id')}}
             </p>
         @endif
     </div>

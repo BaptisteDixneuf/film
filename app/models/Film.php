@@ -17,6 +17,11 @@ class Film extends Eloquent{
 	    return $this->belongsTo('Realisateur');
 	}
 
+	public function distributeur() 
+	{
+	    return $this->belongsTo('Distributeur');
+	}
+
 	public function acteurs()
 	{
 		return $this->belongsToMany('Acteur');
