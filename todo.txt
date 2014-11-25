@@ -1,0 +1,7 @@
+Nationalité Film -> TODO ALL
+Genre Film -> TODO ALL
+Acteurs -> Unifier nom et prénom
+Affiche -> Lier avec Film
+Distributeur -> Lier avec Film
+Film -> Relations avec les autres classes à terminer
+
