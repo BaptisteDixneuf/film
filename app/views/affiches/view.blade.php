@@ -1,4 +1,4 @@
-<p><a href="{{ URL::action("DistributeursController@index")}}"> Revenir en arrière </a></p>
+<p><a href="{{ URL::action("AffichesController@index")}}"> Revenir en arrière </a></p>
 
 <h1> Affiche </h1>
 	<h2>Affiche n° : {{ $affiche->id }}</h2>

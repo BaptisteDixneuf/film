@@ -58,3 +58,12 @@ Route::post('/affiches/store/{id}', 'AffichesController@store');
 Route::get('/affiches/edit/{id}', 'AffichesController@edit');
 Route::post('/affiches/update/{id}', 'AffichesController@update');
 Route::get('/affiches/delete/{id}', 'AffichesController@delete');
+
+//Genres
+Route::get('/genres/index', 'GenresController@index');
+Route::get('/genres/view/{id}', 'GenresController@view');
+Route::get('/genres/create/{id}', 'GenresController@create');
+Route::post('/genres/store/{id}', 'GenresController@store');
+Route::get('/genres/edit/{id}', 'GenresController@edit');
+Route::post('/genres/update/{id}', 'GenresController@update');
+Route::get('/genres/delete/{id}', 'GenresController@delete');
