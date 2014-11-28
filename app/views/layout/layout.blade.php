@@ -35,8 +35,8 @@
             <li><a href="{{ URL::action("FilmsController@index")}}">Film</a></li>
             <li><a href="{{ URL::action("RealisateursController@index")}}">Réalisateur</a></li>
             <li><a href="{{ URL::action("DistributeursController@index")}}">Distributeur</a></li>
-            <li><a href="{{ URL::action("AffichesController@index")}}">Affiche</a></li>
             <li><a href="{{ URL::action("GenresController@index")}}">Genre</a></li>
+            <li><a href="{{ URL::action("AffichesController@index")}}">Affiche</a></li>            
             <li><a href="{{ URL::action("ActeursController@index")}}">Acteur</a></li>
             
             

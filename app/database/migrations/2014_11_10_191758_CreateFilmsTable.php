@@ -20,12 +20,13 @@ class CreateFilmsTable extends Migration {
 			$table->mediumInteger('annee_prod'); //ANNEE
 			$table->string('titre_francais'); 
 			$table->longtext('prix'); 
-			$table->integer('realisateur_id')->unsigned();
-			$table->integer('distributeur_id')->unsigned();
+			$table->integer('realisateur_id')->unsigned()->nullable();
+			$table->integer('distributeur_id')->unsigned()->nullable();
+			$table->integer('genre_id')->unsigned()->nullable();
 			$table->timestamps();
 		});
 
-		for ($i=0; $i < 100; $i++) { 
+		for ($i=0; $i < 3; $i++) { 
 			Film::create([
 				'titre'=>"Titre-Film-$i",
 				'synopsys'=>"Au début des années 1980, en Allemagne de l'Est, un agent secret, nommé Wiesler, a pour mission d'observer un couple d'intellectuels. Ces derniers vont le fasciner de plus en plus...",
@@ -33,8 +34,7 @@ class CreateFilmsTable extends Migration {
 				'annee_prod'=>'2014',
 				'titre_francais'=>'',
 				'prix'=>'prix International du film',
-				'realisateur_id'=>'1',
-				'distributeur_id'=>'1'
+				
 
 			]);
 		}

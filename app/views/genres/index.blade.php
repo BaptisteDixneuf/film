@@ -8,6 +8,13 @@
 		</a>
 	</h2>
 	<p> Genre: {{ $genre->genre }}</p>
+	<p> Liste des films:
+			<ul>
+				@foreach($genre->films as $film)
+				<li>{{ $film->titre }}</li>	
+				@endforeach
+			</ul>
+	</p>
 
 	
 @endforeach

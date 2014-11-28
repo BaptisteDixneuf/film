@@ -4,7 +4,7 @@ class FilmsController extends BaseController{
 
 	public function index()
 	{
-		$films=Film::with('realisateur','acteurs','distributeur')->paginate(10);		
+		$films=Film::with('realisateur','acteurs','distributeur','genre')->paginate(10);		
 		$this->layout->nest('content','films.index',compact('films'));
 	}
 
@@ -27,7 +27,8 @@ class FilmsController extends BaseController{
 			'titre_francais' => Input::get('titre_francais'),
 			'prix' => Input::get('prix'),
 			'realisateur_id' => Input::get('realisateur_id'),
-			'distributeur_id' => Input::get('distributeur_id')
+			'distributeur_id' => Input::get('distributeur_id'),
+			'genre_id' => Input::get('genre_id')
 			));
 
 			$acteurs=Array();
@@ -42,13 +43,13 @@ class FilmsController extends BaseController{
 
 	public function view($id)
 	{
-		$film = Film::with('realisateur','acteurs','distributeur')->where('id',$id)->firstOrFail();
+		$film = Film::with('realisateur','acteurs','distributeur','genre')->where('id',$id)->firstOrFail();
 		$this->layout->nest('content','films.view',compact('film'));		
 	}
 
 	public function edit($id)
 	{
-		$film = Film::with('realisateur','acteurs','distributeur')->findOrFail($id);
+		$film = Film::with('realisateur','acteurs','distributeur','genre')->findOrFail($id);
 		$this->layout->nest('content','films.edit',compact('film'));
 	}
 
@@ -68,7 +69,8 @@ class FilmsController extends BaseController{
 			'titre_francais' => Input::get('titre_francais'),
 			'prix' => Input::get('prix'),
 			'realisateur_id' => Input::get('realisateur_id'),
-			'distributeur_id' => Input::get('distributeur_id')
+			'distributeur_id' => Input::get('distributeur_id'),
+			'genre_id' => Input::get('genre_id')
 			));
 
 			$acteurs=Array();

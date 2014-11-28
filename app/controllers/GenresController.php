@@ -4,7 +4,7 @@ class GenresController extends BaseController{
 
 	public function index()
 	{
-		$genres=Genre::paginate(10);		
+		$genres=Genre::with('films')->paginate(10);		
 		$this->layout->nest('content','Genres.index',compact('genres'));
 	}
 
@@ -26,7 +26,7 @@ class GenresController extends BaseController{
 
 	public function view($id)
 	{
-		$genre = Genre::where('id',$id)->firstOrFail();
+		$genre = Genre::with('films')->where('id',$id)->firstOrFail();
 		$this->layout->nest('content','Genres.view',compact('genre'));		
 	}
 

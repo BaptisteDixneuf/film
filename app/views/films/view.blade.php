@@ -10,26 +10,30 @@
 	<p> Prix: {{ $film->prix }}</p>
 	<div>
 			<h3>Réalisateur</h3>
-		<p> Nom du Réalisateur:{{ $film->realisateur->nom }}</p>
-		<p> Prénom Réalisateur:{{ $film->realisateur->prenom  }}</p>
-	</div>
 
-	<div>
+				<p> Nom du Réalisateur: {{{ isset($film->realisateur->nom ) ? $film->realisateur->nom  : 'Aucun' }}}</p>
+				<p> Prénom Réalisateur: {{{ isset($film->realisateur->prenom ) ? $film->realisateur->prenom  : 'Aucun' }}}</p>
+		</div>
+
+		<div>
 			<h3>Distributeur</h3>
-		<p> Nom du Distributeur:{{ $film->distributeur->nom }}</p>
-	
-	</div>
-	<div>
-			<h3>Acteurs</h3>
-		<p> Liste des acteurs:
-			<ul>
-				@foreach($film->acteurs as $acteur)
-				<li>{{ $acteur->nom }} {{ $acteur->prenom }} </li>	
-				@endforeach
-			</ul>
-	</p>
+				<p> Nom du Distributeur: {{ isset($film->distributeur->nom  ) ? $film->distributeur->nom   : 'Aucun' }}</p>
+		</div>
+		<div>
+			<h3>Genre</h3>
+				<p> Nom du Genre: {{ isset($film->genre->genre  ) ? $film->genre->genre   : 'Aucun' }}</p>
+		</div>
 
-	</div>
+		<div>
+			<h3>Liste des acteurs:</h3>
+			<p> 
+				<ul>
+					@foreach($film->acteurs as $acteur)
+					<li>{{ $acteur->nom }} {{ $acteur->prenom }} </li>	
+					@endforeach
+				</ul>
+			</p>
+		</div>
 
 <p><a href="{{ URL::action("FilmsController@edit", $film->id) }}"> Editer le film </a></p>
 <p><a href="{{ URL::action("FilmsController@delete", $film->id) }}"> Supprimer le film </a></p>

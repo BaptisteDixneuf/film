@@ -23,7 +23,7 @@ class CreateRealisateursTable extends Migration {
 
 		});
 
-		for ($i=0; $i < 100; $i++) { 
+		for ($i=0; $i < 3; $i++) { 
 			Realisateur::create([
 				'nom'=>"Réal-Dixneuf-$i",
 				'prenom'=>"Réal-Baptiste-$i",

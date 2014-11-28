@@ -181,6 +181,29 @@
             </p>
         @endif
     </div>
+
+    <div class="form-group">
+        {{
+            Form::label(
+                'genre_id',
+                "Genre:",
+                ['class' => 'form-label']
+            )
+        }}
+        {{
+            Form::select(
+                'genre_id',
+                Genre::lists('genre', 'id')
+            )
+        }}
+        @if($errors->has('distributeur_id'))
+            <p class="help-block">
+                {{$errors->first('distributeur_id')}}
+            </p>
+        @endif
+    </div>
+
+
     
         <?php 
         $liste_acteurs=Array();

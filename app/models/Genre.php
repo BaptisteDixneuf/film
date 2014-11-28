@@ -8,4 +8,8 @@ class Genre extends Eloquent{
 			'genre' =>'required|min:4'			
 	];
 
+	public function films() 
+	{
+	    return $this->hasMany('Film');
+	}
 }

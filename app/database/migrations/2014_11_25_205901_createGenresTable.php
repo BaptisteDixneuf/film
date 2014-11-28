@@ -21,7 +21,7 @@ class CreateGenresTable extends Migration {
 
 		});
 
-		for ($i=0; $i < 100; $i++) { 
+		for ($i=0; $i < 3; $i++) { 
 			Genre::create([
 				'genre'=>"Genre-$i"				
 			]);

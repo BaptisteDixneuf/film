@@ -12,16 +12,23 @@ class CreateForeignKeys extends Migration {
 	 */
 	public function up()
 	{
-		//Relations Films-Réalisateurs
+		//Relations Films-Réalisateur
 		Schema::table('films', function(Blueprint $table) {
 			$table->foreign('realisateur_id')->references('id')->on('realisateurs')
 						->onDelete('restrict')
 						->onUpdate('restrict');
 		});
 
-		//Relations Films-Distributeurs
+		//Relations Films-Distributeur
 		Schema::table('films', function(Blueprint $table) {
 			$table->foreign('distributeur_id')->references('id')->on('distributeurs')
+						->onDelete('restrict')
+						->onUpdate('restrict');
+		});
+
+		//Relations Films-Genre
+		Schema::table('films', function(Blueprint $table) {
+			$table->foreign('genre_id')->references('id')->on('genres')
 						->onDelete('restrict')
 						->onUpdate('restrict');
 		});
@@ -42,14 +49,19 @@ class CreateForeignKeys extends Migration {
 
 	public function down()
 	{
-		//Relations Films-Réalisateurs
+		//Relations Films-Réalisateur
 		Schema::table('films', function(Blueprint $table) {
 			$table->dropForeign('films_realisateur_id_foreign');
 		});
 
-		//Relations Films-Distributeurs
+		//Relations Films-Distributeur
 		Schema::table('films', function(Blueprint $table) {
 			$table->dropForeign('films_distributeur_id_foreign');
+		});
+
+		//Relations Films-Genre
+		Schema::table('films', function(Blueprint $table) {
+			$table->dropForeign('films_genre_id_id_foreign');
 		});
 
 		//Relations Films-Acteurs
