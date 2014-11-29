@@ -18,12 +18,12 @@ class CreateFilmsTable extends Migration {
 			$table->longtext('synopsys');	
 			$table->longtext('avis');	
 			$table->mediumInteger('annee_prod'); //ANNEE
-			$table->string('titre_francais'); 
-			$table->longtext('prix'); 
+			$table->string('titre_francais')->nullable();; 
+			$table->longtext('prix')->nullable();; 
 			$table->integer('realisateur_id')->unsigned()->nullable();
 			$table->integer('distributeur_id')->unsigned()->nullable();
 			$table->integer('genre_id')->unsigned()->nullable();
-			$table->integer('affiche_id')->unsigned()->nullable();
+			$table->integer('affiche_id')->unsigned(); // Obligatoire relation 1 à 1
 			$table->timestamps();
 		});
 
@@ -35,9 +35,8 @@ class CreateFilmsTable extends Migration {
 				'annee_prod'=>'2014',
 				'titre_francais'=>'',
 				'prix'=>'prix International du film',
-				
-
-			]);
+				'affiche_id'=>'1'
+				]);
 		}
 	}
 

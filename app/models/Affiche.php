@@ -8,7 +8,7 @@ class Affiche extends Eloquent{
 			'image' =>'required|min:4'			
 	];
 
-	public function affiche() 
+	public function film() 
 	{
 	    return $this->belongsTo('Film');
 	}
