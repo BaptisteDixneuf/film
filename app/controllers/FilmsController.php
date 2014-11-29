@@ -4,7 +4,7 @@ class FilmsController extends BaseController{
 
 	public function index()
 	{
-		$films=Film::with('realisateur','acteurs','distributeur','genre')->paginate(10);		
+		$films=Film::with('realisateur','acteurs','distributeur','genre','affiche')->paginate(10);		
 		$this->layout->nest('content','films.index',compact('films'));
 	}
 
@@ -43,13 +43,13 @@ class FilmsController extends BaseController{
 
 	public function view($id)
 	{
-		$film = Film::with('realisateur','acteurs','distributeur','genre')->where('id',$id)->firstOrFail();
+		$film = Film::with('realisateur','acteurs','distributeur','genre','affiche')->where('id',$id)->firstOrFail();
 		$this->layout->nest('content','films.view',compact('film'));		
 	}
 
 	public function edit($id)
 	{
-		$film = Film::with('realisateur','acteurs','distributeur','genre')->findOrFail($id);
+		$film = Film::with('realisateur','acteurs','distributeur','genre','affiche')->findOrFail($id);
 		$this->layout->nest('content','films.edit',compact('film'));
 	}
 

@@ -25,6 +25,11 @@
 		</div>
 
 		<div>
+			<h3>Affiche</h3>
+				<p> Image: {{ isset($film->affiche->image  ) ? $film->affiche->image   : 'Aucun' }}</p>
+		</div>
+
+		<div>
 			<h3>Liste des acteurs:</h3>
 			<p> 
 				<ul>

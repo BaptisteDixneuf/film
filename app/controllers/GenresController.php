@@ -5,13 +5,13 @@ class GenresController extends BaseController{
 	public function index()
 	{
 		$genres=Genre::with('films')->paginate(10);		
-		$this->layout->nest('content','Genres.index',compact('genres'));
+		$this->layout->nest('content','genres.index',compact('genres'));
 	}
 
 	public function create()
 	{
 		$genre = new Genre();
-		$this->layout->nest('content','Genres.edit',compact('genre'));
+		$this->layout->nest('content','genres.edit',compact('genre'));
 	}
 
 	public function store(){
@@ -27,13 +27,13 @@ class GenresController extends BaseController{
 	public function view($id)
 	{
 		$genre = Genre::with('films')->where('id',$id)->firstOrFail();
-		$this->layout->nest('content','Genres.view',compact('genre'));		
+		$this->layout->nest('content','genres.view',compact('genre'));		
 	}
 
 	public function edit($id)
 	{
 		$genre = Genre::findOrFail($id);
-		$this->layout->nest('content','Genres.edit',compact('genre'));
+		$this->layout->nest('content','genres.edit',compact('genre'));
 	}
 
 

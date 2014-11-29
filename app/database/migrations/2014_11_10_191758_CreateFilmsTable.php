@@ -23,6 +23,7 @@ class CreateFilmsTable extends Migration {
 			$table->integer('realisateur_id')->unsigned()->nullable();
 			$table->integer('distributeur_id')->unsigned()->nullable();
 			$table->integer('genre_id')->unsigned()->nullable();
+			$table->integer('affiche_id')->unsigned()->nullable();
 			$table->timestamps();
 		});
 

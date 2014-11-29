@@ -5,13 +5,13 @@ class AffichesController extends BaseController{
 	public function index()
 	{
 		$affiches=Affiche::paginate(10);		
-		$this->layout->nest('content','Affiches.index',compact('affiches'));
+		$this->layout->nest('content','affiches.index',compact('affiches'));
 	}
 
 	public function create()
 	{
 		$affiche = new Affiche();
-		$this->layout->nest('content','Affiches.edit',compact('affiche'));
+		$this->layout->nest('content','affiches.edit',compact('affiche'));
 	}
 
 	public function store(){
@@ -21,19 +21,19 @@ class AffichesController extends BaseController{
 		}else{
 			$affiche=Affiche::create(Input::all());
 		}
-		return Redirect::action('AffichesController@edit', $affiche->id)->with(['success' => 'Affiche Ajoutée']);
+		return Redirect::action('affichesController@edit', $affiche->id)->with(['success' => 'Affiche Ajoutée']);
 	}
 
 	public function view($id)
 	{
 		$affiche = Affiche::where('id',$id)->firstOrFail();
-		$this->layout->nest('content','Affiches.view',compact('affiche'));		
+		$this->layout->nest('content','affiches.view',compact('affiche'));		
 	}
 
 	public function edit($id)
 	{
 		$affiche = Affiche::findOrFail($id);
-		$this->layout->nest('content','Affiches.edit',compact('affiche'));
+		$this->layout->nest('content','affiches.edit',compact('affiche'));
 	}
 
 
