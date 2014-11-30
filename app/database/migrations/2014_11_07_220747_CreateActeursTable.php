@@ -15,9 +15,7 @@ class CreateActeursTable extends Migration {
 		Schema::create('acteurs', function (Blueprint $table)
 		{
 			$table->increments('id');
-			$table->string('nom');
-			$table->string('prenom');
-			$table->longtext('biographie');
+			$table->string('pre_nom_acteur');
 			$table->timestamps();
 
 
@@ -25,9 +23,7 @@ class CreateActeursTable extends Migration {
 
 		for ($i=0; $i < 3; $i++) { 
 			Acteur::create([
-				'nom'=>"Dixneuf-$i",
-				'prenom'=>"Baptiste-$i",
-				'biographie'=>"Loremp iqdqsfdfb fbdsfbdfb dsfbdifh"
+				'pre_nom_acteur'=>"Dixneuf-$i"
 			]);
 		}
 		

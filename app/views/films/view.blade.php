@@ -33,7 +33,7 @@
 			<p> 
 				<ul>
 					@foreach($film->acteurs as $acteur)
-					<li>{{ $acteur->nom }} {{ $acteur->prenom }} </li>	
+					<li>{{ $acteur->pre_nom_acteur }}</li>	
 					@endforeach
 				</ul>
 			</p>

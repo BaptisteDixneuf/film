@@ -58,15 +58,14 @@ class ActeursController extends BaseController{
 
 	public function search(){
 
-		$acteurs=Acteur::select(array('id','nom','prenom'))
-				->where('nom','LIKE','%'.Input::get('q').'%')
-				->orwhere('prenom','LIKE','%'.Input::get('q').'%')
+		$acteurs=Acteur::select(array('id','pre_nom_acteur'))
+				->where('pre_nom_acteur','LIKE','%'.Input::get('q').'%')
 				->get();
 		$liste_acteurs;
 		$i=0;
 		foreach ($acteurs as $acteur) {
 			$liste_acteurs[$i]['id']=$acteur->id;
-			$liste_acteurs[$i]["name"]=$acteur->nom.' '.$acteur->prenom;
+			$liste_acteurs[$i]["name"]=$acteur->pre_nom_acteur;
 			$i++;
 		}	
 		return $liste_acteurs;

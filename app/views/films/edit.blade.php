@@ -235,7 +235,7 @@
         $i=0;
         foreach ($film->acteurs as $acteur) {
             $liste_acteurs[$i]['id']=$acteur->id;
-            $liste_acteurs[$i]["name"]=$acteur->nom.' '.$acteur->prenom;
+            $liste_acteurs[$i]["name"]=$acteur->pre_nom_acteur;
             $i++;
         }
         
