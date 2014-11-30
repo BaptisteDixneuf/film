@@ -15,9 +15,7 @@ class CreateRealisateursTable extends Migration {
 		Schema::create('realisateurs', function (Blueprint $table)
 		{
 			$table->increments('id');
-			$table->string('nom');
-			$table->string('prenom');
-			$table->longtext('biographie');
+			$table->string('pre_nom_rea');
 			$table->timestamps();
 
 
@@ -25,9 +23,7 @@ class CreateRealisateursTable extends Migration {
 
 		for ($i=0; $i < 3; $i++) { 
 			Realisateur::create([
-				'nom'=>"Réal-Dixneuf-$i",
-				'prenom'=>"Réal-Baptiste-$i",
-				'biographie'=>"Loremp iqdqsfdfb fbdsfbdfb dsfbdifh"
+				'pre_nom_rea'=>"Réal-Dixneuf-$i"				
 			]);
 		}
 	}

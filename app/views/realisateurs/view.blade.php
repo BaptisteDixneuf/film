@@ -2,9 +2,7 @@
 
 <h1> Réalisateur </h1>
 	<h2>Réalisateur n° : {{ $realisateur->id }}</h2>
-	<p> Nom: {{ $realisateur->nom }}</p>
-	<p> Prenom: {{ $realisateur->prenom }}</p>
-	<p> Biographie: {{ $realisateur->biographie }}</p>
+	<p> Nom: {{ $realisateur->pre_nom_rea }}</p>
 	<p> Liste des films:
 			<ul>
 				@foreach($realisateur->films as $film)

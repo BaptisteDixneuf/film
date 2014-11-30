@@ -21,7 +21,7 @@ class AffichesController extends BaseController{
 		}else{
 			$affiche=Affiche::create(Input::all());
 		}
-		return Redirect::action('affichesController@edit', $affiche->id)->with(['success' => 'Affiche Ajoutée']);
+		return Redirect::action('AffichesController@edit', $affiche->id)->with(['success' => 'Affiche Ajoutée']);
 	}
 
 	public function view($id)

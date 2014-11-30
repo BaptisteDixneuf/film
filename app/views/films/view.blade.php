@@ -11,8 +11,7 @@
 	<div>
 			<h3>Réalisateur</h3>
 
-				<p> Nom du Réalisateur: {{{ isset($film->realisateur->nom ) ? $film->realisateur->nom  : 'Aucun' }}}</p>
-				<p> Prénom Réalisateur: {{{ isset($film->realisateur->prenom ) ? $film->realisateur->prenom  : 'Aucun' }}}</p>
+				<p> Prénom et Nom du Réalisateur: {{{ isset($film->realisateur->pre_nom_rea ) ? $film->realisateur->pre_nom_rea  : 'Aucun' }}}</p>
 		</div>
 
 		<div>

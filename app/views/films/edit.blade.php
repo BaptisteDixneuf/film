@@ -176,7 +176,7 @@
         {{
             Form::select(
                 'realisateur_id',
-                Realisateur::lists('nom', 'id')
+                Realisateur::lists('pre_nom_rea', 'id')
             )
         }}
         @if($errors->has('realisateur_id'))

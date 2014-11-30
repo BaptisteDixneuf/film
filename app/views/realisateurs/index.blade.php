@@ -8,9 +8,8 @@
 		Réalisateur n° : {{ $realisateur->id }}
 		</a>
 	</h2>
-	<p> Nom: {{ $realisateur->nom }}</p>
-	<p> Prenom: {{ $realisateur->prenom }}</p>
-	<p> Biographie: {{ $realisateur->biographie }}</p>
+	<p> Prénom et Nom: {{ $realisateur->pre_nom_rea }}</p>
+
 
 	<p> Liste des films:
 			<ul>

@@ -4,68 +4,24 @@
 	$realisateur->id? URL::action('RealisateursController@update', $realisateur->id): URL::action('RealisateursController@store')
 	))
 }}
-	<div class="form-group">
+	  	<div class="form-group">
     	{{
     		Form::label(
-    			'nom',
-    			"Nom du réalisateur",
-    	 		['class' => 'form-label']
-    	 	)
-    	}}
-    	{{
-    		Form::text(
-    			'nom',
-    			null,
-    			['class' => 'form-control']
-    		)
-    	}}
-    	@if($errors->has('nom'))
-	    	<p class="help-block">
-		    	{{$errors->first('nom')}}
-		    </p>
-    	@endif
-  	</div>
-
-  	<div class="form-group">
-    	{{
-    		Form::label(
-    			'prenom',
-    			"Prénom du réalisateur",
-    	 		['class' => 'form-label']
-    	 	)
-    	}}
-    	{{
-    		Form::text(
-    			'prenom',
-    			null,
-    			['class' => 'form-control']
-    		)
-    	}}
-    	@if($errors->has('prenom'))
-	    	<p class="help-block">
-		    	{{$errors->first('prenom')}}
-		    </p>
-    	@endif
-  	</div>
-
-  	<div class="form-group">
-    	{{
-    		Form::label(
-    			'biographie',
-    			"Biographie du réalisateur",
+    			'pre_nom_rea',
+    			"Prenom et Nom du réalisateur",
     	 		['class' => 'form-label']
     	 	)
     	}}
     	{{
     		Form::textarea(
-    			'biographie',
+    			'pre_nom_rea',
     			null,
     			['class' => 'form-control']
     		)
     	}}
-    	@if($errors->has('biographie'))
+    	@if($errors->has('pre_nom_rea'))
 	    	<p class="help-block">
-		    	{{$errors->first('biographie')}}
+		    	{{$errors->first('pre_nom_rea')}}
 		    </p>
     	@endif
   	</div>
