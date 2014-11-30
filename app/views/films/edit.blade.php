@@ -140,6 +140,31 @@
         @endif
     </div>
 
+
+    <div class="form-group">
+        {{
+            Form::label(
+                'affiche_id',
+                "Affiche",
+                ['class' => 'form-label']
+            )
+        }}
+        {{
+            Form::select(
+                'affiche_id',
+                Affiche::lists('image','id')
+            )
+        }}
+        @if($errors->has('realisateur_id'))
+            <p class="help-block">
+                {{$errors->first('realisateur_id')}}
+            </p>
+        @endif
+    </div>
+
+  
+
+
     <div class="form-group">
         {{
             Form::label(

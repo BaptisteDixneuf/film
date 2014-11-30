@@ -4,7 +4,7 @@ class FilmsController extends BaseController{
 
 	public function index()
 	{
-		$films=Film::with('realisateur','acteurs','distributeur','genre','affiche')->paginate(10);		
+		$films=Film::with('realisateur','acteurs','distributeur','genre','affiche')->paginate(500);		
 		$this->layout->nest('content','films.index',compact('films'));
 	}
 
@@ -28,7 +28,8 @@ class FilmsController extends BaseController{
 			'prix' => Input::get('prix'),
 			'realisateur_id' => Input::get('realisateur_id'),
 			'distributeur_id' => Input::get('distributeur_id'),
-			'genre_id' => Input::get('genre_id')
+			'genre_id' => Input::get('genre_id'),
+			'affiche_id' => Input::get('affiche_id')
 			));
 
 			$acteurs=Array();
@@ -70,8 +71,11 @@ class FilmsController extends BaseController{
 			'prix' => Input::get('prix'),
 			'realisateur_id' => Input::get('realisateur_id'),
 			'distributeur_id' => Input::get('distributeur_id'),
-			'genre_id' => Input::get('genre_id')
+			'genre_id' => Input::get('genre_id'),
+			'affiche_id' => Input::get('affiche_id')
 			));
+
+			
 
 			$acteurs=Array();
 			if(Input::has('acteurs')) {

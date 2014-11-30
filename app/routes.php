@@ -72,3 +72,9 @@ Route::post('/genres/store/{id}', 'GenresController@store');
 Route::get('/genres/edit/{id}', 'GenresController@edit');
 Route::post('/genres/update/{id}', 'GenresController@update');
 Route::get('/genres/delete/{id}', 'GenresController@delete');
+
+
+//Migration SQL 
+Route::get('/migrations/index', 'MigrationsController@index');
+
+

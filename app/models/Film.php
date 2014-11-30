@@ -2,7 +2,7 @@
 
 class Film extends Eloquent{
 
-	protected $guarded= array('id','updated_at','created_at');
+	protected $guarded= array('updated_at','created_at');
 
 	public static $rules = [
 			'titre' =>'required|min:4',
