@@ -21,7 +21,7 @@ class CreateDistributeursTable extends Migration {
 
 		});
 
-		for ($i=0; $i < 3; $i++) { 
+		for ($i=0; $i < 0; $i++) { 
 			Distributeur::create([
 				'nom'=>"Distributeur-$i"				
 			]);
