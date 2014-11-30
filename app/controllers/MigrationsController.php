@@ -49,6 +49,7 @@ class MigrationsController extends BaseController{
 			return $data;
 		}
 
+		
 
 		foreach($dbh->query('SELECT * FROM affiche') as $row) {
 
@@ -60,16 +61,38 @@ class MigrationsController extends BaseController{
     	}
     	var_dump("Table affiches migrée");
 
+
+    	foreach($dbh->query('SELECT * FROM realisateur') as $row) {
+
+
+    		//var_dump($row);
+			Realisateur::create(array(
+			'id' => $row['num_rea' ],
+			'pre_nom_rea' => $row['pre_nom_rea' ]
+			));
+       		
+    	}
+    	var_dump("Table realisateurs migrée");
+
+
+    	foreach($dbh->query('SELECT * FROM acteur') as $row) {
+
+
+    		//var_dump($row);
+			Acteur::create(array(
+			'id' => $row['num_acteur' ],
+			'pre_nom_acteur' => $row['pre_nom_acteur' ]
+			));
+       		
+    	}
+    	var_dump("Table acteurs migrée");
+
+
 		foreach($dbh->query('SELECT * FROM film') as $row) {
 
 
 
-			/*var_dump($row['num_film']);
-			var_dump($row['titre']);
-			var_dump(clean($row['synopsis']));
-			var_dump(clean($row['avis']));
-			var_dump($row['annee_prod']);			
-			var_dump($row['titre']);*/
+			
 
 
 			$affiche_id='1';
@@ -85,12 +108,63 @@ class MigrationsController extends BaseController{
 			'annee_prod' => $row['annee_prod' ],
 			'titre_francais' => $row['titre_francais' ],
 			'prix' => $row['prix' ],	
+			'realisateur_id' => $row['num_rea'],	
 			'affiche_id'=> $affiche_id		
 			
 			));
        		
     	}
     	var_dump("Table films migrée");
+
+
+
+    	$listeFilm= Array();
+    	foreach($dbh->query("SELECT film.num_film FROM film")	as $row) {
+    		array_push($listeFilm,$row['0']);
+    	}
+    	
+    	$listeActeur= Array();
+    	foreach($dbh->query("SELECT acteur.num_acteur FROM acteur") as $row) {
+    		array_push($listeActeur,$row['0']);
+    	}    	
+
+		$listeFilmSup= Array();
+		for ($i=0; $i <10000 ; $i++) { 
+			if(!(in_array($i,$listeFilm))){
+				array_push($listeFilmSup,$i);
+			}
+		}
+
+		$listeActeurSup= Array();
+		for ($i=0; $i <10000 ; $i++) { 
+			if(!(in_array($i,$listeActeur))){
+				array_push($listeActeurSup,$i);
+			}
+		}
+
+		
+
+
+
+    	foreach($dbh->query('SELECT * FROM participer') as $row) {
+
+
+    		
+    		if($row['num_film']>17 
+    			&& !(in_array($row['num_film'],$listeFilmSup))
+    			&& $row['num_acteur']!=0 
+    			&& !(in_array($row['num_acteur'],$listeActeurSup))
+    			){
+
+    			DB::table('acteur_film')->insert(array(
+				'acteur_id' => $row['num_acteur'],
+				'film_id' => $row['num_film']
+				));
+    		}
+			
+       		
+    	}
+    	var_dump("Table acteurs/films migrée");
 
     	die();
 
