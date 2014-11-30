@@ -27,7 +27,7 @@ class CreateFilmsTable extends Migration {
 			$table->timestamps();
 		});
 
-		for ($i=0; $i < 3; $i++) { 
+		for ($i=0; $i < 0; $i++) { 
 			Film::create([
 				'titre'=>"Titre-Film-$i",
 				'synopsys'=>"Au début des années 1980, en Allemagne de l'Est, un agent secret, nommé Wiesler, a pour mission d'observer un couple d'intellectuels. Ces derniers vont le fasciner de plus en plus...",

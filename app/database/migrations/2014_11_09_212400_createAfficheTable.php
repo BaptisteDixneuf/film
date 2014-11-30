@@ -21,7 +21,7 @@ class CreateAfficheTable extends Migration {
 
 		});
 
-		for ($i=0; $i < 3; $i++) { 
+		for ($i=0; $i < 0; $i++) { 
 			Affiche::create([
 				'image'=>"image-$i",
 				
