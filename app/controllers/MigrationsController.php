@@ -166,6 +166,30 @@ class MigrationsController extends BaseController{
     	}
     	var_dump("Table acteurs/films migrée");
 
+
+    	foreach($dbh->query('SELECT * FROM distributeur') as $row) {
+
+
+    		
+			Distributeur::create(array(
+				'nom' => utf8_decode($row['nom_distrib'])
+			));
+       		
+    	}
+    	var_dump("Table distributeurs migrée");
+
+
+    	foreach($dbh->query('SELECT * FROM genre') as $row) {
+
+
+    		//var_dump($row);
+			Genre::create(array(
+				'genre' => clean($row['nom_genre'])
+			));
+       		
+    	}
+    	var_dump("Table genres migrée");
+
     	die();
 
 
