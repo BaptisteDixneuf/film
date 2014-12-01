@@ -1,6 +1,8 @@
 <h1> Tous les films </h1>
 <p><a href="{{ URL::action("FilmsController@create") }}"> Ajouter un film </a></p>
 
+<?php echo $films->links(); ?>
+
 @foreach($films as $film)
 	
 	<h2>
@@ -35,7 +37,7 @@
 
 		<div>
 			<h3>Affiche</h3>
-				<p> Image: {{ isset($film->affiche->image  ) ? $film->affiche->image   : 'Aucun' }}</p>
+				<p> Image: {{ isset($film->affiche->image  ) ?  HTML::image('affiches/'.$film->affiche->image)   : 'Aucun' }}</p>
 		</div>
 
 
