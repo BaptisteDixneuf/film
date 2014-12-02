@@ -88,13 +88,49 @@ class MigrationsController extends BaseController{
     	var_dump("Table acteurs migrée");
 
 
-		foreach($dbh->query('SELECT * FROM film') as $row) {
+    	foreach($dbh->query('SELECT * FROM distributeur') as $row) {
+
+
+    		
+			Distributeur::create(array(
+				'nom' => utf8_decode($row['nom_distrib'])
+			));
+       		
+    	}
+    	var_dump("Table distributeurs migrée");
+
+
+    	foreach($dbh->query('SELECT * FROM genre') as $row) {
+
+
+    		//var_dump($row);
+			Genre::create(array(
+				'genre' => clean($row['nom_genre'])
+			));
+       		
+    	}
+    	var_dump("Table genres migrée");
 
 
 
-			
+		foreach($dbh->query('SELECT * FROM film') as $row) {	
 
 
+			//distributeur
+			$distributeur_id=0;			
+			$distributeur_id = DB::table('distributeurs')->where('nom', $row['nom_distrib'])->pluck('id');
+			//var_dump($distributeur_id);
+
+			//genre
+			$genre_id=0;
+			$genre_nom;
+			foreach($dbh->query("SELECT nom_genre FROM posseder WHERE num_film=".$row['num_film']) as $row2){
+				$genre_nom= $row2['nom_genre'];
+			}
+			$genre_id = DB::table('genres')->where('genre', $genre_nom)->pluck('id');
+			//var_dump($genre_id);
+
+			//affiche
 			$affiche_id='1';
 			if(isset($row['num_affiche' ]) && $row['num_affiche' ]!='' ){
 				$affiche_id=$row['num_affiche' ];
@@ -109,12 +145,16 @@ class MigrationsController extends BaseController{
 			'titre_francais' => $row['titre_francais' ],
 			'prix' => $row['prix' ],	
 			'realisateur_id' => $row['num_rea'],	
+			'distributeur_id' => $distributeur_id,
+			'genre_id' => $genre_id,
 			'affiche_id'=> $affiche_id		
 			
 			));
        		
     	}
     	var_dump("Table films migrée");
+
+
 
 
 
@@ -167,29 +207,7 @@ class MigrationsController extends BaseController{
     	var_dump("Table acteurs/films migrée");
 
 
-    	foreach($dbh->query('SELECT * FROM distributeur') as $row) {
-
-
-    		
-			Distributeur::create(array(
-				'nom' => utf8_decode($row['nom_distrib'])
-			));
-       		
-    	}
-    	var_dump("Table distributeurs migrée");
-
-
-    	foreach($dbh->query('SELECT * FROM genre') as $row) {
-
-
-    		//var_dump($row);
-			Genre::create(array(
-				'genre' => clean($row['nom_genre'])
-			));
-       		
-    	}
-    	var_dump("Table genres migrée");
-
+    	
     	die();
 
 
