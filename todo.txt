@@ -1,7 +1,2 @@
-Acteurs-> Unifier nom et prénom
-Film -> Relations avec les autres classes à terminer
-synopsys to synopsis 
-
 Validation relations films
 Nationalité Film -> TODO ALL
-Suppresion RELATIONS -> PROBLEME

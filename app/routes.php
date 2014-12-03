@@ -16,9 +16,10 @@
     var_dump($query);
 });*/
 
-Route::get('/', 'FilmsController@index');
+Route::get('/', 'AccueilsController@index');
 
 //Acteurs
+Route::get('/acteurs', 'ActeursController@index');
 Route::get('/acteurs/index', 'ActeursController@index');
 Route::get('/acteurs/view/{id}', 'ActeursController@view');
 Route::get('/acteurs/create/{id}', 'ActeursController@create');
@@ -26,9 +27,10 @@ Route::post('/acteurs/store/{id}', 'ActeursController@store');
 Route::get('/acteurs/edit/{id}', 'ActeursController@edit');
 Route::post('/acteurs/update/{id}', 'ActeursController@update');
 Route::get('/acteurs/delete/{id}', 'ActeursController@delete');
-Route::get('/acteurs/search', 'ActeursController@search');
+Route::get('/acteurs/search', 'ActeursController@search'); // Liaison acteur_film
 
 //Réalisateurs
+Route::get('/realisateurs', 'RealisateursController@index');
 Route::get('/realisateurs/index', 'RealisateursController@index');
 Route::get('/realisateurs/view/{id}', 'RealisateursController@view');
 Route::get('/realisateurs/create/{id}', 'RealisateursController@create');
@@ -38,6 +40,7 @@ Route::post('/realisateurs/update/{id}', 'RealisateursController@update');
 Route::get('/realisateurs/delete/{id}', 'RealisateursController@delete');
 
 //Distributeurs
+Route::get('/distributeurs', 'DistributeursController@index');
 Route::get('/distributeurs/index', 'DistributeursController@index');
 Route::get('/distributeurs/view/{id}', 'DistributeursController@view');
 Route::get('/distributeurs/create/{id}', 'DistributeursController@create');
@@ -47,6 +50,7 @@ Route::post('/distributeurs/update/{id}', 'DistributeursController@update');
 Route::get('/distributeurs/delete/{id}', 'DistributeursController@delete');
 
 //Films
+Route::get('/films', 'FilmsController@index');
 Route::get('/films/index', 'FilmsController@index');
 Route::get('/films/view/{id}', 'FilmsController@view');
 Route::get('/films/create/{id}', 'FilmsController@create');
@@ -65,6 +69,7 @@ Route::post('/affiches/update/{id}', 'AffichesController@update');
 Route::get('/affiches/delete/{id}', 'AffichesController@delete');
 
 //Genres
+Route::get('/genres', 'GenresController@index');
 Route::get('/genres/index', 'GenresController@index');
 Route::get('/genres/view/{id}', 'GenresController@view');
 Route::get('/genres/create/{id}', 'GenresController@create');
@@ -74,7 +79,17 @@ Route::post('/genres/update/{id}', 'GenresController@update');
 Route::get('/genres/delete/{id}', 'GenresController@delete');
 
 
-//Migration SQL 
+//Migration SQL
+Route::get('/migrations', 'MigrationsController@index');
 Route::get('/migrations/index', 'MigrationsController@index');
+
+//Accueil
+Route::get('/accueil', 'AccueilsController@index');
+Route::get('/accueil/index', 'AccueilsController@index');
+
+//Recherche
+Route::get('/recherches/index', 'RecherchesController@index');
+Route::post('/recherches/view', 'RecherchesController@view');
+
 
 
