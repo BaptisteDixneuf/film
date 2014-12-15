@@ -12,6 +12,7 @@
     {{ HTML::style('http://getbootstrap.com/dist/css/bootstrap.min.css')}}
     {{ HTML::style('http://getbootstrap.com/examples/starter-template/starter-template.css')}}
     {{ HTML::style('css/token-input.css')}}
+    {{ HTML::style('css/design.css')}}
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>  
     
   

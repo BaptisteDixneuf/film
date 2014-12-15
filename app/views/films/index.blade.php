@@ -4,45 +4,50 @@
 <?php echo $films->links(); ?>
 
 @foreach($films as $film)
-	
-	<h2>
-		<a href="{{ URL::action("FilmsController@view", $film->id )}}"> 
-		Film n° : {{ $film->id }}
-		</a>
-	</h2>
-	<p> Nom: {{ $film->titre }}</p>
-	<p> Synopsys: {{ $film->synopsys }}</p>
-	<p> Avis: {{ $film->avis }}</p>
-	<p> Annee de production: {{ $film->annee_prod }}</p>
-	<p> Titre Français: {{ $film->titre_francais }}</p>
-	<p> Prix: {{ $film->prix }}</p>
-	
-		<div>
-			<h3>Réalisateur</h3>
-
-				<p>  Prénom et Nom du Réalisateur: {{{ isset($film->realisateur->pre_nom_rea ) ? $film->realisateur->pre_nom_rea  : 'Aucun' }}}</p>
-				
-		</div>
-
-		<div>
-			<h3>Distributeur</h3>
-				<p> Nom du Distributeur: {{ isset($film->distributeur->nom  ) ? $film->distributeur->nom   : 'Aucun' }}</p>
-		</div>
-
-		<div>
-			<h3>Genre</h3>
-				<p> Nom du Genre: {{ isset($film->genre->genre  ) ? $film->genre->genre   : 'Aucun' }}</p>
-		</div>
-
-
-		<div>
-			<h3>Affiche</h3>
-				<p> Image: {{ isset($film->affiche->image  ) ?  HTML::image('affiches/'.$film->affiche->image)   : 'Aucun' }}</p>
-		</div>
-
-
-		<div>
-			<h3>Liste des acteurs:</h3>
+	<div class="card">
+		<h2>
+			<a href="{{ URL::action("FilmsController@view", $film->id )}}"> 
+			{{ $film->titre }}
+			</a>
+		</h2>
+		<p>
+			{{ isset($film->affiche->image  ) ?  HTML::image('affiches/'.$film->affiche->image)   : 'Aucune Affiche' }}
+		</p>
+		
+		<p>
+			<strong>Synopsys:</strong>
+			{{ $film->synopsys }}
+		</p>
+		<p>
+			<strong> Avis: </strong>
+			{{ $film->avis }}
+			</p>
+		<p>
+			<strong> Annee de production: </strong>
+			{{ $film->annee_prod }}
+		</p>
+		<p>
+			<strong> Titre Français: </strong>
+			{{ $film->titre_francais }}
+		</p>
+		<p>
+			<strong> Prix: </strong>
+			{{ $film->prix }}
+		</p>
+		<p>  
+			<strong> Réalisateur: </strong> 
+			{{{ isset($film->realisateur->pre_nom_rea ) ? $film->realisateur->pre_nom_rea  : 'Aucun' }}}
+		</p>
+		<p> 
+			<strong> Distributeur: </strong> 
+			{{ isset($film->distributeur->nom  ) ? $film->distributeur->nom   : 'Aucun' }}
+		</p>
+		<p> 
+			<strong> Nom du Genre: </strong>  
+			{{ isset($film->genre->genre  ) ? $film->genre->genre   : 'Aucun' }}
+		</p>
+		<p>
+			<strong> Liste des acteurs:</strong> 
 			<p> 
 				<ul>
 					@foreach($film->acteurs as $acteur)
@@ -50,7 +55,9 @@
 					@endforeach
 				</ul>
 			</p>
-		</div>
+		</p>
+			
+	</div>
 @endforeach
 
 <?php echo $films->links(); ?>
