@@ -1,2 +1,7 @@
-Validation relations films
-Nationalité Film -> TODO ALL
+Bouton Précédent suivant - Dans chaque view de chaque controlleur
+Nationalité,Pays
+Upload Image
+Design de l'application
+Sécurité Insert,Update,Delete
+
+
