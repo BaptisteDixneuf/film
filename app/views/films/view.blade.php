@@ -26,27 +26,55 @@
 			{{ $film->titre_francais }}
 		</p>
 		<p>
-			<strong> Prix: </strong>
-			{{ $film->prix }}
+			<strong> Prix: </strong>			
+			@if (isset($film->prix ) && (!empty($film->prix))  )
+				$film->prix
+			@else
+				Aucun Prix
+			@endif
 		</p>
 		<p>  
-			<strong> Réalisateur: </strong> 
-			{{{ isset($film->realisateur->pre_nom_rea ) ? $film->realisateur->pre_nom_rea  : 'Aucun' }}}
+			<strong> Réalisateur: </strong>
+			@if (isset($film->realisateur->pre_nom_rea ) && (!empty($film->realisateur->pre_nom_rea))  )
+				<a href="{{ URL::action("RealisateursController@view", $film->realisateur->id )}}"> 
+				{{$film->realisateur->pre_nom_rea}}
+				</a>
+			@else
+				Aucun Réalisateur
+			@endif
+			
 		</p>
 		<p> 
-			<strong> Distributeur: </strong> 
-			{{ isset($film->distributeur->nom  ) ? $film->distributeur->nom   : 'Aucun' }}
+			<strong> Distributeur: </strong>			
+			@if (isset($film->distributeur->nom ) && (!empty($film->distributeur->nom))  )
+				<a href="{{ URL::action("DistributeursController@view", $film->distributeur->id )}}"> 
+				{{$film->distributeur->nom}}
+				</a>
+			@else
+				Aucun Distributeur
+			@endif
 		</p>
 		<p> 
 			<strong> Nom du Genre: </strong>  
-			{{ isset($film->genre->genre  ) ? $film->genre->genre   : 'Aucun' }}
+			
+			@if (isset($film->genre->genre  ) && (!empty($film->genre->genre ))  )
+				<a href="{{ URL::action("GenresController@view", $film->genre->id )}}"> 
+				{{$film->genre->genre }}
+				</a>
+			@else
+				Aucun Genre
+			@endif
 		</p>
 		<p>
 			<strong> Liste des acteurs:</strong> 
 			<p> 
 				<ul>
 					@foreach($film->acteurs as $acteur)
-					<li>{{ $acteur->pre_nom_acteur }}</li>	
+					<li>
+						<a href="{{ URL::action("ActeursController@view", $acteur->id )}}">
+						{{ $acteur->pre_nom_acteur }}
+						</a>
+					</li>	
 					@endforeach
 				</ul>
 			</p>
