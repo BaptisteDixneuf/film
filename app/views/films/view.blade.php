@@ -81,6 +81,15 @@
 		</p>
 			
 	</div>
+	<p>
+		@if (isset($previous) && (!empty($previous ))  )
+			<a href="{{ URL::action("FilmsController@view", $previous ) }}">Précédent</a>
+		@endif
+		@if (isset($next) && (!empty($next ))  )
+			<a href="{{ URL::action("FilmsController@view", $next ) }}">Suivant</a>
+		@endif
+		
+	</p>
 
 <p><a href="{{ URL::action("FilmsController@edit", $film->id) }}"> Editer le film </a></p>
 <p><a href="{{ URL::action("FilmsController@delete", $film->id) }}"> Supprimer le film </a></p>

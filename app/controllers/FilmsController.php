@@ -45,7 +45,13 @@ class FilmsController extends BaseController{
 	public function view($id)
 	{
 		$film = Film::with('realisateur','acteurs','distributeur','genre','affiche')->where('id',$id)->firstOrFail();
-		$this->layout->nest('content','films.view',compact('film'));		
+		// get previous film id
+	    $previous = Film::where('id', '<', $film->id)->max('id');
+
+	    // get next film id
+	    $next = Film::where('id', '>', $film->id)->min('id');
+
+		$this->layout->nest('content','films.view',compact('film','previous','next'));		
 	}
 
 	public function edit($id)
