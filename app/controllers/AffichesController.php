@@ -16,10 +16,14 @@ class AffichesController extends BaseController{
 
 	public function store(){
 		$v = Validator::make(Input::all(),Affiche::$rules);
-		if($v->fails()){
+		if(!Input::hasFile('image')){
 			return Redirect::back()->withInput()->withErrors($v->errors());
 		}else{
-			$affiche=Affiche::create(Input::all());
+			if (Input::hasFile('image')){		
+				Input::file('image')->move('affiches',Input::file('image')->getClientOriginalName());				
+				$affiche=Affiche::create(array('image'=>Input::file('image')->getClientOriginalName()));
+			}
+
 		}
 		return Redirect::action('AffichesController@edit', $affiche->id)->with(['success' => 'Affiche Ajoutée']);
 	}

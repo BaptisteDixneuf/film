@@ -1,7 +1,8 @@
 {{ Form::model(
 	$affiche,
 	array('url' =>
-	$affiche->id? URL::action('AffichesController@update', $affiche->id): URL::action('AffichesController@store')
+	$affiche->id? URL::action('AffichesController@update', $affiche->id): URL::action('AffichesController@store'),
+    'files' => true
 	))
 }}
 	<div class="form-group">
@@ -13,7 +14,7 @@
     	 	)
     	}}
     	{{
-    		Form::text(
+    		Form::file(
     			'image',
     			null,
     			['class' => 'form-control']
