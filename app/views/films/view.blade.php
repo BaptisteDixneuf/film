@@ -28,7 +28,7 @@
 		<p>
 			<strong> Prix: </strong>			
 			@if (isset($film->prix ) && (!empty($film->prix))  )
-				$film->prix
+				{{$film->prix}}
 			@else
 				Aucun Prix
 			@endif
