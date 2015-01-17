@@ -19,6 +19,17 @@ class FilmsController extends BaseController{
 		if($v->fails()){
 			return Redirect::back()->withInput()->withErrors($v->errors());
 		}else{
+			//Insertion Image
+			if(!Input::hasFile('image')){				
+				return Redirect::back()->withInput()->withErrors($v->errors());
+			}else{
+				if (Input::hasFile('image')){		
+					Input::file('image')->move('affiches',Input::file('image')->getClientOriginalName());				
+					$affiche=Affiche::create(array('image'=>Input::file('image')->getClientOriginalName()));
+				}
+			}
+					
+			//Insertion film
 			$film=Film::create(array(
 			'titre' => Input::get('titre'),
 			'synopsys' => Input::get('synopsys'),
@@ -29,7 +40,7 @@ class FilmsController extends BaseController{
 			'realisateur_id' => Input::get('realisateur_id'),
 			'distributeur_id' => Input::get('distributeur_id'),
 			'genre_id' => Input::get('genre_id'),
-			'affiche_id' => Input::get('affiche_id')
+			'affiche_id' => $affiche->id
 			));
 
 			$acteurs=Array();
@@ -68,6 +79,15 @@ class FilmsController extends BaseController{
 		if($v->fails()){
 			return Redirect::back()->withInput()->withErrors($v->errors());
 		}else{
+			//Insertion Image
+			if(!Input::hasFile('image')){				
+				return Redirect::back()->withInput()->withErrors($v->errors());
+			}else{
+				if (Input::hasFile('image')){		
+					Input::file('image')->move('affiches',Input::file('image')->getClientOriginalName());				
+					$affiche=Affiche::create(array('image'=>Input::file('image')->getClientOriginalName()));
+				}
+			}
 			$film->update(array(
 			'titre' => Input::get('titre'),
 			'synopsys' => Input::get('synopsys'),
@@ -78,7 +98,7 @@ class FilmsController extends BaseController{
 			'realisateur_id' => Input::get('realisateur_id'),
 			'distributeur_id' => Input::get('distributeur_id'),
 			'genre_id' => Input::get('genre_id'),
-			'affiche_id' => Input::get('affiche_id')
+			'affiche_id' => $affiche->id
 			));
 
 			

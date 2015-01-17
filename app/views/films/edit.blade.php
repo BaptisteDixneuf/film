@@ -3,7 +3,8 @@
 {{ Form::model(
 	$film,
 	array('url' =>
-	$film->id? URL::action('FilmsController@update', $film->id): URL::action('FilmsController@store')
+	$film->id? URL::action('FilmsController@update', $film->id): URL::action('FilmsController@store'),
+    'files' => true
 	))
 }}
 
@@ -144,20 +145,21 @@
     <div class="form-group">
         {{
             Form::label(
-                'affiche_id',
-                "Affiche",
+                'image',
+                "Image",
                 ['class' => 'form-label']
             )
         }}
         {{
-            Form::select(
-                'affiche_id',
-                Affiche::lists('image','id')
+            Form::file(
+               'image',
+                null,
+                ['class' => 'form-control']
             )
         }}
-        @if($errors->has('realisateur_id'))
+        @if($errors->has('image'))
             <p class="help-block">
-                {{$errors->first('realisateur_id')}}
+                {{$errors->first('image')}}
             </p>
         @endif
     </div>
@@ -176,7 +178,7 @@
         {{
             Form::select(
                 'realisateur_id',
-                Realisateur::lists('pre_nom_rea', 'id')
+                Realisateur::orderBy('pre_nom_rea')->lists('pre_nom_rea', 'id')
             )
         }}
         @if($errors->has('realisateur_id'))
@@ -197,7 +199,7 @@
         {{
             Form::select(
                 'distributeur_id',
-                Distributeur::lists('nom', 'id')
+                Distributeur::orderBy('nom')->lists('nom', 'id')
             )
         }}
         @if($errors->has('distributeur_id'))
@@ -218,7 +220,7 @@
         {{
             Form::select(
                 'genre_id',
-                Genre::lists('genre', 'id')
+                Genre::orderBy('genre')->lists('genre', 'id')
             )
         }}
         @if($errors->has('distributeur_id'))
