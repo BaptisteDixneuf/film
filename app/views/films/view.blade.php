@@ -1,4 +1,4 @@
-<p><a href="{{ URL::action("FilmsController@index")}}"> Revenir en arrière </a></p>
+<p><a class="btn btn-primary" href="{{ URL::action("FilmsController@index")}}"> Revenir en arrière </a></p>
 	<div class="card">
 		<h2>
 			<a href="{{ URL::action("FilmsController@view", $film->id )}}"> 
@@ -83,13 +83,13 @@
 	</div>
 	<p>
 		@if (isset($previous) && (!empty($previous ))  )
-			<a href="{{ URL::action("FilmsController@view", $previous ) }}">Précédent</a>
+			<a class="btn btn-warning" href="{{ URL::action("FilmsController@view", $previous ) }}">Précédent</a>
 		@endif
 		@if (isset($next) && (!empty($next ))  )
-			<a href="{{ URL::action("FilmsController@view", $next ) }}">Suivant</a>
+			<a class="btn btn-warning" href="{{ URL::action("FilmsController@view", $next ) }}">Suivant</a>
 		@endif
 		
 	</p>
 
-<p><a href="{{ URL::action("FilmsController@edit", $film->id) }}"> Editer le film </a></p>
-<p><a href="{{ URL::action("FilmsController@delete", $film->id) }}"> Supprimer le film </a></p>
+<p><a class="btn btn-success" href="{{ URL::action("FilmsController@edit", $film->id) }}"> Editer le film </a></p>
+<p><a class="btn btn-danger" href="{{ URL::action("FilmsController@delete", $film->id) }}"> Supprimer le film </a></p>
