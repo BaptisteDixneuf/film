@@ -24,6 +24,17 @@ class RealisateursController extends BaseController{
 		return Redirect::action('RealisateursController@edit', $realisateur->id)->with(['success' => 'Réalisateur Ajouté']);
 	}
 
+	public function add(){		
+		$v = Validator::make(Input::all(),Realisateur::$rules);
+		if($v->fails()){
+			return "Non Valide";
+		}else{
+			$realisateur=Realisateur::create(Input::all());
+		}
+		return "Valide";
+		exit();
+	}
+
 	public function view($id)
 	{
 		$realisateur = Realisateur::with('films')->where('id',$id)->firstOrFail();

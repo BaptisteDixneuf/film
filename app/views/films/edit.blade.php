@@ -1,9 +1,49 @@
+<script type="text/javascript">
+function getXhr(){
+    var xhr = null;
+    try {
+        xhr = new ActiveXObject("Microsoft.XMLHTTP"); // Essayer Internet Explorer  
+    } catch(e){
+        try{
+            xhr = new XMLHttpRequest();
+        }catch(e){
+            alert("Votre navigateur ne supporte pas les objets XMLHTTPRequest...");
+            xhr= false;
+        }
+    }
+    return xhr;
+}
+function envoyerRealisateur(){
+    var xhr = getXhr();
+    xhr.open("POST","{{ URL::action('RealisateursController@add')}}",true);
+    xhr.setRequestHeader('Content-Type','application/x-www-form-urlencoded');    
+    param= document.getElementById("pre_nom_rea").value;
+    listparam="pre_nom_rea="+param
+    xhr.send(listparam);
+    xhr.onreadystatechange = function(){
+            // On ne fait quelque chose que si on a tout reçu et que le serveur est ok
+            if(xhr.readyState == 4 && xhr.status == 200){
+                rep= xhr.responseText;
+                if(rep=='Valide'){
 
+                }else{
+
+                }
+               
+                
+            }
+            console.log("Statut"+xhr.readyState);
+            console.log("Réponse:"+xhr.responseText);
+        }
+        
+    }
+</script>
 
 {{ Form::model(
 	$film,
 	array('url' =>
-	$film->id? URL::action('FilmsController@update', $film->id): URL::action('FilmsController@store')
+	$film->id? URL::action('FilmsController@update', $film->id): URL::action('FilmsController@store'),
+    'files' => true
 	))
 }}
 
@@ -144,24 +184,26 @@
     <div class="form-group">
         {{
             Form::label(
-                'affiche_id',
-                "Affiche",
+                'image',
+                "Image",
                 ['class' => 'form-label']
             )
         }}
         {{
-            Form::select(
-                'affiche_id',
-                Affiche::lists('image','id')
+            Form::file(
+                'image',
+                null,
+                ['class' => 'form-control']
             )
         }}
-        @if($errors->has('realisateur_id'))
+        @if($errors->has('image'))
             <p class="help-block">
-                {{$errors->first('realisateur_id')}}
+                {{$errors->first('image')}}
             </p>
         @endif
     </div>
 
+        
   
 
 
@@ -176,15 +218,44 @@
         {{
             Form::select(
                 'realisateur_id',
-                Realisateur::lists('pre_nom_rea', 'id')
+                Realisateur::orderBy('pre_nom_rea')->lists('pre_nom_rea', 'id')
             )
         }}
         @if($errors->has('realisateur_id'))
             <p class="help-block">
                 {{$errors->first('realisateur_id')}}
             </p>
-        @endif
+        @endif 
+        
     </div>
+
+        <a href="#" class="big-link" data-reveal-id="myModal">
+            Ajouter un réalisateur
+        </a> 
+        <div id="myModal" class="reveal-modal">
+
+            <div class="form-group">
+                {{
+                    Form::label(
+                        'pre_nom_rea',
+                        "Prenom et Nom du réalisateur",
+                        ['class' => 'form-label']
+                    )
+                }}
+                {{
+                    Form::textarea(
+                        'pre_nom_rea',
+                        null,
+                        ['class' => 'form-control']
+                    )
+                }}
+                    <div class="bouttonsRealisateurs">
+                    <input type='button' value='Ajouter' onclick='envoyerRealisateur()' />
+                    </div>
+            </div>           
+            
+            <a class="close-reveal-modal">&#215;</a>
+        </div>  
 
     <div class="form-group">
         {{
@@ -197,7 +268,7 @@
         {{
             Form::select(
                 'distributeur_id',
-                Distributeur::lists('nom', 'id')
+                Distributeur::orderBy('nom')->lists('nom', 'id')
             )
         }}
         @if($errors->has('distributeur_id'))
@@ -218,7 +289,7 @@
         {{
             Form::select(
                 'genre_id',
-                Genre::lists('genre', 'id')
+                Genre::orderBy('genre')->lists('genre', 'id')
             )
         }}
         @if($errors->has('distributeur_id'))
@@ -254,10 +325,13 @@
 
 {{ HTML::script('js/jquery.tokeninput.js')}}
 
-    <script type="text/javascript">
-          $(document).ready(function() {
-            $("#acteurs").tokenInput("http://local.dev/projetFilmApp/film/public/acteurs/search", {
-                prePopulate: <?php echo json_encode($liste_acteurs); ?>
-            });
+<script type="text/javascript">
+    $(document).ready(function() {
+        $("#acteurs").tokenInput("http://local.dev/projetFilmApp/film/public/acteurs/search", {
+            prePopulate: <?php echo json_encode($liste_acteurs); ?>
         });
-  </script>
+
+    });
+</script>
+
+
