@@ -25,9 +25,9 @@ function envoyerRealisateur(){
             if(xhr.readyState == 4 && xhr.status == 200){
                 rep= xhr.responseText;
                 if(rep=='Valide'){
-
+                   document.getElementById('bouttonsRealisateurs').innerHTML = rep;     
                 }else{
-
+                    document.getElementById('bouttonsRealisateurs').innerHTML = rep; 
                 }
                
                 
@@ -249,7 +249,7 @@ function envoyerRealisateur(){
                         ['class' => 'form-control']
                     )
                 }}
-                    <div class="bouttonsRealisateurs">
+                    <div id="bouttonsRealisateurs">
                     <input type='button' value='Ajouter' onclick='envoyerRealisateur()' />
                     </div>
             </div>           
