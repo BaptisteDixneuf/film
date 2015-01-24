@@ -24,6 +24,17 @@ class DistributeursController extends BaseController{
 		return Redirect::action('DistributeursController@edit', $distributeur->id)->with(['success' => 'Distributeur Ajouté']);
 	}
 
+	public function add(){		
+		$v = Validator::make(Input::all(),Distributeur::$rules);
+		if($v->fails()){
+			return "Non Valide";
+		}else{
+			$distributeur=Distributeur::create(Input::all());
+		}
+		return $distributeur;
+		exit();
+	}
+
 	public function view($id)
 	{
 		$distributeur = Distributeur::with('films')->where('id',$id)->firstOrFail();

@@ -24,6 +24,17 @@ class ActeursController extends BaseController{
 		return Redirect::action('ActeursController@edit', $acteur->id)->with(['success' => 'Acteur Ajouté']);
 	}
 
+	public function add(){		
+		$v = Validator::make(Input::all(),Acteur::$rules);
+		if($v->fails()){
+			return "Non Valide";
+		}else{
+			$acteur=Acteur::create(Input::all());
+		}
+		return $acteur;
+		exit();
+	}
+
 	public function view($id)
 	{
 		$acteur = Acteur::with('films')->where('id',$id)->firstOrFail();
