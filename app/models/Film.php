@@ -8,7 +8,8 @@ class Film extends Eloquent{
 			'titre' =>'required|min:4',
 			'synopsys' =>'required|min:4',
 			'avis' =>'required|min:4',
-			'annee_prod' =>'required|min:4|max:4'			
+			'annee_prod' =>'required|min:4|max:4',
+			'image' =>'required|min:4'			
 	];
 
 
