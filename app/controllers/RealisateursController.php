@@ -31,7 +31,7 @@ class RealisateursController extends BaseController{
 		}else{
 			$realisateur=Realisateur::create(Input::all());
 		}
-		return "Valide";
+		return $realisateur;
 		exit();
 	}
 

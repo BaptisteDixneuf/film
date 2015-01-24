@@ -1,12 +1,23 @@
 <script type="text/javascript">
 
       function envoyerRealisateur(){
-        listparam="pre_nom_rea="+$("#pre_nom_rea").val();
+        param = $("#pre_nom_rea").val();
+        listparam="pre_nom_rea="+ param;
           $.post( 
              "{{ URL::action('RealisateursController@add')}}",
              listparam,
-             function(data) {
-                console.log(data);
+             function(data) { 
+                console.log(data);              
+                if(data=="Non Valide"){
+                    $(".info").append( document.createTextNode( " Le nom et prénom du réalisateur n'est pas valide (min: 4 caractères)" ) );
+                }else{
+                    $('#myModal').trigger('reveal:close');
+                   var o = new Option(data.pre_nom_rea, data.id);
+                    /// jquerify the DOM object 'o' so we can use the html method
+                    $(o).html(data.pre_nom_rea);
+                    $("#realisateur_id").append(o);
+                    $("#realisateur_id").val(data.id);
+                }
              }
 
           );
@@ -226,7 +237,10 @@
                     )
                 }}
                     <div id="bouttonsRealisateurs">
-                    <input type='button' value='Ajouter' onclick='envoyerRealisateur()' />
+                        <input type='button' value='Ajouter' onclick='envoyerRealisateur()' />
+                    </div>
+                    <div class="info">
+                        
                     </div>
             </div>           
             
