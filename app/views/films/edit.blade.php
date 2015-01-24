@@ -1,42 +1,18 @@
 <script type="text/javascript">
-function getXhr(){
-    var xhr = null;
-    try {
-        xhr = new ActiveXObject("Microsoft.XMLHTTP"); // Essayer Internet Explorer  
-    } catch(e){
-        try{
-            xhr = new XMLHttpRequest();
-        }catch(e){
-            alert("Votre navigateur ne supporte pas les objets XMLHTTPRequest...");
-            xhr= false;
-        }
-    }
-    return xhr;
-}
-function envoyerRealisateur(){
-    var xhr = getXhr();
-    xhr.open("POST","{{ URL::action('RealisateursController@add')}}",true);
-    xhr.setRequestHeader('Content-Type','application/x-www-form-urlencoded');    
-    param= document.getElementById("pre_nom_rea").value;
-    listparam="pre_nom_rea="+param
-    xhr.send(listparam);
-    xhr.onreadystatechange = function(){
-            // On ne fait quelque chose que si on a tout reçu et que le serveur est ok
-            if(xhr.readyState == 4 && xhr.status == 200){
-                rep= xhr.responseText;
-                if(rep=='Valide'){
-                   document.getElementById('bouttonsRealisateurs').innerHTML = rep;     
-                }else{
-                    document.getElementById('bouttonsRealisateurs').innerHTML = rep; 
-                }
-               
-                
-            }
-            console.log("Statut"+xhr.readyState);
-            console.log("Réponse:"+xhr.responseText);
-        }
-        
-    }
+
+      function envoyerRealisateur(){
+        listparam="pre_nom_rea="+$("#pre_nom_rea").val();
+          $.post( 
+             "{{ URL::action('RealisateursController@add')}}",
+             listparam,
+             function(data) {
+                console.log(data);
+             }
+
+          );
+      };
+  
+
 </script>
 
 {{ Form::model(
