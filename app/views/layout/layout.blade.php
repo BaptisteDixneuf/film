@@ -13,7 +13,12 @@
     {{ HTML::style('http://getbootstrap.com/examples/starter-template/starter-template.css')}}
     {{ HTML::style('css/token-input.css')}}
     {{ HTML::style('css/design.css')}}
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>  
+    {{ HTML::style('modal/reveal.css')}}
+
+    <!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>-->
+    {{ HTML::script('http://code.jquery.com/jquery-1.6.min.js')}} 
+    {{ HTML::script('modal/jquery.reveal.js')}} 
+    
     
   
   </head>
@@ -57,7 +62,7 @@
     </div><!-- /.container -->
 
 
-   
+    
     
 
 

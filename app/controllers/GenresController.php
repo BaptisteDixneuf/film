@@ -36,6 +36,16 @@ class GenresController extends BaseController{
 		$this->layout->nest('content','genres.edit',compact('genre'));
 	}
 
+	public function add(){		
+		$v = Validator::make(Input::all(),Genre::$rules);
+		if($v->fails()){
+			return "Non Valide";
+		}else{
+			$genre=Genre::create(Input::all());
+		}
+		return $genre;
+		exit();
+	}
 
 	public function update($id)
 	{

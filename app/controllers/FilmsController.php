@@ -19,6 +19,10 @@ class FilmsController extends BaseController{
 		if($v->fails()){
 			return Redirect::back()->withInput()->withErrors($v->errors());
 		}else{
+<<<<<<< HEAD
+=======
+
+>>>>>>> github/js
 			//Insertion Image
 			if(!Input::hasFile('image')){				
 				return Redirect::back()->withInput()->withErrors($v->errors());
@@ -88,6 +92,10 @@ class FilmsController extends BaseController{
 					$affiche=Affiche::create(array('image'=>Input::file('image')->getClientOriginalName()));
 				}
 			}
+<<<<<<< HEAD
+=======
+
+>>>>>>> github/js
 			$film->update(array(
 			'titre' => Input::get('titre'),
 			'synopsys' => Input::get('synopsys'),
