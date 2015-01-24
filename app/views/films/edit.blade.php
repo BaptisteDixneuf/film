@@ -94,8 +94,7 @@
 {{ Form::model(
 	$film,
 	array('url' =>
-	$film->id? URL::action('FilmsController@update', $film->id): URL::action('FilmsController@store'),
-    'files' => true
+	$film->id? URL::action('FilmsController@update', $film->id): URL::action('FilmsController@store')
 	))
 }}
 
@@ -235,12 +234,13 @@
     <div class="form-group">
         {{
             Form::label(
-                'image',
-                "Image",
+                'affiche_id',
+                "Affiche",
                 ['class' => 'form-label']
             )
         }}
         {{
+<<<<<<< HEAD
             Form::file(
 <<<<<<< HEAD
                'image',
@@ -249,11 +249,16 @@
 >>>>>>> github/js
                 null,
                 ['class' => 'form-control']
+=======
+            Form::select(
+                'affiche_id',
+                Affiche::lists('image','id')
+>>>>>>> parent of 25c9fb4... Merge remote-tracking branch 'github/js'
             )
         }}
-        @if($errors->has('image'))
+        @if($errors->has('realisateur_id'))
             <p class="help-block">
-                {{$errors->first('image')}}
+                {{$errors->first('realisateur_id')}}
             </p>
         @endif
     </div>
@@ -269,7 +274,7 @@
         {{
             Form::select(
                 'realisateur_id',
-                Realisateur::orderBy('pre_nom_rea')->lists('pre_nom_rea', 'id')
+                Realisateur::lists('pre_nom_rea', 'id')
             )
         }}
         @if($errors->has('realisateur_id'))
@@ -322,7 +327,7 @@
         {{
             Form::select(
                 'distributeur_id',
-                Distributeur::orderBy('nom')->lists('nom', 'id')
+                Distributeur::lists('nom', 'id')
             )
         }}
         @if($errors->has('distributeur_id'))
@@ -374,7 +379,7 @@
         {{
             Form::select(
                 'genre_id',
-                Genre::orderBy('genre')->lists('genre', 'id')
+                Genre::lists('genre', 'id')
             )
         }}
         @if($errors->has('distributeur_id'))

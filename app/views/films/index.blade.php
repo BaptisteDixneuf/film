@@ -1,5 +1,5 @@
 <h1> Tous les films </h1>
-<p><a class="btn btn-primary" href="{{ URL::action("FilmsController@create") }}"> Ajouter un film </a></p>
+<p><a href="{{ URL::action("FilmsController@create") }}"> Ajouter un film </a></p>
 
 <?php echo $films->links(); ?>
 
