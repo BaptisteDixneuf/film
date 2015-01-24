@@ -15,8 +15,6 @@ class AffichesController extends BaseController{
 	}
 
 	public function store(){
-		var_dump(Input::all());
-		exit();
 		$v = Validator::make(Input::all(),Affiche::$rules);
 		if(!Input::hasFile('image')){
 			return Redirect::back()->withInput()->withErrors($v->errors());
