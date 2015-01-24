@@ -92,56 +92,57 @@
 </script>
 
 {{ Form::model(
-	$film,
-	array('url' =>
-	$film->id? URL::action('FilmsController@update', $film->id): URL::action('FilmsController@store')
-	))
+    $film,
+    array('url' =>
+    $film->id? URL::action('FilmsController@update', $film->id): URL::action('FilmsController@store'),
+    'files' => true
+    ))
 }}
 
 
-	<div class="form-group">
-    	{{
-    		Form::label(
-    			'nom',
-    			"Titre du film",
-    	 		['class' => 'form-label']
-    	 	)
-    	}}
-    	{{
-    		Form::text(
-    			'titre',
-    			null,
-    			['class' => 'form-control']
-    		)
-    	}}
-    	@if($errors->has('titre'))
-	    	<p class="help-block">
-		    	{{$errors->first('titre')}}
-		    </p>
-    	@endif
-  	</div>
+    <div class="form-group">
+        {{
+            Form::label(
+                'nom',
+                "Titre du film",
+                ['class' => 'form-label']
+            )
+        }}
+        {{
+            Form::text(
+                'titre',
+                null,
+                ['class' => 'form-control']
+            )
+        }}
+        @if($errors->has('titre'))
+            <p class="help-block">
+                {{$errors->first('titre')}}
+            </p>
+        @endif
+    </div>
 
-   	<div class="form-group">
-    	{{
-    		Form::label(
-    			'synopsys',
-    			"Synopsys du film",
-    	 		['class' => 'form-label']
-    	 	)
-    	}}
-    	{{
-    		Form::textarea(
-    			'synopsys',
-    			null,
-    			['class' => 'form-control']
-    		)
-    	}}
-    	@if($errors->has('synopsys'))
-	    	<p class="help-block">
-		    	{{$errors->first('synopsys')}}
-		    </p>
-    	@endif
-  	</div>
+    <div class="form-group">
+        {{
+            Form::label(
+                'synopsys',
+                "Synopsys du film",
+                ['class' => 'form-label']
+            )
+        }}
+        {{
+            Form::textarea(
+                'synopsys',
+                null,
+                ['class' => 'form-control']
+            )
+        }}
+        @if($errors->has('synopsys'))
+            <p class="help-block">
+                {{$errors->first('synopsys')}}
+            </p>
+        @endif
+    </div>
 
     <div class="form-group">
         {{
@@ -234,31 +235,21 @@
     <div class="form-group">
         {{
             Form::label(
-                'affiche_id',
-                "Affiche",
+                'image',
+                "Image",
                 ['class' => 'form-label']
             )
         }}
         {{
-<<<<<<< HEAD
             Form::file(
-<<<<<<< HEAD
-               'image',
-=======
                 'image',
->>>>>>> github/js
                 null,
                 ['class' => 'form-control']
-=======
-            Form::select(
-                'affiche_id',
-                Affiche::lists('image','id')
->>>>>>> parent of 25c9fb4... Merge remote-tracking branch 'github/js'
             )
         }}
-        @if($errors->has('realisateur_id'))
+        @if($errors->has('image'))
             <p class="help-block">
-                {{$errors->first('realisateur_id')}}
+                {{$errors->first('image')}}
             </p>
         @endif
     </div>
@@ -274,7 +265,7 @@
         {{
             Form::select(
                 'realisateur_id',
-                Realisateur::lists('pre_nom_rea', 'id')
+                Realisateur::orderBy('pre_nom_rea')->lists('pre_nom_rea', 'id')
             )
         }}
         @if($errors->has('realisateur_id'))
@@ -327,7 +318,7 @@
         {{
             Form::select(
                 'distributeur_id',
-                Distributeur::lists('nom', 'id')
+                Distributeur::orderBy('nom')->lists('nom', 'id')
             )
         }}
         @if($errors->has('distributeur_id'))
@@ -379,7 +370,7 @@
         {{
             Form::select(
                 'genre_id',
-                Genre::lists('genre', 'id')
+                Genre::orderBy('genre')->lists('genre', 'id')
             )
         }}
         @if($errors->has('distributeur_id'))
@@ -472,7 +463,7 @@
         
 
 
-	{{Form::submit()}}
+    {{Form::submit()}}
 {{Form::close()}}
 
 
@@ -486,5 +477,4 @@
 
     });
 </script>
-
 

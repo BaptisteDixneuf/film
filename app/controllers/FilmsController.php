@@ -19,11 +19,7 @@ class FilmsController extends BaseController{
 		if($v->fails()){
 			return Redirect::back()->withInput()->withErrors($v->errors());
 		}else{
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
 
->>>>>>> github/js
 			//Insertion Image
 			if(!Input::hasFile('image')){				
 				return Redirect::back()->withInput()->withErrors($v->errors());
@@ -35,8 +31,6 @@ class FilmsController extends BaseController{
 			}
 					
 			//Insertion film
-=======
->>>>>>> parent of 25c9fb4... Merge remote-tracking branch 'github/js'
 			$film=Film::create(array(
 			'titre' => Input::get('titre'),
 			'synopsys' => Input::get('synopsys'),
@@ -47,7 +41,7 @@ class FilmsController extends BaseController{
 			'realisateur_id' => Input::get('realisateur_id'),
 			'distributeur_id' => Input::get('distributeur_id'),
 			'genre_id' => Input::get('genre_id'),
-			'affiche_id' => Input::get('affiche_id')
+			'affiche_id' => $affiche->id
 			));
 
 			$acteurs=Array();
@@ -86,7 +80,6 @@ class FilmsController extends BaseController{
 		if($v->fails()){
 			return Redirect::back()->withInput()->withErrors($v->errors());
 		}else{
-<<<<<<< HEAD
 			//Insertion Image
 			if(!Input::hasFile('image')){				
 				return Redirect::back()->withInput()->withErrors($v->errors());
@@ -96,12 +89,7 @@ class FilmsController extends BaseController{
 					$affiche=Affiche::create(array('image'=>Input::file('image')->getClientOriginalName()));
 				}
 			}
-<<<<<<< HEAD
-=======
 
->>>>>>> github/js
-=======
->>>>>>> parent of 25c9fb4... Merge remote-tracking branch 'github/js'
 			$film->update(array(
 			'titre' => Input::get('titre'),
 			'synopsys' => Input::get('synopsys'),
@@ -112,7 +100,7 @@ class FilmsController extends BaseController{
 			'realisateur_id' => Input::get('realisateur_id'),
 			'distributeur_id' => Input::get('distributeur_id'),
 			'genre_id' => Input::get('genre_id'),
-			'affiche_id' => Input::get('affiche_id')
+			'affiche_id' => $affiche->id
 			));
 
 			
