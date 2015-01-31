@@ -21,11 +21,7 @@ class CreateActeursTable extends Migration {
 
 		});
 
-		for ($i=0; $i < 0; $i++) { 
-			Acteur::create([
-				'pre_nom_acteur'=>"Dixneuf-$i"
-			]);
-		}
+		
 		
 	}
 

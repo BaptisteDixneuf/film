@@ -21,11 +21,7 @@ class CreateRealisateursTable extends Migration {
 
 		});
 
-		for ($i=0; $i < 0; $i++) { 
-			Realisateur::create([
-				'pre_nom_rea'=>"Réal-Dixneuf-$i"				
-			]);
-		}
+		
 	}
 
 	/**

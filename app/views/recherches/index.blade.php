@@ -33,8 +33,14 @@
 	</div>
 	<div class="radio">
 	  	<label>
-	    	<input type="radio" name="optionsRadios" id="optionsRadios4" value="acteur">
+	    	<input type="radio" name="optionsRadios" id="optionsRadios5" value="acteur">
 	    	Acteur
+	  </label>
+	</div>
+	<div class="radio">
+	  	<label>
+	    	<input type="radio" name="optionsRadios" id="optionsRadios6" value="nationalite">
+	    	Nationalité
 	  </label>
 	</div>
  

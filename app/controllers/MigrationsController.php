@@ -111,6 +111,15 @@ class MigrationsController extends BaseController{
     	}
     	var_dump("Table genres migrée");
 
+    	foreach($dbh->query('SELECT * FROM nationalite') as $row) {
+    		
+			Nationalite::create(array(
+				'nationalite' => clean($row['nationalite'])
+			));
+       		
+    	}
+    	var_dump("Table nationalite migrée");
+
 
 
 		foreach($dbh->query('SELECT * FROM film') as $row) {	
@@ -130,6 +139,15 @@ class MigrationsController extends BaseController{
 			$genre_id = DB::table('genres')->where('genre', $genre_nom)->pluck('id');
 			//var_dump($genre_id);
 
+			//nationalite
+			$nationalite_id=0;
+			$nationalite_nom;
+			foreach($dbh->query("SELECT natio FROM appartenir WHERE num_film=".$row['num_film']) as $row3){
+				$nationalite_nom= $row3['natio'];
+			}
+			$nationalite_id = DB::table('nationalites')->where('nationalite', $nationalite_nom)->pluck('id');
+			
+
 			//affiche
 			$affiche_id='1';
 			if(isset($row['num_affiche' ]) && $row['num_affiche' ]!='' ){
@@ -147,6 +165,7 @@ class MigrationsController extends BaseController{
 			'realisateur_id' => $row['num_rea'],	
 			'distributeur_id' => $distributeur_id,
 			'genre_id' => $genre_id,
+			'nationalite_id' => $nationalite_id,
 			'affiche_id'=> $affiche_id		
 			
 			));
@@ -208,10 +227,11 @@ class MigrationsController extends BaseController{
 
 
     	
-    	die();
+    	
 
+    	
 
-			
+		die();	
 		
 	}
 

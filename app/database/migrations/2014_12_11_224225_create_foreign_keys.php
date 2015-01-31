@@ -33,6 +33,13 @@ class CreateForeignKeys extends Migration {
 						->onUpdate('restrict');
 		});
 
+		//Relations Films-Nationalite
+		Schema::table('films', function(Blueprint $table) {
+			$table->foreign('nationalite_id')->references('id')->on('nationalites')
+						->onDelete('restrict')
+						->onUpdate('restrict');
+		});
+
 
 		//Relations Films-Affiche
 		Schema::table('films', function(Blueprint $table) {
@@ -70,6 +77,11 @@ class CreateForeignKeys extends Migration {
 		//Relations Films-Genre
 		Schema::table('films', function(Blueprint $table) {
 			$table->dropForeign('films_genre_id_foreign');
+		});
+
+		//Relations Films-Nationalite
+		Schema::table('films', function(Blueprint $table) {
+			$table->dropForeign('films_nationalite_id_foreign');
 		});
 
 		//Relations Films-Affiche

@@ -65,6 +65,17 @@
 				Aucun Genre
 			@endif
 		</p>
+		<p> 
+			<strong> Nationalite: </strong>  
+			
+			@if (isset($film->nationalite->nationalite  ) && (!empty($film->nationalite->nationalite ))  )
+				<a href="{{ URL::action("NationalitesController@view", $film->nationalite->id )}}"> 
+				{{$film->nationalite->nationalite }}
+				</a>
+			@else
+				Aucun Genre
+			@endif
+		</p>
 		<p>
 			<strong> Liste des acteurs:</strong> 
 			<p> 

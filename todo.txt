@@ -1,6 +1,6 @@
 Bouton Précédent suivant - Dans chaque view de chaque controlleur
 Nationalité,Pays
-Upload Image
+Upload Image -> Edition
 Sécurité Insert,Update,Delete
 
 

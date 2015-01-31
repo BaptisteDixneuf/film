@@ -39,9 +39,16 @@ class RecherchesController extends BaseController{
 				->where('pre_nom_acteur','LIKE','%'.Input::get('InputRecherche').'%')
 				->orderBy('pre_nom_acteur')
 				->get();			
-		        break;    
+		        break;
+		    case 'nationalite':
+		       	$data=Nationalite::select(array('id','nationalite as value'))
+				->where('nationalite','LIKE','%'.Input::get('InputRecherche').'%')
+				->orderBy('nationalite')
+				->get();			
+		        break;      
 		    default:
 		       echo "Recherche Erronéee ";
+		       exit();
 		}
 		$this->layout->nest('content','recherches.view',compact('data','base_chemin'));
 		

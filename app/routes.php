@@ -96,4 +96,13 @@ Route::get('/recherches/index', 'RecherchesController@index');
 Route::post('/recherches/view', 'RecherchesController@view');
 
 
-
+//Nationalite
+Route::get('/nationalites', 'NationalitesController@index');
+Route::get('/nationalites/index', 'NationalitesController@index');
+Route::get('/nationalites/view/{id}', 'NationalitesController@view');
+Route::get('/nationalites/create', 'NationalitesController@create');
+Route::post('/nationalites/add/{id}', 'NationalitesController@add');
+Route::post('/nationalites/store/{id}', 'NationalitesController@store');
+Route::get('/nationalites/edit/{id}', 'NationalitesController@edit');
+Route::post('/nationalites/update/{id}', 'NationalitesController@update');
+Route::get('/nationalites/delete/{id}', 'NationalitesController@delete');

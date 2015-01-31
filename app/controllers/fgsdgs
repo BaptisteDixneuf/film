@@ -1,4 +1,0 @@
-if (Input::hasFile('image')){		
-				Input::file('image')->move('affiches',Input::file('image')->getClientOriginalName());
-				$affiche=Affiche::create(Input::all());
-			}

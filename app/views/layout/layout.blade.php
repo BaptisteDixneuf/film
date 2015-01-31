@@ -44,6 +44,7 @@
             <li><a href="{{ URL::action("GenresController@index")}}">Genre</a></li>
             <li><a href="{{ URL::action("AffichesController@index")}}">Affiche</a></li>            
             <li><a href="{{ URL::action("ActeursController@index")}}">Acteur</a></li>
+            <li><a href="{{ URL::action("NationalitesController@index")}}">Nationalité</a></li>
             
             
           </ul>
