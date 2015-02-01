@@ -56,7 +56,7 @@ class FilmsController extends BaseController{
 
 	public function view($id)
 	{
-		$film = Film::with('realisateur','acteurs','distributeur','genre','affiche')->where('id',$id)->firstOrFail();
+		$film = Film::with('realisateur','acteurs','distributeur','genre','affiche','nationalite')->where('id',$id)->firstOrFail();
 		// get previous film id
 	    $previous = Film::where('id', '<', $film->id)->max('id');
 

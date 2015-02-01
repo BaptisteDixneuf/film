@@ -88,6 +88,29 @@
         );
     };
 
+     function envoyerNationalite(){
+        param = $("#nationalite").val();
+        listparam="nationalite="+ param;
+        $.post( 
+            "{{ URL::action('NationalitesController@add')}}",
+            listparam,
+            function(data) { 
+                console.log(data);              
+                if(data=="Non Valide"){
+                    $(".info").append( document.createTextNode("Le nom de la nationalité n'est pas valide (min: 4 caractères)" ));
+                }else{
+                    $('#modal-nationalite').trigger('reveal:close'); 
+                    var o = new Option(data.nom, data.id);
+                    /// jquerify the DOM object 'o' so we can use the html method
+                    $(o).html(data.nationalite);
+                    $("#nationalite_id").append(o);
+                    $("#nationalite_id").val(data.id);                   
+                }
+            }
+
+        );
+    };
+
 
 </script>
 
@@ -373,9 +396,9 @@
                 Genre::orderBy('genre')->lists('genre', 'id')
             )
         }}
-        @if($errors->has('distributeur_id'))
+        @if($errors->has('genre_id'))
             <p class="help-block">
-                {{$errors->first('distributeur_id')}}
+                {{$errors->first('genre_id')}}
             </p>
         @endif
     </div>
@@ -410,7 +433,57 @@
                 <a class="close-reveal-modal">&#215;</a>
             </div>
 
+    
+    <div class="form-group">
+        {{
+            Form::label(
+                'nationalite_id',
+                "Nationalité:",
+                ['class' => 'form-label']
+            )
+        }}
+        {{
+            Form::select(
+                'nationalite_id',
+                Nationalite::orderBy('nationalite')->lists('nationalite', 'id')
+            )
+        }}
+        @if($errors->has('nationalite_id'))
+            <p class="help-block">
+                {{$errors->first('nationalite_id')}}
+            </p>
+        @endif
+    </div>
+            <a href="#" class="big-link" data-reveal-id="modal-nationalite">
+                Ajouter une nationalité
+            </a> 
+            <div id="modal-nationalite" class="reveal-modal">
 
+                <div class="form-group">
+                    {{
+                        Form::label(
+                            'nationalite',
+                            "Nationalité : ",
+                            ['class' => 'form-label']
+                        )
+                    }}
+                    {{
+                        Form::textarea(
+                            'nationalite',
+                            null,
+                            ['class' => 'form-control']
+                        )
+                    }}
+                        <div id="bouttonsNationalites">
+                            <input type='button' value='Ajouter' onclick='envoyerNationalite()' />
+                        </div>
+                        <div class="info">
+                            
+                        </div>
+                </div>           
+                
+                <a class="close-reveal-modal">&#215;</a>
+            </div>
     
         <?php 
         $liste_acteurs=Array();
