@@ -1,4 +1,5 @@
 Bouton Précédent suivant - Dans chaque view de chaque controlleur
+Bouton arrière -> delete
 Nationalité,Pays -> iNSERT/EDIT controller film
 Upload Image -> Edition
 Sécurité Insert,Update,Delete

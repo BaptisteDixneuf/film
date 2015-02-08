@@ -1,11 +1,16 @@
-<p><a href="{{ URL::action("ActeursController@index")}}"> Revenir en arrière </a></p>
+<p>
+	@if (isset($previous) && (!empty($previous ))  )
+	<a class="btn btn-warning" href="{{ URL::action("ActeursController@view", $previous ) }}">Précédent</a>
+	@endif
+	@if (isset($next) && (!empty($next ))  )
+	<a class="btn btn-warning" href="{{ URL::action("ActeursController@view", $next ) }}">Suivant</a>
+	@endif
 
+</p>
 <h1> Acteur </h1>
 	<div class="card">
-		<h2>
-			<a href="{{ URL::action("ActeursController@view", $acteur->id )}}"> 
-			{{ $acteur->pre_nom_acteur }}
-			</a>
+		<h2>		
+			{{ $acteur->pre_nom_acteur }}			
 		</h2>
 		
 			<p> Liste des films:
@@ -21,5 +26,5 @@
 		</p>
 	</div>
 
-<p><a href="{{ URL::action("ActeursController@edit", $acteur->id) }}"> Editer l'acteur </a></p>
-<p><a href="{{ URL::action("ActeursController@delete", $acteur->id) }}"> Supprimer l'acteur </a></p>
+<p><a class="btn btn-success" href="{{ URL::action("ActeursController@edit", $acteur->id) }}"> Editer l'acteur </a></p>
+<p><a class="btn btn-danger" href="{{ URL::action("ActeursController@delete", $acteur->id) }}"> Supprimer l'acteur </a></p>

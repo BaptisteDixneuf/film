@@ -38,7 +38,16 @@ class ActeursController extends BaseController{
 	public function view($id)
 	{
 		$acteur = Acteur::with('films')->where('id',$id)->firstOrFail();
-		$this->layout->nest('content','acteurs.view',compact('acteur'));		
+		$this->layout->nest('content','acteurs.view',compact('acteur'));
+
+		// get previous Acteur id
+	    $previous = Acteur::where('id', '<', $acteur->id)->max('id');
+
+	    // get next Acteur id
+	    $next = Acteur::where('id', '>', $acteur->id)->min('id');
+
+		$this->layout->nest('content','acteurs.view',compact('acteur','previous','next'));
+
 	}
 
 	public function edit($id)

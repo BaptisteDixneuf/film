@@ -27,7 +27,14 @@ class NationalitesController extends BaseController{
 	public function view($id)
 	{
 		$nationalite = Nationalite::with('films')->where('id',$id)->firstOrFail();
-		$this->layout->nest('content','nationalites.view',compact('nationalite'));		
+		
+		// get previous Nationalite id
+	    $previous = Nationalite::where('id', '<', $nationalite->id)->max('id');
+
+	    // get next Nationalite id
+	    $next = Nationalite::where('id', '>', $nationalite->id)->min('id');
+
+		$this->layout->nest('content','nationalites.view',compact('nationalite','previous','next'));	
 	}
 
 	public function edit($id)

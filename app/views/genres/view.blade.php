@@ -1,11 +1,16 @@
-<p><a href="{{ URL::action("GenresController@index")}}"> Revenir en arrière </a></p>
+<p>
+	@if (isset($previous) && (!empty($previous ))  )
+	<a class="btn btn-warning" href="{{ URL::action("GenresController@view", $previous ) }}">Précédent</a>
+	@endif
+	@if (isset($next) && (!empty($next ))  )
+	<a class="btn btn-warning" href="{{ URL::action("GenresController@view", $next ) }}">Suivant</a>
+	@endif
 
+</p>
 <h1> Genre </h1>
 	<div class="card">
-		<h2>
-			<a href="{{ URL::action("GenresController@view", $genre->id )}}"> 
+		<h2>			
 			{{ $genre->genre }}
-			</a>
 		</h2>
 		
 		<p> Liste des films:
@@ -22,5 +27,5 @@
 	</div>
 	
 
-<p><a href="{{ URL::action("GenresController@edit", $genre->id) }}"> Editer le genre </a></p>
-<p><a href="{{ URL::action("GenresController@delete", $genre->id) }}"> Supprimer le genre </a></p>
+<p><a class="btn btn-success" href="{{ URL::action("GenresController@edit", $genre->id) }}"> Editer le genre </a></p>
+<p><a class="btn btn-danger" href="{{ URL::action("GenresController@delete", $genre->id) }}"> Supprimer le genre </a></p>

@@ -1,5 +1,5 @@
 <h1> Tous les acteurs </h1>
-<p><a href="{{ URL::action("ActeursController@create") }}"> Ajouter un acteur </a></p>
+<p><a class="btn btn-primary" href="{{ URL::action("ActeursController@create") }}"> Ajouter un acteur </a></p>
 
 <?php echo $acteurs->links(); ?>
 @foreach($acteurs as $acteur)

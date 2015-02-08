@@ -1,5 +1,5 @@
 <h1> Tous les Nationalités </h1>
-<p><a href="{{ URL::action("NationalitesController@create") }}"> Ajouter une nationalite </a></p>
+<p><a class="btn btn-primary" href="{{ URL::action("NationalitesController@create") }}"> Ajouter une nationalite </a></p>
 <?php echo $nationalites->links(); ?>
 @foreach($nationalites as $nationalite)
 	<div class="card">

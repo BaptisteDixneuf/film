@@ -1,10 +1,15 @@
-<p><a href="{{ URL::action("DistributeursController@index")}}"> Revenir en arrière </a></p>
+<p>
+	@if (isset($previous) && (!empty($previous ))  )
+	<a class="btn btn-warning" href="{{ URL::action("DistributeursController@view", $previous ) }}">Précédent</a>
+	@endif
+	@if (isset($next) && (!empty($next ))  )
+	<a class="btn btn-warning" href="{{ URL::action("DistributeursController@view", $next ) }}">Suivant</a>
+	@endif
 
+</p>
 <div class="card">
-		<h2>
-			<a href="{{ URL::action("DistributeursController@view", $distributeur->id )}}"> 
+		<h2>			
 			{{ $distributeur->nom }}
-			</a>
 		</h2>
 		
 		<p> Liste des films:
@@ -20,5 +25,5 @@
 		</p>
 	</div>	
 
-<p><a href="{{ URL::action("DistributeursController@edit", $distributeur->id) }}"> Editer le distributeur </a></p>
-<p><a href="{{ URL::action("DistributeursController@delete", $distributeur->id) }}"> Supprimer le distributeur </a></p>
+<p><a class="btn btn-success" href="{{ URL::action("DistributeursController@edit", $distributeur->id) }}"> Editer le distributeur </a></p>
+<p><a class="btn btn-danger" href="{{ URL::action("DistributeursController@delete", $distributeur->id) }}"> Supprimer le distributeur </a></p>

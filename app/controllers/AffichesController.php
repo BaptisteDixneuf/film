@@ -4,8 +4,8 @@ class AffichesController extends BaseController{
 
 	public function index()
 	{
-		$affiches=Affiche::paginate(10);		
-		$this->layout->nest('content','affiches.index',compact('affiches'));
+		$affiches=Affiche::paginate(10);
+	  $this->layout->nest('content','affiches.index',compact('affiches'));
 	}
 
 	public function create()
@@ -19,8 +19,8 @@ class AffichesController extends BaseController{
 		if(!Input::hasFile('image')){
 			return Redirect::back()->withInput()->withErrors($v->errors());
 		}else{
-			if (Input::hasFile('image')){		
-				Input::file('image')->move('affiches',Input::file('image')->getClientOriginalName());				
+			if (Input::hasFile('image')){
+				Input::file('image')->move('affiches',Input::file('image')->getClientOriginalName());
 				$affiche=Affiche::create(array('image'=>Input::file('image')->getClientOriginalName()));
 			}
 
@@ -31,7 +31,14 @@ class AffichesController extends BaseController{
 	public function view($id)
 	{
 		$affiche = Affiche::where('id',$id)->firstOrFail();
-		$this->layout->nest('content','affiches.view',compact('affiche'));		
+		
+		// get previous Affiche id
+	    $previous = Affiche::where('id', '<', $affiche->id)->max('id');
+
+	    // get next Affiche id
+	    $next = Affiche::where('id', '>', $affiche->id)->min('id');
+
+		$this->layout->nest('content','affiches.view',compact('affiche','previous','next'));
 	}
 
 	public function edit($id)
@@ -49,9 +56,9 @@ class AffichesController extends BaseController{
 			return Redirect::back()->withInput()->withErrors($v->errors());
 		}else{
 			$affiche->update(Input::all());
-		}		
+		}
 		return Redirect::back()->with(['success' => 'Affiche Modifiée']);
-		
+
 	}
 
 	public function delete($id)

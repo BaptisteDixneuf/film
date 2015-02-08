@@ -38,7 +38,14 @@ class RealisateursController extends BaseController{
 	public function view($id)
 	{
 		$realisateur = Realisateur::with('films')->where('id',$id)->firstOrFail();
-		$this->layout->nest('content','realisateurs.view',compact('realisateur'));		
+		
+		// get previous realisateur id
+	    $previous = Realisateur::where('id', '<', $realisateur->id)->max('id');
+
+	    // get next realisateur id
+	    $next = Realisateur::where('id', '>', $realisateur->id)->min('id');
+	    
+		$this->layout->nest('content','realisateurs.view',compact('realisateur','previous','next'));		
 	}
 
 	public function edit($id)

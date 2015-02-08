@@ -1,5 +1,5 @@
 <h1> Tous les Genres </h1>
-<p><a href="{{ URL::action("GenresController@create") }}"> Ajouter un genre </a></p>
+<p><a class="btn btn-primary" href="{{ URL::action("GenresController@create") }}"> Ajouter un genre </a></p>
 <?php echo $genres->links(); ?>
 @foreach($genres as $genre)
 	<div class="card">

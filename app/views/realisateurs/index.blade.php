@@ -1,5 +1,5 @@
 <h1> Tous les Réalisateurs </h1>
-<p><a href="{{ URL::action("RealisateursController@create") }}"> Ajouter un réalisateur </a></p>
+<p><a  class="btn btn-primary" href="{{ URL::action("RealisateursController@create") }}"> Ajouter un réalisateur </a></p>
 <?php echo $realisateurs->links(); ?>
 @foreach($realisateurs as $realisateur)
 	<div class="card">
@@ -8,9 +8,6 @@
 			{{ $realisateur->pre_nom_rea }}
 			</a>
 		</h2>
-		
-
-
 		<p> Liste des films:
 				<ul>
 					@foreach($realisateur->films as $film)

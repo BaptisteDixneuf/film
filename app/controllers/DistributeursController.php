@@ -37,8 +37,15 @@ class DistributeursController extends BaseController{
 
 	public function view($id)
 	{
-		$distributeur = Distributeur::with('films')->where('id',$id)->firstOrFail();
-		$this->layout->nest('content','distributeurs.view',compact('distributeur'));		
+		$distributeur = Distributeur::with('films')->where('id',$id)->firstOrFail();		
+
+		// get previous Distributeur id
+	    $previous = Distributeur::where('id', '<', $distributeur->id)->max('id');
+
+	    // get next Distributeur id
+	    $next = Distributeur::where('id', '>', $distributeur->id)->min('id');
+
+		$this->layout->nest('content','distributeurs.view',compact('distributeur','previous','next'));		
 	}
 
 	public function edit($id)

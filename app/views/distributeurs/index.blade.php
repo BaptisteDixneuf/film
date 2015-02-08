@@ -1,5 +1,5 @@
 <h1> Tous les Distributeurs </h1>
-<p><a href="{{ URL::action("DistributeursController@create") }}"> Ajouter un distributeur </a></p>
+<p><a class="btn btn-primary" href="{{ URL::action("DistributeursController@create") }}"> Ajouter un distributeur </a></p>
 <?php echo $distributeurs->links(); ?>
 @foreach($distributeurs as $distributeur)
 	<div class="card">
