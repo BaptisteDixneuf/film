@@ -1,6 +1,7 @@
-Bouton arrière -> delete
 Nationalité -> Edition controller film
 Upload Image -> Edition controller film
+Revoir l'édition/suppression de film
+edition affiche
 Sécurité Insert,Update,Delete
 Ordre croissant des élements dans l'index des controlleurs
 
