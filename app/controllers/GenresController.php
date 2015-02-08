@@ -69,7 +69,16 @@ class GenresController extends BaseController{
 
 	public function delete($id)
 	{
-		Genre::destroy($id);
-		return Redirect::to('/')->with('success','Genre Supprimé');
+		$genre = Genre::with('films')->where('id',$id)->firstOrFail();
+	    if($genre->films->count() == 0)
+	    {
+	        $genre->delete();
+	        $type='success';
+	        $message ="Genre Supprimé";
+	    } else {
+	       $type='error';
+	       $message='Ce genre ne peut pas être supprimé parce qu\'il est lié à un/plusieurs films !';
+	    }		
+		return Redirect::to('/')->with($type,$message);
 	}
 }

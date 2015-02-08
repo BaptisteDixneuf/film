@@ -34,7 +34,7 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="{{ URL::to('/')}}">App Film</a>
+          <a class="navbar-brand" href="{{ URL::to('/')}}">Accueil</a>
         </div>
         <div id="navbar" class="collapse navbar-collapse">
           <ul class="nav navbar-nav">
@@ -56,6 +56,11 @@
       @if(Session::has('success'))
         <div class="alert alert-success">
           {{ Session::get('success')}}
+        </div>
+      @endif
+      @if(Session::has('error'))
+        <div class="alert alert-danger">
+          {{ Session::get('error')}}
         </div>
       @endif
 

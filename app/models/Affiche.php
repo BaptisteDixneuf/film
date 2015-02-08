@@ -8,9 +8,9 @@ class Affiche extends Eloquent{
 			'image' =>'required|min:4'			
 	];
 
-	public function film() 
+	public function films() 
 	{
-	    return $this->belongsTo('Film');
+	    return $this->hasMany('Film');
 	}
 
 }

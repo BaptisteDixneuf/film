@@ -63,7 +63,17 @@ class AffichesController extends BaseController{
 
 	public function delete($id)
 	{
-		Affiche::destroy($id);
-		return Redirect::to('/')->with('success','Affiche Supprimée');
+		$affiche = Affiche::with('films')->where('id',$id)->firstOrFail();
+		
+	    if( $affiche->films->count() == 0)
+	    {
+	        $affiche->delete();
+	        $type='success';
+	        $message ="Affiche Supprimé";
+	    } else {
+	       $type='error';
+	       $message='Cette affiche ne peut pas être supprimé parce qu\'elle est lié à un/plusieurs films !';
+	    }		
+		return Redirect::to('/')->with($type,$message);
 	}
 }

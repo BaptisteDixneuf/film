@@ -70,8 +70,17 @@ class RealisateursController extends BaseController{
 
 	public function delete($id)
 	{
-		Realisateur::destroy($id);
-		return Redirect::to('/')->with('success','Réalisateur Supprimé');
+		$realisateur = Realisateur::with('films')->where('id',$id)->firstOrFail();
+	    if($realisateur->films->count() == 0)
+	    {
+	        $realisateur->delete();
+	        $type='success';
+	        $message ="Réalisateur Supprimé";
+	    } else {
+	       $type='error';
+	       $message='Ce réalisateur ne peut pas être supprimé parce qu\'il est lié à un/plusieurs films !';
+	    }		
+		return Redirect::to('/')->with($type,$message);
 	}
 
 }

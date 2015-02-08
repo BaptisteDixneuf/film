@@ -69,7 +69,16 @@ class NationalitesController extends BaseController{
 
 	public function delete($id)
 	{
-		Nationalite::destroy($id);
-		return Redirect::to('/')->with('success','Nationalite Supprimé');
+		$nationalite = Nationalite::with('films')->where('id',$id)->firstOrFail();		
+	    if( $nationalite->films->count() == 0)
+	    {
+	        $nationalite->delete();
+	        $type='success';
+	        $message ="Nationalité Supprimé";
+	    } else {
+	       $type='error';
+	       $message='Cette nationalité ne peut pas être supprimé parce qu\'elle est lié à un/plusieurs films !';
+	    }		
+		return Redirect::to('/')->with($type,$message);
 	}
 }

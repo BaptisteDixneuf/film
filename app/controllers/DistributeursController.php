@@ -70,7 +70,18 @@ class DistributeursController extends BaseController{
 
 	public function delete($id)
 	{
-		Distributeur::destroy($id);
-		return Redirect::to('/')->with('success','Distributeur Supprimé');
+		
+		$distributeur = Distributeur::with('films')->where('id',$id)->firstOrFail();
+	    if($distributeur->films->count() == 0)
+	    {
+	        $distributeur->delete();
+	        $type='success';
+	        $message ="Distributeur Supprimé";
+	    } else {
+	       $type='error';
+	       $message='Ce distrubuteur ne peut pas être supprimé parce qu\'il est lié à un/plusieurs films !';
+	    }		
+		return Redirect::to('/')->with($type,$message);
+
 	}
 }

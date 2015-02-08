@@ -72,8 +72,17 @@ class ActeursController extends BaseController{
 
 	public function delete($id)
 	{
-		Acteur::destroy($id);
-		return Redirect::to('/')->with('success','Acteur Supprimé');
+		$acteur = Acteur::with('films')->where('id',$id)->firstOrFail();		
+	    if( $acteur->films->count() == 0)
+	    {
+	        $acteur->delete();
+	        $type='success';
+	        $message ="Acteur Supprimé";
+	    } else {
+	       $type='error';
+	       $message='Cet Acteur ne peut pas être supprimé parce qu\'il est lié à un/plusieurs films !';
+	    }		
+		return Redirect::to('/')->with($type,$message);
 	}
 
 	public function search(){
