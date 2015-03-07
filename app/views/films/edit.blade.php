@@ -69,7 +69,6 @@
         );
     };
 
-
     function envoyerActeur(){
         param = $("#pre_nom_acteur").val();
         listparam="pre_nom_acteur="+ param;
@@ -88,7 +87,7 @@
         );
     };
 
-     function envoyerNationalite(){
+    function envoyerNationalite(){
         param = $("#nationalite").val();
         listparam="nationalite="+ param;
         $.post( 
@@ -123,15 +122,23 @@
 }}
 
 
+@if($errors->has())
+   @foreach ($errors->all() as $error)
+      <div class="btn btn-danger" >{{ $error }}</div>
+  @endforeach
+@endif
+
+
+    <!-- Titre du film -->
     <div class="form-group">
         {{
             Form::label(
                 'nom',
-                "Titre du film",
+                "Titre du film (*) : ",
                 ['class' => 'form-label']
             )
         }}
-        {{
+        {{ 
             Form::text(
                 'titre',
                 null,
@@ -145,11 +152,12 @@
         @endif
     </div>
 
+    <!-- Synopsys du film -->
     <div class="form-group">
         {{
             Form::label(
                 'synopsys',
-                "Synopsys du film",
+                "Synopsys du film (*) : ",
                 ['class' => 'form-label']
             )
         }}
@@ -167,11 +175,12 @@
         @endif
     </div>
 
+    <!-- Avis sur le film -->
     <div class="form-group">
         {{
             Form::label(
                 'avis',
-                "Avis sur le film",
+                "Avis sur le film (*) : ",
                 ['class' => 'form-label']
             )
         }}
@@ -189,11 +198,12 @@
         @endif
     </div>
 
+    <!-- Année de production -->
     <div class="form-group">
         {{
             Form::label(
                 'annee_prod',
-                "Année de production",
+                "Année de production (*) : ",
                 ['class' => 'form-label']
             )
         }}
@@ -211,11 +221,12 @@
         @endif
     </div>
 
+    <!-- Titre Français -->
     <div class="form-group">
         {{
             Form::label(
                 'titre_francais',
-                "Titre Français",
+                "Titre Français : ",
                 ['class' => 'form-label']
             )
         }}
@@ -233,11 +244,12 @@
         @endif
     </div>
 
+    <!-- Prix -->
     <div class="form-group">
         {{
             Form::label(
                 'prix',
-                "Prix ",
+                "Prix :  ",
                 ['class' => 'form-label']
             )
         }}
@@ -259,7 +271,7 @@
         {{
             Form::label(
                 'image',
-                "Image",
+                "Image : ",
                 ['class' => 'form-label']
             )
         }}
@@ -270,18 +282,19 @@
                 ['class' => 'form-control']
             )
         }}
-        @if($errors->has('image'))
+        @if($errors->has('affiche_id'))
             <p class="help-block">
-                {{$errors->first('image')}}
+                {{$errors->first('affiche_id')}}
             </p>
         @endif
     </div>
 
+    <!-- Réalisateur -->
     <div class="form-group">
         {{
             Form::label(
                 'realisateur_id',
-                "Réalisateur",
+                "Réalisateur : ",
                 ['class' => 'form-label']
             )
         }}
@@ -291,15 +304,14 @@
                 Realisateur::orderBy('pre_nom_rea')->lists('pre_nom_rea', 'id')
             )
         }}
+
         @if($errors->has('realisateur_id'))
             <p class="help-block">
                 {{$errors->first('realisateur_id')}}
             </p>
-        @endif 
-        
-    </div>
+        @endif
 
-            <a href="#" class="big-link" data-reveal-id="modal-realisateur">
+        <a href="#" class="big-link" data-reveal-id="modal-realisateur">
                 Ajouter un réalisateur
             </a> 
             <div id="modal-realisateur" class="reveal-modal">
@@ -308,7 +320,7 @@
                     {{
                         Form::label(
                             'pre_nom_rea',
-                            "Prenom et Nom du réalisateur",
+                            "Prénom et Nom du réalisateur : ",
                             ['class' => 'form-label']
                         )
                     }}
@@ -328,13 +340,15 @@
                 </div>           
                 
                 <a class="close-reveal-modal">&#215;</a>
-            </div>  
+            </div>        
+    </div>              
 
+    <!-- Distributeur -->
     <div class="form-group">
         {{
             Form::label(
                 'distributeur_id',
-                "Distributeur",
+                "Distributeur : ",
                 ['class' => 'form-label']
             )
         }}
@@ -344,14 +358,14 @@
                 Distributeur::orderBy('nom')->lists('nom', 'id')
             )
         }}
+
         @if($errors->has('distributeur_id'))
             <p class="help-block">
                 {{$errors->first('distributeur_id')}}
             </p>
         @endif
-    </div>
 
-            <a href="#" class="big-link" data-reveal-id="modal-distributeur">
+        <a href="#" class="big-link" data-reveal-id="modal-distributeur">
                 Ajouter un distributeur
             </a> 
             <div id="modal-distributeur" class="reveal-modal">
@@ -360,7 +374,7 @@
                     {{
                         Form::label(
                             'nom',
-                            "Nom du distributeur",
+                            "Nom du distributeur : ",
                             ['class' => 'form-label']
                         )
                     }}
@@ -381,12 +395,14 @@
                 
                 <a class="close-reveal-modal">&#215;</a>
             </div>
-
+    </div>
+            
+    <!-- Genre -->
     <div class="form-group">
         {{
             Form::label(
                 'genre_id',
-                "Genre:",
+                "Genre : ",
                 ['class' => 'form-label']
             )
         }}
@@ -396,13 +412,14 @@
                 Genre::orderBy('genre')->lists('genre', 'id')
             )
         }}
+
         @if($errors->has('genre_id'))
             <p class="help-block">
                 {{$errors->first('genre_id')}}
             </p>
         @endif
-    </div>
-            <a href="#" class="big-link" data-reveal-id="modal-genre">
+
+        <a href="#" class="big-link" data-reveal-id="modal-genre">
                 Ajouter un genre
             </a> 
             <div id="modal-genre" class="reveal-modal">
@@ -432,13 +449,14 @@
                 
                 <a class="close-reveal-modal">&#215;</a>
             </div>
+    </div>            
 
-    
+    <!-- Nationalité -->
     <div class="form-group">
         {{
             Form::label(
                 'nationalite_id',
-                "Nationalité:",
+                "Nationalité :",
                 ['class' => 'form-label']
             )
         }}
@@ -448,13 +466,14 @@
                 Nationalite::orderBy('nationalite')->lists('nationalite', 'id')
             )
         }}
+
         @if($errors->has('nationalite_id'))
             <p class="help-block">
                 {{$errors->first('nationalite_id')}}
             </p>
         @endif
-    </div>
-            <a href="#" class="big-link" data-reveal-id="modal-nationalite">
+        
+        <a href="#" class="big-link" data-reveal-id="modal-nationalite">
                 Ajouter une nationalité
             </a> 
             <div id="modal-nationalite" class="reveal-modal">
@@ -484,23 +503,24 @@
                 
                 <a class="close-reveal-modal">&#215;</a>
             </div>
+    </div>
+            
     
         <?php 
-        $liste_acteurs=Array();
-        $i=0;
-        foreach ($film->acteurs as $acteur) {
-            $liste_acteurs[$i]['id']=$acteur->id;
-            $liste_acteurs[$i]["name"]=$acteur->pre_nom_acteur;
-            $i++;
-        }
-        
+            $liste_acteurs=Array();
+            $i=0;
+            foreach ($film->acteurs as $acteur) {
+                $liste_acteurs[$i]['id']=$acteur->id;
+                $liste_acteurs[$i]["name"]=$acteur->pre_nom_acteur;
+                $i++;
+            }        
         ?>
-        
+
+    <!-- acteur -->    
     <div class="form-group">
-        <label for="acteurs" class="form-label">Acteurs</label>
+        <label for="acteurs" class="form-label">Acteurs : </label>
         <input class="form-control" name="acteurs" id="acteurs" type="text" value="">
-    </div>
-            <a href="#" class="big-link" data-reveal-id="modal-acteur">
+        <a href="#" class="big-link" data-reveal-id="modal-acteur">
                 Ajouter un acteur
             </a> 
             <div id="modal-acteur" class="reveal-modal">
@@ -530,13 +550,9 @@
                 
                 <a class="close-reveal-modal">&#215;</a>
             </div>
+    </div>   
 
-
-
-        
-
-
-    {{Form::submit()}}
+    {{Form::submit('Enregistrer', ['class' => 'btn btn-primary'])}}
 {{Form::close()}}
 
 

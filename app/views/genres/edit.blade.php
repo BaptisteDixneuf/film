@@ -4,11 +4,17 @@
 	$genre->id? URL::action('GenresController@update', $genre->id): URL::action('GenresController@store')
 	))
 }}
+@if($errors->has())
+   @foreach ($errors->all() as $error)
+      <div class="btn btn-danger" >{{ $error }}</div>
+  @endforeach
+@endif  
+
 	<div class="form-group">
     	{{
     		Form::label(
     			'genre',
-    			"Genre:",
+    			"Genre :",
     	 		['class' => 'form-label']
     	 	)
     	}}
@@ -27,5 +33,5 @@
   	</div>
 
   	
-	{{Form::submit()}}
+	{{Form::submit('Enregistrer', ['class' => 'btn btn-primary'])}}
 {{Form::close()}}

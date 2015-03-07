@@ -1,4 +1,4 @@
-<h1> Tous les Affiches </h1>
+<h1> Toutes les Affiches </h1>
 <p><a class="btn btn-primary" href="{{ URL::action("AffichesController@create") }}"> Ajouter une affiche </a></p>
 
 <?php echo $affiches->links(); ?>
