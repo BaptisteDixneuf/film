@@ -78,8 +78,13 @@ class FilmsController extends BaseController{
 		$film = Film::findOrFail($id);
 		$v = Validator::make(Input::all(),Film::$rules);
 		if($v->fails()){
+			echo "fails";
+			//echo $v->errors();
+			//exit();
 			return Redirect::back()->withInput()->withErrors($v->errors());
 		}else{
+			echo "no fails";
+			exit();
 			//Insertion Image
 			if(!Input::hasFile('image')){				
 				return Redirect::back()->withInput()->withErrors($v->errors());

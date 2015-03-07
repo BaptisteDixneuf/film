@@ -55,7 +55,12 @@ class AffichesController extends BaseController{
 		if($v->fails()){
 			return Redirect::back()->withInput()->withErrors($v->errors());
 		}else{
-			$affiche->update(Input::all());
+			if (Input::hasFile('image')){
+				//var_dump(Input::file('image')->getClientOriginalName());
+				//exit();
+				Input::file('image')->move('affiches',Input::file('image')->getClientOriginalName());				
+				$affiche->update(array('image' => Input::file('image')->getClientOriginalName()));
+			}
 		}
 		return Redirect::back()->with(['success' => 'Affiche Modifiée']);
 

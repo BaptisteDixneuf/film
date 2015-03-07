@@ -11,6 +11,15 @@
   @endforeach
 @endif  
 
+<div class="form-group">
+    <label for="oldimage" class="form-label">Image Actuelle:</label>
+    <div>
+        {{ isset($affiche->image  ) ?  HTML::image('affiches/'.$affiche->image)   : 'Aucune Affiche' }}
+    </div>
+</div>
+
+
+
 	<div class="form-group">
     	{{
     		Form::label(
