@@ -4,5 +4,5 @@
 		<li><a href="{{ URL::action($base_chemin,  $d->id)  }}">{{$d->value}}</a></li>	
 	@endforeach
 @else
-	Aucun Résultat
+	<p>Aucun Résultat<p>
 @endif
