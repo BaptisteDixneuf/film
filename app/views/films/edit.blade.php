@@ -312,7 +312,7 @@
         @endif
 
         <a href="#" class="big-link" data-reveal-id="modal-realisateur">
-                Ajouter un réalisateur
+                Ajouter un nouveau réalisateur
             </a> 
             <div id="modal-realisateur" class="reveal-modal">
 
@@ -366,7 +366,7 @@
         @endif
 
         <a href="#" class="big-link" data-reveal-id="modal-distributeur">
-                Ajouter un distributeur
+                Ajouter un nouveau distributeur
             </a> 
             <div id="modal-distributeur" class="reveal-modal">
 
@@ -420,7 +420,7 @@
         @endif
 
         <a href="#" class="big-link" data-reveal-id="modal-genre">
-                Ajouter un genre
+                Ajouter un nouveau genre
             </a> 
             <div id="modal-genre" class="reveal-modal">
 
@@ -474,7 +474,7 @@
         @endif
         
         <a href="#" class="big-link" data-reveal-id="modal-nationalite">
-                Ajouter une nationalité
+                Ajouter une nouvelle nationalité
             </a> 
             <div id="modal-nationalite" class="reveal-modal">
 
@@ -518,10 +518,10 @@
 
     <!-- acteur -->    
     <div class="form-group">
-        <label for="acteurs" class="form-label">Acteurs : </label>
+        <label for="acteurs" class="form-label">Acteurs (Taper un terme dans le champs ci-dessous pour rechercher un acteur): </label>
         <input class="form-control" name="acteurs" id="acteurs" type="text" value="">
         <a href="#" class="big-link" data-reveal-id="modal-acteur">
-                Ajouter un acteur
+                Ajouter un nouveau acteur
             </a> 
             <div id="modal-acteur" class="reveal-modal">
 
@@ -560,7 +560,7 @@
 
 <script type="text/javascript">
     $(document).ready(function() {
-        $("#acteurs").tokenInput("http://local.dev/projetFilmApp/film/public/acteurs/search", {
+        $("#acteurs").tokenInput("{{ URL::action('ActeursController@search')}}", {
             prePopulate: <?php echo json_encode($liste_acteurs); ?>
         });
 

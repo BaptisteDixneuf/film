@@ -30,16 +30,16 @@ class NationalitesController extends BaseController{
 			$nationalite = Nationalite::with('films')->where('id',$id)->firstOrFail();
 			
 			// get previous Nationalite id
-		    $previous = Nationalite::where('id', '<', $nationalite->id)->max('id');
+			$previous = Nationalite::where('id', '<', $nationalite->id)->max('id');
 
 		    // get next Nationalite id
-		    $next = Nationalite::where('id', '>', $nationalite->id)->min('id');
+			$next = Nationalite::where('id', '>', $nationalite->id)->min('id');
 
 			$this->layout->nest('content','nationalites.view',compact('nationalite','previous','next'));
 
 		}catch(ModelNotFoundException $e){
-		    $erreur = "Cette nationalité n'existe pas";
-		    $this->layout->nest('content','errors.index',compact('erreur'));
+			$erreur = "Cette nationalité n'existe pas";
+			$this->layout->nest('content','errors.index',compact('erreur'));
 		}	
 	}
 
@@ -76,15 +76,15 @@ class NationalitesController extends BaseController{
 	public function delete($id)
 	{
 		$nationalite = Nationalite::with('films')->where('id',$id)->firstOrFail();		
-	    if( $nationalite->films->count() == 0)
-	    {
-	        $nationalite->delete();
-	        $type='success';
-	        $message ="Nationalité Supprimé";
-	    } else {
-	       $type='error';
-	       $message='Cette nationalité ne peut pas être supprimé parce qu\'elle est lié à un/plusieurs films !';
-	    }		
+		if( $nationalite->films->count() == 0)
+		{
+			$nationalite->delete();
+			$type='success';
+			$message ="Nationalité Supprimé";
+		} else {
+			$type='error';
+			$message='Cette nationalité ne peut pas être supprimé parce qu\'elle est lié à un/plusieurs films !';
+		}		
 		return Redirect::to('/')->with($type,$message);
 	}
 }

@@ -41,16 +41,16 @@ class RealisateursController extends BaseController{
 			$realisateur = Realisateur::with('films')->where('id',$id)->firstOrFail();
 			
 			// get previous realisateur id
-		    $previous = Realisateur::where('id', '<', $realisateur->id)->max('id');
+			$previous = Realisateur::where('id', '<', $realisateur->id)->max('id');
 
 		    // get next realisateur id
-		    $next = Realisateur::where('id', '>', $realisateur->id)->min('id');
-		    
+			$next = Realisateur::where('id', '>', $realisateur->id)->min('id');
+			
 			$this->layout->nest('content','realisateurs.view',compact('realisateur','previous','next'));
 			
 		}catch(ModelNotFoundException $e){
-		    $erreur = "Ce réalisateur n'existe pas";
-		    $this->layout->nest('content','errors.index',compact('erreur'));
+			$erreur = "Ce réalisateur n'existe pas";
+			$this->layout->nest('content','errors.index',compact('erreur'));
 		}	
 	}
 
@@ -77,15 +77,15 @@ class RealisateursController extends BaseController{
 	public function delete($id)
 	{
 		$realisateur = Realisateur::with('films')->where('id',$id)->firstOrFail();
-	    if($realisateur->films->count() == 0)
-	    {
-	        $realisateur->delete();
-	        $type='success';
-	        $message ="Réalisateur Supprimé";
-	    } else {
-	       $type='error';
-	       $message='Ce réalisateur ne peut pas être supprimé parce qu\'il est lié à un/plusieurs films !';
-	    }		
+		if($realisateur->films->count() == 0)
+		{
+			$realisateur->delete();
+			$type='success';
+			$message ="Réalisateur Supprimé";
+		} else {
+			$type='error';
+			$message='Ce réalisateur ne peut pas être supprimé parce qu\'il est lié à un/plusieurs films !';
+		}		
 		return Redirect::to('/')->with($type,$message);
 	}
 

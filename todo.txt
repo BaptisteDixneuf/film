@@ -2,10 +2,6 @@ Revoir suppression de film
 
 /* Mineur */
 Sécurité Insert,Update,Delete
-Ordre croissant des élements dans l'index des controlleurs
-	* Distributeur
-	* Genre
-	* Nationalite	
 Script recherche acteur -> Move to prod
-Bouton nouveau element -> modal -> Revoir
+
 
