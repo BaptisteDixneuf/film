@@ -14,7 +14,7 @@
     	{{
     		Form::label(
     			'genre',
-    			"Genre :",
+    			"Genre (*) :",
     	 		['class' => 'form-label']
     	 	)
     	}}

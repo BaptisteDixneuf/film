@@ -14,7 +14,7 @@
     	{{
     		Form::label(
     			'pre_nom_rea',
-    			"Prénom et Nom du réalisateur : ",
+    			"Prénom et Nom du réalisateur (*) : ",
     	 		['class' => 'form-label']
     	 	)
     	}}

@@ -24,7 +24,7 @@
     	{{
     		Form::label(
     			'image',
-    			"Image :",
+    			"Image (*) :",
     	 		['class' => 'form-label']
     	 	)
     	}}

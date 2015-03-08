@@ -13,7 +13,7 @@
     	{{
     		Form::label(
     			'nationalite',
-    			"Nationalité :",
+    			"Nationalité (*) :",
     	 		['class' => 'form-label']
     	 	)
     	}}

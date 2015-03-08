@@ -14,7 +14,7 @@
     	{{
     		Form::label(
     			'nom',
-    			"Nom du distributeur : ",
+    			"Nom du distributeur (*) : ",
     	 		['class' => 'form-label']
     	 	)
     	}}
