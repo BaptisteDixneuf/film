@@ -12,7 +12,8 @@ class Film extends Eloquent{
 			'realisateur_id' =>'required',
 			'distributeur_id'=>'required',
 			'genre_id'=>'required',
-			'affiche_id'=>'required'	
+			'nationalite_id'=>'required'
+			//'image'=>'required'	=> Lors de l'update le champs n'est pas pré-rempli 
 	];
 
 

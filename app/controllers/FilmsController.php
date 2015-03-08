@@ -29,7 +29,7 @@ class FilmsController extends BaseController{
 					$affiche=Affiche::create(array('image'=>Input::file('image')->getClientOriginalName()));
 				}
 			}
-					
+
 			//Insertion film
 			$film=Film::create(array(
 			'titre' => Input::get('titre'),
@@ -41,6 +41,7 @@ class FilmsController extends BaseController{
 			'realisateur_id' => Input::get('realisateur_id'),
 			'distributeur_id' => Input::get('distributeur_id'),
 			'genre_id' => Input::get('genre_id'),
+			'nationalite_id' => Input::get('nationalite_id'),
 			'affiche_id' => $affiche->id
 			));
 
@@ -75,25 +76,25 @@ class FilmsController extends BaseController{
 
 	public function update($id)
 	{
-		$film = Film::findOrFail($id);
+		$film = Film::findOrFail($id);	
+
 		$v = Validator::make(Input::all(),Film::$rules);
-		if($v->fails()){
-			echo "fails";
-			//echo $v->errors();
-			//exit();
+		if($v->fails()){			
 			return Redirect::back()->withInput()->withErrors($v->errors());
 		}else{
-			echo "no fails";
-			exit();
-			//Insertion Image
-			if(!Input::hasFile('image')){				
-				return Redirect::back()->withInput()->withErrors($v->errors());
-			}else{
-				if (Input::hasFile('image')){		
-					Input::file('image')->move('affiches',Input::file('image')->getClientOriginalName());				
-					$affiche=Affiche::create(array('image'=>Input::file('image')->getClientOriginalName()));
+			if(Input::hasFile('image')){
+				$affiche = Affiche::findOrFail($film->affiche_id);
+				$v = Validator::make(array('image' => Input::file('image')->getClientOriginalName()),Affiche::$rules);
+				if($v->fails()){
+					return Redirect::back()->withInput()->withErrors($v->errors());
+				}else{
+					if(Input::hasFile('image')){						
+						Input::file('image')->move('affiches',Input::file('image')->getClientOriginalName());				
+						$affiche->update(array('image' => Input::file('image')->getClientOriginalName()));
+					}
 				}
 			}
+
 
 			$film->update(array(
 			'titre' => Input::get('titre'),
@@ -105,7 +106,8 @@ class FilmsController extends BaseController{
 			'realisateur_id' => Input::get('realisateur_id'),
 			'distributeur_id' => Input::get('distributeur_id'),
 			'genre_id' => Input::get('genre_id'),
-			'affiche_id' => $affiche->id
+			'nationalite_id' => Input::get('nationalite_id'),
+			'affiche_id' => $film->affiche_id
 			));
 
 			

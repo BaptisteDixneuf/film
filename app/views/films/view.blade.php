@@ -79,7 +79,7 @@
 			{{$film->nationalite->nationalite }}
 		</a>
 		@else
-		Aucun Genre
+		Aucune Nationalité
 		@endif
 	</p>
 	<p>
