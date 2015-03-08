@@ -1,15 +1,37 @@
 /* Card */
-    .card{
-      
-      display: block;
-      vertical-align: top;
-      background-color: #fff;
-      box-shadow: 0 12px 15px 0 rgba(0, 0, 0, 0.24);
-      padding: 10px;
-      margin: 20px;
-    }
-    .help-block{
-    	color:red;
-    }
+.card{
 
-	
+  display: block;
+  vertical-align: top;
+  background-color: #fff;
+  box-shadow: 0 12px 15px 0 rgba(0, 0, 0, 0.24);
+  padding: 10px;
+  margin: 20px;
+}
+.help-block{
+ color:red;
+}
+
+body {
+  /* background: linear-gradient(#a2c5d7 0%, #e2e2e2 300px); */
+  background: linear-gradient(#3395CD, #81D3DD);
+  background-attachment: fixed;
+}
+
+.main {
+  display: block; /* Internet Explorer */
+  margin: 0 auto;
+  background: #eeeeee;
+  position: relative;
+  box-shadow: 0 0 1em rgba(0,0,0,0.1);
+  box-shadow: 0 0 1em rgba(0,0,0,0.3);
+  border-left: 2px solid #f5f5f5;
+  border-right: 2px solid #f5f5f5;
+  overflow: hidden;
+}
+
+form {
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+

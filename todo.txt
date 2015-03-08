@@ -3,5 +3,8 @@ Revoir suppression de film
 /* Mineur */
 Sécurité Insert,Update,Delete
 Ordre croissant des élements dans l'index des controlleurs
-Script recherche etudiant updat link
+	* Distributeur
+	* Genre
+	* Nationalite	
+Script recherche acteur -> Move to prod
 

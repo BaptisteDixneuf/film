@@ -52,7 +52,7 @@
       </div>
     </nav>
 
-    <div class="container">   
+    <div class="container main">   
       @if(Session::has('success'))
         <div class="alert alert-success">
           {{ Session::get('success')}}

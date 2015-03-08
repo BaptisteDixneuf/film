@@ -4,7 +4,7 @@ class NationalitesController extends BaseController{
 
 	public function index()
 	{
-		$nationalites=Nationalite::with('films')->paginate(10);		
+		$nationalites=Nationalite::with('films')->orderBy('nationalite', 'asc')->paginate(10);		
 		$this->layout->nest('content','nationalites.index',compact('nationalites'));
 	}
 

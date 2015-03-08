@@ -4,7 +4,7 @@ class DistributeursController extends BaseController{
 
 	public function index()
 	{
-		$distributeurs=Distributeur::with('films')->paginate(10);		
+		$distributeurs=Distributeur::with('films')->orderBy('nom', 'asc')->paginate(10);		
 		$this->layout->nest('content','distributeurs.index',compact('distributeurs'));
 	}
 

@@ -4,7 +4,7 @@ class GenresController extends BaseController{
 
 	public function index()
 	{
-		$genres=Genre::with('films')->paginate(10);		
+		$genres=Genre::with('films')->orderBy('genre', 'asc')->paginate(10);		
 		$this->layout->nest('content','genres.index',compact('genres'));
 	}
 
