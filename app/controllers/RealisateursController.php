@@ -1,5 +1,5 @@
 <?php
-
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 class RealisateursController extends BaseController{
 
 
@@ -37,15 +37,21 @@ class RealisateursController extends BaseController{
 
 	public function view($id)
 	{
-		$realisateur = Realisateur::with('films')->where('id',$id)->firstOrFail();
-		
-		// get previous realisateur id
-	    $previous = Realisateur::where('id', '<', $realisateur->id)->max('id');
+		try{
+			$realisateur = Realisateur::with('films')->where('id',$id)->firstOrFail();
+			
+			// get previous realisateur id
+		    $previous = Realisateur::where('id', '<', $realisateur->id)->max('id');
 
-	    // get next realisateur id
-	    $next = Realisateur::where('id', '>', $realisateur->id)->min('id');
-	    
-		$this->layout->nest('content','realisateurs.view',compact('realisateur','previous','next'));		
+		    // get next realisateur id
+		    $next = Realisateur::where('id', '>', $realisateur->id)->min('id');
+		    
+			$this->layout->nest('content','realisateurs.view',compact('realisateur','previous','next'));
+			
+		}catch(ModelNotFoundException $e){
+		    $erreur = "Ce réalisateur n'existe pas";
+		    $this->layout->nest('content','errors.index',compact('erreur'));
+		}	
 	}
 
 	public function edit($id)

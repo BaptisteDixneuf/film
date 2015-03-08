@@ -1,5 +1,5 @@
 <?php
-
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 class AffichesController extends BaseController{
 
 	public function index()
@@ -30,15 +30,21 @@ class AffichesController extends BaseController{
 
 	public function view($id)
 	{
-		$affiche = Affiche::where('id',$id)->firstOrFail();
-		
-		// get previous Affiche id
-	    $previous = Affiche::where('id', '<', $affiche->id)->max('id');
+		try{
+			$affiche = Affiche::where('id',$id)->firstOrFail();
+			
+			// get previous Affiche id
+		    $previous = Affiche::where('id', '<', $affiche->id)->max('id');
 
-	    // get next Affiche id
-	    $next = Affiche::where('id', '>', $affiche->id)->min('id');
+		    // get next Affiche id
+		    $next = Affiche::where('id', '>', $affiche->id)->min('id');
 
-		$this->layout->nest('content','affiches.view',compact('affiche','previous','next'));
+			$this->layout->nest('content','affiches.view',compact('affiche','previous','next'));
+
+		}catch(ModelNotFoundException $e){
+		    $erreur = "Cette affiche n'existe pas";
+		    $this->layout->nest('content','errors.index',compact('erreur'));
+		}
 	}
 
 	public function edit($id)

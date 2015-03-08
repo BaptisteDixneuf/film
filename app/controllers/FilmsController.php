@@ -1,5 +1,5 @@
 <?php
-
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 class FilmsController extends BaseController{
 
 	public function index()
@@ -57,14 +57,21 @@ class FilmsController extends BaseController{
 
 	public function view($id)
 	{
-		$film = Film::with('realisateur','acteurs','distributeur','genre','affiche','nationalite')->where('id',$id)->firstOrFail();
-		// get previous film id
-	    $previous = Film::where('id', '<', $film->id)->max('id');
+		try{
+			$film = Film::with('realisateur','acteurs','distributeur','genre','affiche','nationalite')->where('id',$id)->firstOrFail();
+			// get previous film id
+	    	$previous = Film::where('id', '<', $film->id)->max('id');
 
-	    // get next film id
-	    $next = Film::where('id', '>', $film->id)->min('id');
+	    	// get next film id
+	    	$next = Film::where('id', '>', $film->id)->min('id');
 
-		$this->layout->nest('content','films.view',compact('film','previous','next'));		
+			$this->layout->nest('content','films.view',compact('film','previous','next'));
+
+		}catch(ModelNotFoundException $e){
+		    $erreur = "Ce film n'existe pas";
+		    $this->layout->nest('content','errors.index',compact('erreur'));
+		}
+				
 	}
 
 	public function edit($id)

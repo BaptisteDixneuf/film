@@ -1,5 +1,5 @@
 <?php
-
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 class GenresController extends BaseController{
 
 	public function index()
@@ -26,15 +26,21 @@ class GenresController extends BaseController{
 
 	public function view($id)
 	{
-		$genre = Genre::with('films')->where('id',$id)->firstOrFail();
+		try{
+			$genre = Genre::with('films')->where('id',$id)->firstOrFail();
 
-		// get previous Genre id
-	    $previous = Genre::where('id', '<', $genre->id)->max('id');
+			// get previous Genre id
+		    $previous = Genre::where('id', '<', $genre->id)->max('id');
 
-	    // get next Genre id
-	    $next = Genre::where('id', '>', $genre->id)->min('id');
+		    // get next Genre id
+		    $next = Genre::where('id', '>', $genre->id)->min('id');
 
-		$this->layout->nest('content','genres.view',compact('genre','previous','next'));	
+			$this->layout->nest('content','genres.view',compact('genre','previous','next'));
+
+		}catch(ModelNotFoundException $e){
+		    $erreur = "Ce genre n'existe pas";
+		    $this->layout->nest('content','errors.index',compact('erreur'));
+		}	
 	}
 
 	public function edit($id)

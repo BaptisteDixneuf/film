@@ -1,5 +1,5 @@
 <?php
-
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 class DistributeursController extends BaseController{
 
 	public function index()
@@ -37,15 +37,21 @@ class DistributeursController extends BaseController{
 
 	public function view($id)
 	{
-		$distributeur = Distributeur::with('films')->where('id',$id)->firstOrFail();		
+		try{
+			$distributeur = Distributeur::with('films')->where('id',$id)->firstOrFail();		
 
-		// get previous Distributeur id
-	    $previous = Distributeur::where('id', '<', $distributeur->id)->max('id');
+			// get previous Distributeur id
+		    $previous = Distributeur::where('id', '<', $distributeur->id)->max('id');
 
-	    // get next Distributeur id
-	    $next = Distributeur::where('id', '>', $distributeur->id)->min('id');
+		    // get next Distributeur id
+		    $next = Distributeur::where('id', '>', $distributeur->id)->min('id');
 
-		$this->layout->nest('content','distributeurs.view',compact('distributeur','previous','next'));		
+			$this->layout->nest('content','distributeurs.view',compact('distributeur','previous','next'));
+
+		}catch(ModelNotFoundException $e){
+		    $erreur = "Ce distributeur n'existe pas";
+		    $this->layout->nest('content','errors.index',compact('erreur'));
+		}		
 	}
 
 	public function edit($id)

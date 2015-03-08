@@ -1,5 +1,5 @@
 <?php
-
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 class NationalitesController extends BaseController{
 
 	public function index()
@@ -26,15 +26,21 @@ class NationalitesController extends BaseController{
 
 	public function view($id)
 	{
-		$nationalite = Nationalite::with('films')->where('id',$id)->firstOrFail();
-		
-		// get previous Nationalite id
-	    $previous = Nationalite::where('id', '<', $nationalite->id)->max('id');
+		try{
+			$nationalite = Nationalite::with('films')->where('id',$id)->firstOrFail();
+			
+			// get previous Nationalite id
+		    $previous = Nationalite::where('id', '<', $nationalite->id)->max('id');
 
-	    // get next Nationalite id
-	    $next = Nationalite::where('id', '>', $nationalite->id)->min('id');
+		    // get next Nationalite id
+		    $next = Nationalite::where('id', '>', $nationalite->id)->min('id');
 
-		$this->layout->nest('content','nationalites.view',compact('nationalite','previous','next'));	
+			$this->layout->nest('content','nationalites.view',compact('nationalite','previous','next'));
+
+		}catch(ModelNotFoundException $e){
+		    $erreur = "Cette nationalité n'existe pas";
+		    $this->layout->nest('content','errors.index',compact('erreur'));
+		}	
 	}
 
 	public function edit($id)
