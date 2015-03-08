@@ -42,16 +42,16 @@ class ActeursController extends BaseController{
 			$this->layout->nest('content','acteurs.view',compact('acteur'));
 
 			// get previous Acteur id
-		    $previous = Acteur::where('id', '<', $acteur->id)->max('id');
+			$previous = Acteur::where('id', '<', $acteur->id)->max('id');
 
 		    // get next Acteur id
-		    $next = Acteur::where('id', '>', $acteur->id)->min('id');
+			$next = Acteur::where('id', '>', $acteur->id)->min('id');
 
 			$this->layout->nest('content','acteurs.view',compact('acteur','previous','next'));
 
 		}catch(ModelNotFoundException $e){
-		    $erreur = "Cette acteur n'existe pas";
-		    $this->layout->nest('content','errors.index',compact('erreur'));
+			$erreur = "Cette acteur n'existe pas";
+			$this->layout->nest('content','errors.index',compact('erreur'));
 		}
 
 	}
@@ -79,23 +79,23 @@ class ActeursController extends BaseController{
 	public function delete($id)
 	{
 		$acteur = Acteur::with('films')->where('id',$id)->firstOrFail();		
-	    if( $acteur->films->count() == 0)
-	    {
-	        $acteur->delete();
-	        $type='success';
-	        $message ="Acteur Supprimé";
-	    } else {
-	       $type='error';
-	       $message='Cet Acteur ne peut pas être supprimé parce qu\'il est lié à un/plusieurs films !';
-	    }		
+		if( $acteur->films->count() == 0)
+		{
+			$acteur->delete();
+			$type='success';
+			$message ="Acteur Supprimé";
+		} else {
+			$type='error';
+			$message='Cet Acteur ne peut pas être supprimé parce qu\'il est lié à un/plusieurs films !';
+		}		
 		return Redirect::to('/')->with($type,$message);
 	}
 
 	public function search(){
 
 		$acteurs=Acteur::select(array('id','pre_nom_acteur'))
-				->where('pre_nom_acteur','LIKE','%'.Input::get('q').'%')
-				->get();
+		->where('pre_nom_acteur','LIKE','%'.Input::get('q').'%')
+		->get();
 		$liste_acteurs;
 		$i=0;
 		foreach ($acteurs as $acteur) {

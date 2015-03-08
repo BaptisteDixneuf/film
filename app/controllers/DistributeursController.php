@@ -4,7 +4,7 @@ class DistributeursController extends BaseController{
 
 	public function index()
 	{
-		$distributeurs=Distributeur::with('films')->orderBy('nom', 'asc')->paginate(10);		
+		$distributeurs=Distributeur::with('films')->paginate(10);		
 		$this->layout->nest('content','distributeurs.index',compact('distributeurs'));
 	}
 
@@ -41,16 +41,16 @@ class DistributeursController extends BaseController{
 			$distributeur = Distributeur::with('films')->where('id',$id)->firstOrFail();		
 
 			// get previous Distributeur id
-		    $previous = Distributeur::where('id', '<', $distributeur->id)->max('id');
+			$previous = Distributeur::where('id', '<', $distributeur->id)->max('id');
 
 		    // get next Distributeur id
-		    $next = Distributeur::where('id', '>', $distributeur->id)->min('id');
+			$next = Distributeur::where('id', '>', $distributeur->id)->min('id');
 
 			$this->layout->nest('content','distributeurs.view',compact('distributeur','previous','next'));
 
 		}catch(ModelNotFoundException $e){
-		    $erreur = "Ce distributeur n'existe pas";
-		    $this->layout->nest('content','errors.index',compact('erreur'));
+			$erreur = "Ce distributeur n'existe pas";
+			$this->layout->nest('content','errors.index',compact('erreur'));
 		}		
 	}
 
@@ -78,15 +78,15 @@ class DistributeursController extends BaseController{
 	{
 		
 		$distributeur = Distributeur::with('films')->where('id',$id)->firstOrFail();
-	    if($distributeur->films->count() == 0)
-	    {
-	        $distributeur->delete();
-	        $type='success';
-	        $message ="Distributeur Supprimé";
-	    } else {
-	       $type='error';
-	       $message='Ce distrubuteur ne peut pas être supprimé parce qu\'il est lié à un/plusieurs films !';
-	    }		
+		if($distributeur->films->count() == 0)
+		{
+			$distributeur->delete();
+			$type='success';
+			$message ="Distributeur Supprimé";
+		} else {
+			$type='error';
+			$message='Ce distrubuteur ne peut pas être supprimé parce qu\'il est lié à un/plusieurs films !';
+		}		
 		return Redirect::to('/')->with($type,$message);
 
 	}

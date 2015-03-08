@@ -5,7 +5,7 @@ class AffichesController extends BaseController{
 	public function index()
 	{
 		$affiches=Affiche::paginate(10);
-	  $this->layout->nest('content','affiches.index',compact('affiches'));
+		$this->layout->nest('content','affiches.index',compact('affiches'));
 	}
 
 	public function create()
@@ -34,16 +34,16 @@ class AffichesController extends BaseController{
 			$affiche = Affiche::where('id',$id)->firstOrFail();
 			
 			// get previous Affiche id
-		    $previous = Affiche::where('id', '<', $affiche->id)->max('id');
+			$previous = Affiche::where('id', '<', $affiche->id)->max('id');
 
 		    // get next Affiche id
-		    $next = Affiche::where('id', '>', $affiche->id)->min('id');
+			$next = Affiche::where('id', '>', $affiche->id)->min('id');
 
 			$this->layout->nest('content','affiches.view',compact('affiche','previous','next'));
 
 		}catch(ModelNotFoundException $e){
-		    $erreur = "Cette affiche n'existe pas";
-		    $this->layout->nest('content','errors.index',compact('erreur'));
+			$erreur = "Cette affiche n'existe pas";
+			$this->layout->nest('content','errors.index',compact('erreur'));
 		}
 	}
 
@@ -76,15 +76,15 @@ class AffichesController extends BaseController{
 	{
 		$affiche = Affiche::with('films')->where('id',$id)->firstOrFail();
 		
-	    if( $affiche->films->count() == 0)
-	    {
-	        $affiche->delete();
-	        $type='success';
-	        $message ="Affiche Supprimé";
-	    } else {
-	       $type='error';
-	       $message='Cette affiche ne peut pas être supprimé parce qu\'elle est lié à un/plusieurs films !';
-	    }		
+		if( $affiche->films->count() == 0)
+		{
+			$affiche->delete();
+			$type='success';
+			$message ="Affiche Supprimé";
+		} else {
+			$type='error';
+			$message='Cette affiche ne peut pas être supprimé parce qu\'elle est lié à un/plusieurs films !';
+		}		
 		return Redirect::to('/')->with($type,$message);
 	}
 }

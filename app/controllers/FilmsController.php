@@ -32,18 +32,18 @@ class FilmsController extends BaseController{
 
 			//Insertion film
 			$film=Film::create(array(
-			'titre' => Input::get('titre'),
-			'synopsys' => Input::get('synopsys'),
-			'avis' => Input::get('avis'),
-			'annee_prod' => Input::get('annee_prod'),
-			'titre_francais' => Input::get('titre_francais'),
-			'prix' => Input::get('prix'),
-			'realisateur_id' => Input::get('realisateur_id'),
-			'distributeur_id' => Input::get('distributeur_id'),
-			'genre_id' => Input::get('genre_id'),
-			'nationalite_id' => Input::get('nationalite_id'),
-			'affiche_id' => $affiche->id
-			));
+				'titre' => Input::get('titre'),
+				'synopsys' => Input::get('synopsys'),
+				'avis' => Input::get('avis'),
+				'annee_prod' => Input::get('annee_prod'),
+				'titre_francais' => Input::get('titre_francais'),
+				'prix' => Input::get('prix'),
+				'realisateur_id' => Input::get('realisateur_id'),
+				'distributeur_id' => Input::get('distributeur_id'),
+				'genre_id' => Input::get('genre_id'),
+				'nationalite_id' => Input::get('nationalite_id'),
+				'affiche_id' => $affiche->id
+				));
 
 			$acteurs=Array();
 			if(Input::has('acteurs')) {
@@ -60,18 +60,18 @@ class FilmsController extends BaseController{
 		try{
 			$film = Film::with('realisateur','acteurs','distributeur','genre','affiche','nationalite')->where('id',$id)->firstOrFail();
 			// get previous film id
-	    	$previous = Film::where('id', '<', $film->id)->max('id');
+			$previous = Film::where('id', '<', $film->id)->max('id');
 
 	    	// get next film id
-	    	$next = Film::where('id', '>', $film->id)->min('id');
+			$next = Film::where('id', '>', $film->id)->min('id');
 
 			$this->layout->nest('content','films.view',compact('film','previous','next'));
 
 		}catch(ModelNotFoundException $e){
-		    $erreur = "Ce film n'existe pas";
-		    $this->layout->nest('content','errors.index',compact('erreur'));
+			$erreur = "Ce film n'existe pas";
+			$this->layout->nest('content','errors.index',compact('erreur'));
 		}
-				
+		
 	}
 
 	public function edit($id)
@@ -104,18 +104,18 @@ class FilmsController extends BaseController{
 
 
 			$film->update(array(
-			'titre' => Input::get('titre'),
-			'synopsys' => Input::get('synopsys'),
-			'avis' => Input::get('avis'),
-			'annee_prod' => Input::get('annee_prod'),
-			'titre_francais' => Input::get('titre_francais'),
-			'prix' => Input::get('prix'),
-			'realisateur_id' => Input::get('realisateur_id'),
-			'distributeur_id' => Input::get('distributeur_id'),
-			'genre_id' => Input::get('genre_id'),
-			'nationalite_id' => Input::get('nationalite_id'),
-			'affiche_id' => $film->affiche_id
-			));
+				'titre' => Input::get('titre'),
+				'synopsys' => Input::get('synopsys'),
+				'avis' => Input::get('avis'),
+				'annee_prod' => Input::get('annee_prod'),
+				'titre_francais' => Input::get('titre_francais'),
+				'prix' => Input::get('prix'),
+				'realisateur_id' => Input::get('realisateur_id'),
+				'distributeur_id' => Input::get('distributeur_id'),
+				'genre_id' => Input::get('genre_id'),
+				'nationalite_id' => Input::get('nationalite_id'),
+				'affiche_id' => $film->affiche_id
+				));
 
 			
 
@@ -125,9 +125,9 @@ class FilmsController extends BaseController{
 				$film = Film::find($film->id);				
 			}
 			$film->acteurs()->sync($acteurs);
-				
+			
 		}
-				
+		
 		return Redirect::back()->with(['success' => 'Film Modifié']);
 		
 	}

@@ -4,7 +4,7 @@ class GenresController extends BaseController{
 
 	public function index()
 	{
-		$genres=Genre::with('films')->orderBy('genre', 'asc')->paginate(10);		
+		$genres=Genre::with('films')->paginate(10);		
 		$this->layout->nest('content','genres.index',compact('genres'));
 	}
 
@@ -30,16 +30,16 @@ class GenresController extends BaseController{
 			$genre = Genre::with('films')->where('id',$id)->firstOrFail();
 
 			// get previous Genre id
-		    $previous = Genre::where('id', '<', $genre->id)->max('id');
+			$previous = Genre::where('id', '<', $genre->id)->max('id');
 
 		    // get next Genre id
-		    $next = Genre::where('id', '>', $genre->id)->min('id');
+			$next = Genre::where('id', '>', $genre->id)->min('id');
 
 			$this->layout->nest('content','genres.view',compact('genre','previous','next'));
 
 		}catch(ModelNotFoundException $e){
-		    $erreur = "Ce genre n'existe pas";
-		    $this->layout->nest('content','errors.index',compact('erreur'));
+			$erreur = "Ce genre n'existe pas";
+			$this->layout->nest('content','errors.index',compact('erreur'));
 		}	
 	}
 
@@ -76,15 +76,15 @@ class GenresController extends BaseController{
 	public function delete($id)
 	{
 		$genre = Genre::with('films')->where('id',$id)->firstOrFail();
-	    if($genre->films->count() == 0)
-	    {
-	        $genre->delete();
-	        $type='success';
-	        $message ="Genre Supprimé";
-	    } else {
-	       $type='error';
-	       $message='Ce genre ne peut pas être supprimé parce qu\'il est lié à un/plusieurs films !';
-	    }		
+		if($genre->films->count() == 0)
+		{
+			$genre->delete();
+			$type='success';
+			$message ="Genre Supprimé";
+		} else {
+			$type='error';
+			$message='Ce genre ne peut pas être supprimé parce qu\'il est lié à un/plusieurs films !';
+		}		
 		return Redirect::to('/')->with($type,$message);
 	}
 }
