@@ -7,8 +7,8 @@
 	@endif
 
 </p>
-<div class="card">
-	<h2>
+<div class="card">	
+		<h2>
 			<a href="{{ URL::action("FilmsController@view", $film->id )}}"> 
 			{{ $film->titre }}
 			</a>
@@ -18,7 +18,11 @@
 		</p>
 		<p>
 			<strong> Titre Français: </strong>
-			{{ $film->titre_francais }}
+			@if (isset($film->titre_francais ) && (!empty($film->titre_francais)))
+				{{ $film->titre_francais }}
+			@else
+				- 
+			@endif			
 		</p>
 		<p> 
 			<strong> Nationalite: </strong>  
@@ -28,7 +32,7 @@
 				{{$film->nationalite->nationalite }}
 				</a>
 			@else
-				Aucune Nationalité
+				-
 			@endif
 		</p>
 		<p>  
@@ -38,7 +42,7 @@
 				{{$film->realisateur->pre_nom_rea}}
 				</a>
 			@else
-				Aucun Réalisateur
+				-
 			@endif
 			
 		</p>
@@ -74,7 +78,7 @@
 				{{$film->genre->genre }}
 				</a>
 			@else
-				Aucun Genre
+				-
 			@endif
 		</p>
 		<p>
@@ -95,9 +99,9 @@
 			@if (isset($film->prix ) && (!empty($film->prix))  )
 				{{ $film->prix }}
 			@else
-				
+				- 
 			@endif
-		</p>
+		</p>	
 
 </div>
 <p><a class="btn btn-success" href="{{ URL::action("FilmsController@edit", $film->id) }}"> Editer le film </a></p>
