@@ -134,7 +134,11 @@ class FilmsController extends BaseController{
 
 	public function delete($id)
 	{
+		
+		$film = Film::with('realisateur','acteurs','distributeur','genre','affiche','nationalite')->where('id',$id)->firstOrFail();
+		$film->acteurs()->detach();
 		Film::destroy($id);
 		return Redirect::to('/')->with('success','Film Supprimé');
+		
 	}
 }
