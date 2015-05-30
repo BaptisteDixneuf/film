@@ -21,7 +21,7 @@ class GenresController extends BaseController{
 		}else{
 			$genre=Genre::create(Input::all());
 		}
-		return Redirect::action('GenresController@edit', $genre->id)->with(['success' => 'Genre Ajouté']);
+		return Redirect::action('GenresController@view', $genre->id)->with(['success' => 'Genre Ajouté']);
 	}
 
 	public function view($id)
@@ -69,7 +69,7 @@ class GenresController extends BaseController{
 		}else{
 			$genre->update(Input::all());
 		}		
-		return Redirect::back()->with(['success' => 'Genre Modifié']);
+		return Redirect::action('GenresController@view', $genre->id)->with(['success' => 'Genre Modifié']);
 		
 	}
 

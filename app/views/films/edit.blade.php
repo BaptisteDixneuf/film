@@ -271,7 +271,7 @@
         {{
             Form::label(
                 'image',
-                "Image : ",
+                "Image ( Laisser vide lors d'une modification) :  ",
                 ['class' => 'form-label']
             )
         }}

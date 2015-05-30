@@ -21,7 +21,7 @@ class DistributeursController extends BaseController{
 		}else{
 			$distributeur=Distributeur::create(Input::all());
 		}
-		return Redirect::action('DistributeursController@edit', $distributeur->id)->with(['success' => 'Distributeur Ajouté']);
+		return Redirect::action('DistributeursController@view', $distributeur->id)->with(['success' => 'Distributeur Ajouté']);
 	}
 
 	public function add(){		
@@ -70,7 +70,7 @@ class DistributeursController extends BaseController{
 		}else{
 			$distributeur->update(Input::all());
 		}		
-		return Redirect::back()->with(['success' => 'Distributeur Modifié']);
+		return Redirect::action('DistributeursController@view', $distributeur->id)->with(['success' => 'Distributeur Modifié']);
 		
 	}
 

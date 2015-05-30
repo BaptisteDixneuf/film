@@ -52,7 +52,7 @@ class FilmsController extends BaseController{
 			}
 			$film->acteurs()->sync($acteurs);
 		}
-		return Redirect::action('FilmsController@edit', $film->id)->with(['success' => 'Film Ajouté']);
+		return Redirect::action('FilmsController@view', $film->id)->with(['success' => 'Film Ajouté']);
 	}
 
 	public function view($id)
@@ -128,7 +128,7 @@ class FilmsController extends BaseController{
 			
 		}
 		
-		return Redirect::back()->with(['success' => 'Film Modifié']);
+		return Redirect::action('FilmsController@view', $film->id)->with(['success' => 'Film Modifié']);
 		
 	}
 

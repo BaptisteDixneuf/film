@@ -25,7 +25,7 @@ class AffichesController extends BaseController{
 			}
 
 		}
-		return Redirect::action('AffichesController@edit', $affiche->id)->with(['success' => 'Affiche Ajoutée']);
+		return Redirect::action('AffichesController@view', $affiche->id)->with(['success' => 'Affiche Ajoutée']);
 	}
 
 	public function view($id)
@@ -68,7 +68,7 @@ class AffichesController extends BaseController{
 				$affiche->update(array('image' => Input::file('image')->getClientOriginalName()));
 			}
 		}
-		return Redirect::back()->with(['success' => 'Affiche Modifiée']);
+		return Redirect::action('AffichesController@view', $affiche->id)->with(['success' => 'Affiche Modifiée']);
 
 	}
 

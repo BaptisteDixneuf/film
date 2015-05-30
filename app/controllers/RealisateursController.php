@@ -21,7 +21,7 @@ class RealisateursController extends BaseController{
 		}else{
 			$realisateur=Realisateur::create(Input::all());
 		}
-		return Redirect::action('RealisateursController@edit', $realisateur->id)->with(['success' => 'Réalisateur Ajouté']);
+		return Redirect::action('RealisateursController@view', $realisateur->id)->with(['success' => 'Réalisateur Ajouté']);
 	}
 
 	public function add(){		
@@ -70,7 +70,7 @@ class RealisateursController extends BaseController{
 		}else{
 			$realisateur->update(Input::all());
 		}		
-		return Redirect::back()->with(['success' => 'Réalisateur Modifié']);
+		return Redirect::action('RealisateursController@view', $realisateur->id)->with(['success' => 'Réalisateur Modifié']);
 		
 	}
 

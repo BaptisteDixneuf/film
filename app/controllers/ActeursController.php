@@ -21,7 +21,7 @@ class ActeursController extends BaseController{
 		}else{
 			$acteur=Acteur::create(Input::all());
 		}
-		return Redirect::action('ActeursController@edit', $acteur->id)->with(['success' => 'Acteur Ajouté']);
+		return Redirect::action('ActeursController@view', $acteur->id)->with(['success' => 'Acteur Ajouté']);
 	}
 
 	public function add(){		
@@ -72,7 +72,7 @@ class ActeursController extends BaseController{
 		}else{
 			$acteur->update(Input::all());
 		}		
-		return Redirect::back()->with(['success' => 'Acteur Modifié']);
+		return Redirect::action('ActeursController@view', $acteur->id)->with(['success' => 'Acteur Modifié']);
 		
 	}
 

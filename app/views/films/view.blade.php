@@ -105,3 +105,4 @@
 
 </div>
 <p><a class="btn btn-success" href="{{ URL::action("FilmsController@edit", $film->id) }}"> Editer le film </a></p>
+<p><a class="btn btn-danger" href="{{ URL::action("FilmsController@delete", $film->id) }}"> Supprimer le film </a></p>
