@@ -38,7 +38,7 @@ class NationalitesController extends BaseController{
 			$this->layout->nest('content','nationalites.view',compact('nationalite','previous','next'));
 
 		}catch(ModelNotFoundException $e){
-			$erreur = "Cette nationalité n'existe pas";
+			$erreur = "Cette nationalité n'existe pas dans la base de données";
 			$this->layout->nest('content','errors.index',compact('erreur'));
 		}	
 	}

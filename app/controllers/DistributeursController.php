@@ -49,7 +49,7 @@ class DistributeursController extends BaseController{
 			$this->layout->nest('content','distributeurs.view',compact('distributeur','previous','next'));
 
 		}catch(ModelNotFoundException $e){
-			$erreur = "Ce distributeur n'existe pas";
+			$erreur = "Ce distributeur n'existe pas dans la base de données";
 			$this->layout->nest('content','errors.index',compact('erreur'));
 		}		
 	}

@@ -42,7 +42,7 @@ class AffichesController extends BaseController{
 			$this->layout->nest('content','affiches.view',compact('affiche','previous','next'));
 
 		}catch(ModelNotFoundException $e){
-			$erreur = "Cette affiche n'existe pas";
+			$erreur = "Cette affiche n'existe pas dans la base de données";
 			$this->layout->nest('content','errors.index',compact('erreur'));
 		}
 	}

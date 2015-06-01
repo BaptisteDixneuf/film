@@ -49,7 +49,7 @@ class RealisateursController extends BaseController{
 			$this->layout->nest('content','realisateurs.view',compact('realisateur','previous','next'));
 			
 		}catch(ModelNotFoundException $e){
-			$erreur = "Ce réalisateur n'existe pas";
+			$erreur = "Ce réalisateur n'existe pas dans la base de données";
 			$this->layout->nest('content','errors.index',compact('erreur'));
 		}	
 	}

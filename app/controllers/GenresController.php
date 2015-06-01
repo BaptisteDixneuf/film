@@ -38,7 +38,7 @@ class GenresController extends BaseController{
 			$this->layout->nest('content','genres.view',compact('genre','previous','next'));
 
 		}catch(ModelNotFoundException $e){
-			$erreur = "Ce genre n'existe pas";
+			$erreur = "Ce genre n'existe pas dans la base de données";
 			$this->layout->nest('content','errors.index',compact('erreur'));
 		}	
 	}

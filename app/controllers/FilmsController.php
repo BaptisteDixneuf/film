@@ -68,7 +68,7 @@ class FilmsController extends BaseController{
 			$this->layout->nest('content','films.view',compact('film','previous','next'));
 
 		}catch(ModelNotFoundException $e){
-			$erreur = "Ce film n'existe pas";
+			$erreur = "Ce film n'existe pas dans la base de données";
 			$this->layout->nest('content','errors.index',compact('erreur'));
 		}
 		
@@ -138,7 +138,8 @@ class FilmsController extends BaseController{
 		$film = Film::with('realisateur','acteurs','distributeur','genre','affiche','nationalite')->where('id',$id)->firstOrFail();
 		$film->acteurs()->detach();
 		Film::destroy($id);
-		return Redirect::to('/')->with('success','Film Supprimé');
+		Affiche::destroy($film->affiche->id);
+		return Redirect::to('/')->with('success','Film Supprimé et Affiche Supprimé');
 		
 	}
 }

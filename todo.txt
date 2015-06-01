@@ -1,5 +1,3 @@
-Revoir suppression de film
-
 /* Mineur */
 Sécurité Insert,Update,Delete
 

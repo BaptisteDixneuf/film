@@ -50,7 +50,7 @@ class ActeursController extends BaseController{
 			$this->layout->nest('content','acteurs.view',compact('acteur','previous','next'));
 
 		}catch(ModelNotFoundException $e){
-			$erreur = "Cette acteur n'existe pas";
+			$erreur = "Cette acteur n'existe pas dans la base de données";
 			$this->layout->nest('content','errors.index',compact('erreur'));
 		}
 
