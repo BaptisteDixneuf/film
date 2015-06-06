@@ -15,12 +15,17 @@ class MigrationsController extends BaseController{
    header ('Content-type:text/html; charset=utf-8');
 
 
-		try {
-		    $dbh = new PDO('mysql:host=127.0.0.1;dbname=base_film', "root", "root",array(PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES utf8'));		    		    
-		} catch (PDOException $e) {
+   		function connexion(){
+   			try {
+		    $dbh = new PDO('mysql:host=127.0.0.1;dbname=admin_old_film', "admin_old_film", "csTXkQ7VIb",array(PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES utf8'));		    		    
+			} catch (PDOException $e) {
 		    print "Erreur !: " . $e->getMessage() . "<br/>";
 		    die();
-		}
+			}
+			return $dbh;
+   		}
+
+		
 		
 		function clean($data){
 
@@ -50,7 +55,7 @@ class MigrationsController extends BaseController{
 		}
 
 		
-
+		$dbh = connexion();
 		foreach($dbh->query('SELECT * FROM affiche') as $row) {
 
 			Affiche::create(array(
@@ -61,7 +66,7 @@ class MigrationsController extends BaseController{
     	}
     	var_dump("Table affiches migrée");
 
-
+    	$dbh = connexion();    	
     	foreach($dbh->query('SELECT * FROM realisateur') as $row) {
 
 
@@ -74,7 +79,7 @@ class MigrationsController extends BaseController{
     	}
     	var_dump("Table realisateurs migrée");
 
-
+    	$dbh = connexion(); 
     	foreach($dbh->query('SELECT * FROM acteur') as $row) {
 
 
@@ -87,7 +92,7 @@ class MigrationsController extends BaseController{
     	}
     	var_dump("Table acteurs migrée");
 
-
+    	$dbh = connexion(); 
     	foreach($dbh->query('SELECT * FROM distributeur') as $row) {
 
 
@@ -99,7 +104,7 @@ class MigrationsController extends BaseController{
     	}
     	var_dump("Table distributeurs migrée");
 
-
+    	$dbh = connexion(); 
     	foreach($dbh->query('SELECT * FROM genre') as $row) {
 
 
@@ -111,6 +116,7 @@ class MigrationsController extends BaseController{
     	}
     	var_dump("Table genres migrée");
 
+    	$dbh = connexion(); 
     	foreach($dbh->query('SELECT * FROM nationalite') as $row) {
     		
 			Nationalite::create(array(
@@ -121,7 +127,7 @@ class MigrationsController extends BaseController{
     	var_dump("Table nationalite migrée");
 
 
-
+    	$dbh = connexion(); 
 		foreach($dbh->query('SELECT * FROM film') as $row) {	
 
 
@@ -133,6 +139,7 @@ class MigrationsController extends BaseController{
 			//genre
 			$genre_id=0;
 			$genre_nom;
+			$dbh = connexion(); 
 			foreach($dbh->query("SELECT nom_genre FROM posseder WHERE num_film=".$row['num_film']) as $row2){
 				$genre_nom= $row2['nom_genre'];
 			}
@@ -142,6 +149,7 @@ class MigrationsController extends BaseController{
 			//nationalite
 			$nationalite_id=0;
 			$nationalite_nom;
+			$dbh = connexion(); 
 			foreach($dbh->query("SELECT natio FROM appartenir WHERE num_film=".$row['num_film']) as $row3){
 				$nationalite_nom= $row3['natio'];
 			}
@@ -178,16 +186,19 @@ class MigrationsController extends BaseController{
 
 
     	$listeFilm= Array();
+    	$dbh = connexion(); 
     	foreach($dbh->query("SELECT film.num_film FROM film")	as $row) {
     		array_push($listeFilm,$row['0']);
     	}
     	
     	$listeActeur= Array();
+    	$dbh = connexion(); 
     	foreach($dbh->query("SELECT acteur.num_acteur FROM acteur") as $row) {
     		array_push($listeActeur,$row['0']);
     	}    	
 
 		$listeFilmSup= Array();
+		$dbh = connexion(); 
 		for ($i=0; $i <10000 ; $i++) { 
 			if(!(in_array($i,$listeFilm))){
 				array_push($listeFilmSup,$i);
@@ -195,6 +206,7 @@ class MigrationsController extends BaseController{
 		}
 
 		$listeActeurSup= Array();
+		$dbh = connexion(); 
 		for ($i=0; $i <10000 ; $i++) { 
 			if(!(in_array($i,$listeActeur))){
 				array_push($listeActeurSup,$i);
@@ -204,7 +216,7 @@ class MigrationsController extends BaseController{
 		
 
 
-
+		$dbh = connexion(); 
     	foreach($dbh->query('SELECT * FROM participer') as $row) {
 
 

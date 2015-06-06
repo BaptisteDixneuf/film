@@ -11,14 +11,14 @@ class RecherchesController extends BaseController{
 		$base_chemin=ucfirst($type).'sController@view';
 		switch (Input::get('optionsRadios')) {
 		    case 'film':
-		        $data=Film::select(array('id','titre as value'))
+		        $data=Film::select(array('id','titre as value'))		        
 				->where('titre','LIKE','%'.Input::get('InputRecherche').'%')
 				->orderBy('titre')
 				->get();
 		        break;
 		    case 'realisateur':
-		        $data=Realisateur::select(array('id','pre_nom_rea as value'))
-				->where('pre_nom_rea','LIKE','%'.Input::get('InputRecherche').'%')
+		        $data=Realisateur::select(array('id','pre_nom_rea as value'))		        
+				->where('pre_nom_rea','LIKE','%'.Input::get('InputRecherche').'%')				
 				->orderBy('pre_nom_rea')
 				->get();
 		        break;
