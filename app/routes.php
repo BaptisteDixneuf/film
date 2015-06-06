@@ -40,6 +40,7 @@ Route::post('/realisateurs/add/{id}', 'RealisateursController@add');
 Route::get('/realisateurs/edit/{id}', 'RealisateursController@edit');
 Route::post('/realisateurs/update/{id}', 'RealisateursController@update');
 Route::get('/realisateurs/delete/{id}', 'RealisateursController@delete');
+Route::get('/realisateurs/search', 'RealisateursController@search');
 
 //Distributeurs
 Route::get('/distributeurs', 'DistributeursController@index');

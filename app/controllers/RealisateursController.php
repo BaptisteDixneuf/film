@@ -89,4 +89,21 @@ class RealisateursController extends BaseController{
 		return Redirect::to('/')->with($type,$message);
 	}
 
+	public function search(){
+
+		$acteurs=Realisateur::select(array('id','pre_nom_rea'))
+		->where('pre_nom_rea','LIKE','%'.Input::get('q').'%')
+		->get();
+		$liste_realisateurs;
+		$i=0;
+		foreach ($acteurs as $acteur) {
+			$liste_realisateurs[$i]['id']=$acteur->id;
+			$liste_realisateurs[$i]["name"]=$acteur->pre_nom_rea;
+			$i++;
+		}	
+		return $liste_realisateurs;
+	}
+
+
+
 }

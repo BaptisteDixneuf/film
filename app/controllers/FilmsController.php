@@ -102,7 +102,6 @@ class FilmsController extends BaseController{
 				}
 			}
 
-
 			$film->update(array(
 				'titre' => Input::get('titre'),
 				'synopsys' => Input::get('synopsys'),

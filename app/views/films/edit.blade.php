@@ -113,6 +113,32 @@
 
 </script>
 
+
+
+<?php 
+//Pré-remplissage des champs de recherche
+
+$liste_acteurs=array();
+$liste_realisateurs=array();
+
+if($film->id){
+
+    $i=0;
+    foreach ($film->acteurs as $acteur) {
+        $liste_acteurs[$i]['id']=$acteur->id;
+        $liste_acteurs[$i]["name"]=$acteur->pre_nom_acteur;
+        $i++;
+    }
+    $liste_realisateurs['0']['id']=$film->realisateur->id;
+    $liste_realisateurs['0']["name"]=$film->realisateur->pre_nom_rea; 
+}
+
+
+
+
+
+?>
+
 {{ Form::model(
     $film,
     array('url' =>
@@ -267,6 +293,7 @@
         @endif
     </div>
 
+    <!-- Image -->
     <div class="form-group">
         {{
             Form::label(
@@ -291,19 +318,9 @@
 
     <!-- Réalisateur -->
     <div class="form-group">
-        {{
-            Form::label(
-                'realisateur_id',
-                "Réalisateur : ",
-                ['class' => 'form-label']
-            )
-        }}
-        {{
-            Form::select(
-                'realisateur_id',
-                Realisateur::orderBy('pre_nom_rea')->lists('pre_nom_rea', 'id')
-            )
-        }}
+        <label for="realisateur_id" class="form-label">Realisateur (Taper un terme de recherche): </label>
+        <p> <a href="#" class="big-link" data-reveal-id="modal-realisateur">Créer un nouveau réalisateur</a> </p> 
+        <input class="form-control" name="realisateur_id" id="realisateur_id" type="text" value="">
 
         @if($errors->has('realisateur_id'))
             <p class="help-block">
@@ -311,9 +328,7 @@
             </p>
         @endif
 
-        <a href="#" class="big-link" data-reveal-id="modal-realisateur">
-                Ajouter un nouveau réalisateur
-            </a> 
+       
             <div id="modal-realisateur" class="reveal-modal">
 
                 <div class="form-group">
@@ -503,22 +518,12 @@
                 
                 <a class="close-reveal-modal">&#215;</a>
             </div>
-    </div>
-            
-    
-        <?php 
-            $liste_acteurs=Array();
-            $i=0;
-            foreach ($film->acteurs as $acteur) {
-                $liste_acteurs[$i]['id']=$acteur->id;
-                $liste_acteurs[$i]["name"]=$acteur->pre_nom_acteur;
-                $i++;
-            }        
-        ?>
+    </div>                
+        
 
     <!-- acteur -->    
     <div class="form-group">
-        <label for="acteurs" class="form-label">Acteurs (Taper un terme dans le champs ci-dessous pour rechercher un acteur): </label>
+        <label for="acteurs" class="form-label">Acteurs (Taper un terme de recherche) : </label>
         <input class="form-control" name="acteurs" id="acteurs" type="text" value="">
         <a href="#" class="big-link" data-reveal-id="modal-acteur">
                 Ajouter un nouveau acteur
@@ -562,6 +567,12 @@
     $(document).ready(function() {
         $("#acteurs").tokenInput("{{ URL::action('ActeursController@search')}}", {
             prePopulate: <?php echo json_encode($liste_acteurs); ?>
+        });
+        $("#realisateur_id").tokenInput("{{ URL::action('RealisateursController@search')}}", {
+            prePopulate: <?php echo json_encode($liste_realisateurs); ?>,
+            tokenLimit : 1,
+            propertyToSearch: "name",
+            tokenFormatter: function(item) { return "<li><p id='"+ item.id +"'>"+ item.name + "</option></li>" }
         });
 
     });
