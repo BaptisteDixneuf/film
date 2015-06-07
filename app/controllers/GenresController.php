@@ -87,4 +87,19 @@ class GenresController extends BaseController{
 		}		
 		return Redirect::to('/')->with($type,$message);
 	}
+
+	public function search(){
+
+		$genres=Genre::select(array('id','genre'))
+		->where('genre','LIKE','%'.Input::get('q').'%')
+		->get();
+		$liste_genres=array();
+		$i=0;
+		foreach ($genres as $genre) {
+			$liste_genres[$i]['id']=$genre->id;
+			$liste_genres[$i]["name"]=$genre->genre;
+			$i++;
+		}	
+		return $liste_genres;
+	}
 }

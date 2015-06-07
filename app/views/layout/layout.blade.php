@@ -9,14 +9,14 @@
     
     <title>FILM</title>
   
-    {{ HTML::style('http://getbootstrap.com/dist/css/bootstrap.min.css')}}
-    {{ HTML::style('http://getbootstrap.com/examples/starter-template/starter-template.css')}}
+    {{ HTML::style('css/bootstrap.min.css')}}
+    {{ HTML::style('css/starter-template.css')}}
     {{ HTML::style('css/token-input.css')}}
     {{ HTML::style('css/design.css')}}
     {{ HTML::style('modal/reveal.css')}}
 
     <!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>-->
-    {{ HTML::script('http://code.jquery.com/jquery-1.6.min.js')}} 
+    {{ HTML::script('js/jquery-1.6.min.js')}} 
     {{ HTML::script('modal/jquery.reveal.js')}} 
     
     

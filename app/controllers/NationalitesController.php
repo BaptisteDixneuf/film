@@ -87,4 +87,19 @@ class NationalitesController extends BaseController{
 		}		
 		return Redirect::to('/')->with($type,$message);
 	}
+
+	public function search(){
+
+		$nationalites=Nationalite::select(array('id','nationalite'))
+		->where('nationalite','LIKE','%'.Input::get('q').'%')
+		->get();
+		$liste_nationalites=array();
+		$i=0;
+		foreach ($nationalites as $nationalite) {
+			$liste_nationalites[$i]['id']=$nationalite->id;
+			$liste_nationalites[$i]["name"]=$nationalite->nationalite;
+			$i++;
+		}	
+		return $liste_nationalites;
+	}
 }

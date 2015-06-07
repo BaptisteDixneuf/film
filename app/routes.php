@@ -52,6 +52,7 @@ Route::post('/distributeurs/store/{id}', 'DistributeursController@store');
 Route::get('/distributeurs/edit/{id}', 'DistributeursController@edit');
 Route::post('/distributeurs/update/{id}', 'DistributeursController@update');
 Route::get('/distributeurs/delete/{id}', 'DistributeursController@delete');
+Route::get('/distributeurs/search', 'DistributeursController@search');
 
 //Films
 Route::get('/films', 'FilmsController@index');
@@ -82,6 +83,7 @@ Route::post('/genres/store/{id}', 'GenresController@store');
 Route::get('/genres/edit/{id}', 'GenresController@edit');
 Route::post('/genres/update/{id}', 'GenresController@update');
 Route::get('/genres/delete/{id}', 'GenresController@delete');
+Route::get('/genres/search', 'GenresController@search');
 
 
 //Migration SQL
@@ -107,3 +109,4 @@ Route::post('/nationalites/store/{id}', 'NationalitesController@store');
 Route::get('/nationalites/edit/{id}', 'NationalitesController@edit');
 Route::post('/nationalites/update/{id}', 'NationalitesController@update');
 Route::get('/nationalites/delete/{id}', 'NationalitesController@delete');
+Route::get('/nationalites/search', 'NationalitesController@search');

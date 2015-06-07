@@ -90,4 +90,19 @@ class DistributeursController extends BaseController{
 		return Redirect::to('/')->with($type,$message);
 
 	}
+
+	public function search(){
+
+		$distributeurs=Distributeur::select(array('id','nom'))
+		->where('nom','LIKE','%'.Input::get('q').'%')
+		->get();
+		$liste_distributeurs=array();
+		$i=0;
+		foreach ($distributeurs as $distributeur) {
+			$liste_distributeurs[$i]['id']=$distributeur->id;
+			$liste_distributeurs[$i]["name"]=$distributeur->nom;
+			$i++;
+		}	
+		return $liste_distributeurs;
+	}
 }

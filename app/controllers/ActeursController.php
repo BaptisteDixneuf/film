@@ -96,7 +96,7 @@ class ActeursController extends BaseController{
 		$acteurs=Acteur::select(array('id','pre_nom_acteur'))
 		->where('pre_nom_acteur','LIKE','%'.Input::get('q').'%')
 		->get();
-		$liste_acteurs;
+		$liste_acteurs=array();
 		$i=0;
 		foreach ($acteurs as $acteur) {
 			$liste_acteurs[$i]['id']=$acteur->id;

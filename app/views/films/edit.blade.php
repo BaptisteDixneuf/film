@@ -120,17 +120,35 @@
 
 $liste_acteurs=array();
 $liste_realisateurs=array();
+$liste_distributeurs=array();
+$liste_genres=array();
+$liste_nationalites=array();
 
 if($film->id){
 
+    //Acteurs
     $i=0;
     foreach ($film->acteurs as $acteur) {
         $liste_acteurs[$i]['id']=$acteur->id;
         $liste_acteurs[$i]["name"]=$acteur->pre_nom_acteur;
         $i++;
     }
+
+    //Réalisateur
     $liste_realisateurs['0']['id']=$film->realisateur->id;
     $liste_realisateurs['0']["name"]=$film->realisateur->pre_nom_rea; 
+
+    //Distributeur
+    $liste_distributeurs['0']['id']=$film->distributeur->id;
+    $liste_distributeurs['0']["name"]=$film->distributeur->nom; 
+
+    //Genre
+    $liste_genres['0']['id']=$film->genre->id;
+    $liste_genres['0']["name"]=$film->genre->genre; 
+
+    //Nationalite
+    $liste_nationalites['0']['id']=$film->nationalite->id;
+    $liste_nationalites['0']["name"]=$film->nationalite->nationalite; 
 }
 
 
@@ -318,7 +336,7 @@ if($film->id){
 
     <!-- Réalisateur -->
     <div class="form-group">
-        <label for="realisateur_id" class="form-label">Realisateur (Taper un terme de recherche): </label>
+        <label for="realisateur_id" class="form-label">Realisateur (Taper un terme de recherche) : </label>
         <p> <a href="#" class="big-link" data-reveal-id="modal-realisateur">Créer un nouveau réalisateur</a> </p> 
         <input class="form-control" name="realisateur_id" id="realisateur_id" type="text" value="">
 
@@ -360,19 +378,9 @@ if($film->id){
 
     <!-- Distributeur -->
     <div class="form-group">
-        {{
-            Form::label(
-                'distributeur_id',
-                "Distributeur : ",
-                ['class' => 'form-label']
-            )
-        }}
-        {{
-            Form::select(
-                'distributeur_id',
-                Distributeur::orderBy('nom')->lists('nom', 'id')
-            )
-        }}
+        <label for="distributeur_id" class="form-label">Distributeur (Taper un terme de recherche) : </label>
+        <p> <a href="#" class="big-link" data-reveal-id="modal-distributeur">Créer un nouveau distributeur</a> </p> 
+        <input class="form-control" name="distributeur_id" id="distributeur_id" type="text" value="">
 
         @if($errors->has('distributeur_id'))
             <p class="help-block">
@@ -380,10 +388,7 @@ if($film->id){
             </p>
         @endif
 
-        <a href="#" class="big-link" data-reveal-id="modal-distributeur">
-                Ajouter un nouveau distributeur
-            </a> 
-            <div id="modal-distributeur" class="reveal-modal">
+        <div id="modal-distributeur" class="reveal-modal">
 
                 <div class="form-group">
                     {{
@@ -414,19 +419,9 @@ if($film->id){
             
     <!-- Genre -->
     <div class="form-group">
-        {{
-            Form::label(
-                'genre_id',
-                "Genre : ",
-                ['class' => 'form-label']
-            )
-        }}
-        {{
-            Form::select(
-                'genre_id',
-                Genre::orderBy('genre')->lists('genre', 'id')
-            )
-        }}
+        <label for="genre_id" class="form-label">Genre (Taper un terme de recherche) : </label>
+        <p> <a href="#" class="big-link" data-reveal-id="modal-genre">Créer un nouveau genre</a> </p> 
+        <input class="form-control" name="genre_id" id="genre_id" type="text" value="">
 
         @if($errors->has('genre_id'))
             <p class="help-block">
@@ -434,10 +429,7 @@ if($film->id){
             </p>
         @endif
 
-        <a href="#" class="big-link" data-reveal-id="modal-genre">
-                Ajouter un nouveau genre
-            </a> 
-            <div id="modal-genre" class="reveal-modal">
+        <div id="modal-genre" class="reveal-modal">
 
                 <div class="form-group">
                     {{
@@ -468,19 +460,9 @@ if($film->id){
 
     <!-- Nationalité -->
     <div class="form-group">
-        {{
-            Form::label(
-                'nationalite_id',
-                "Nationalité :",
-                ['class' => 'form-label']
-            )
-        }}
-        {{
-            Form::select(
-                'nationalite_id',
-                Nationalite::orderBy('nationalite')->lists('nationalite', 'id')
-            )
-        }}
+        <label for="nationalite_id" class="form-label">Nationalité (Taper un terme de recherche) : </label>
+        <p> <a href="#" class="big-link" data-reveal-id="modal-nationalite">Créer un nouvelle nationalité</a> </p> 
+        <input class="form-control" name="nationalite_id" id="nationalite_id" type="text" value="">
 
         @if($errors->has('nationalite_id'))
             <p class="help-block">
@@ -524,10 +506,9 @@ if($film->id){
     <!-- acteur -->    
     <div class="form-group">
         <label for="acteurs" class="form-label">Acteurs (Taper un terme de recherche) : </label>
+        <p><a href="#" class="big-link" data-reveal-id="modal-acteur">Créer un nouveau acteur</a></p>
         <input class="form-control" name="acteurs" id="acteurs" type="text" value="">
-        <a href="#" class="big-link" data-reveal-id="modal-acteur">
-                Ajouter un nouveau acteur
-            </a> 
+        
             <div id="modal-acteur" class="reveal-modal">
 
                 <div class="form-group">
@@ -570,6 +551,24 @@ if($film->id){
         });
         $("#realisateur_id").tokenInput("{{ URL::action('RealisateursController@search')}}", {
             prePopulate: <?php echo json_encode($liste_realisateurs); ?>,
+            tokenLimit : 1,
+            propertyToSearch: "name",
+            tokenFormatter: function(item) { return "<li><p id='"+ item.id +"'>"+ item.name + "</option></li>" }
+        });
+         $("#distributeur_id").tokenInput("{{ URL::action('DistributeursController@search')}}", {
+            prePopulate: <?php echo json_encode($liste_distributeurs); ?>,
+            tokenLimit : 1,
+            propertyToSearch: "name",
+            tokenFormatter: function(item) { return "<li><p id='"+ item.id +"'>"+ item.name + "</option></li>" }
+        });
+        $("#genre_id").tokenInput("{{ URL::action('GenresController@search')}}", {
+            prePopulate: <?php echo json_encode($liste_genres); ?>,
+            tokenLimit : 1,
+            propertyToSearch: "name",
+            tokenFormatter: function(item) { return "<li><p id='"+ item.id +"'>"+ item.name + "</option></li>" }
+        });
+        $("#nationalite_id").tokenInput("{{ URL::action('NationalitesController@search')}}", {
+            prePopulate: <?php echo json_encode($liste_nationalites); ?>,
             tokenLimit : 1,
             propertyToSearch: "name",
             tokenFormatter: function(item) { return "<li><p id='"+ item.id +"'>"+ item.name + "</option></li>" }
