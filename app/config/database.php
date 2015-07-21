@@ -54,10 +54,10 @@ return array(
 
 		'mysql' => array(
 			'driver'    => 'mysql',
-			'host'      => 'localhost',
+			'host'      => getenv('DB_PORT_3306_TCP_ADDR'),
 			'database'  => 'film',
 			'username'  => 'root',
-			'password'  => 'root',
+			'password'  => getenv('DB_1_ENV_MYSQL_ROOT_PASSWORD'),
 			'charset'   => 'utf8',
 			'collation' => 'utf8_unicode_ci',
 			'prefix'    => '',
